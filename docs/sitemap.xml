@@ -1,51 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>/404.html</loc>
+    <loc>https://tidymass.github.io/massdatabase/404.html</loc>
   </url>
   <url>
-    <loc>/LICENSE-text.html</loc>
+    <loc>https://tidymass.github.io/massdatabase/LICENSE-text.html</loc>
   </url>
   <url>
-    <loc>/authors.html</loc>
+    <loc>https://tidymass.github.io/massdatabase/authors.html</loc>
   </url>
   <url>
-    <loc>/index.html</loc>
+    <loc>https://tidymass.github.io/massdatabase/index.html</loc>
   </url>
   <url>
-    <loc>/reference/down_bigg_model.html</loc>
+    <loc>https://tidymass.github.io/massdatabase/reference/down_bigg_model.html</loc>
   </url>
   <url>
-    <loc>/reference/index.html</loc>
+    <loc>https://tidymass.github.io/massdatabase/reference/index.html</loc>
   </url>
   <url>
-    <loc>/reference/massdatabase_logo.html</loc>
+    <loc>https://tidymass.github.io/massdatabase/reference/massdatabase_logo.html</loc>
   </url>
   <url>
-    <loc>/reference/request_bigg_model_info.html</loc>
+    <loc>https://tidymass.github.io/massdatabase/reference/request_bigg_model_info.html</loc>
   </url>
   <url>
-    <loc>/reference/request_bigg_universal_metabolite.html</loc>
+    <loc>https://tidymass.github.io/massdatabase/reference/request_bigg_universal_metabolite.html</loc>
   </url>
   <url>
-    <loc>/reference/request_bigg_universal_metabolite_info.html</loc>
+    <loc>https://tidymass.github.io/massdatabase/reference/request_bigg_universal_metabolite_info.html</loc>
   </url>
   <url>
-    <loc>/reference/request_bigg_universal_reaction.html</loc>
+    <loc>https://tidymass.github.io/massdatabase/reference/request_bigg_universal_reaction.html</loc>
   </url>
   <url>
-    <loc>/reference/request_bigg_universal_reaction_info.html</loc>
+    <loc>https://tidymass.github.io/massdatabase/reference/request_bigg_universal_reaction_info.html</loc>
   </url>
   <url>
-    <loc>/reference/request_bigg_version.html</loc>
+    <loc>https://tidymass.github.io/massdatabase/reference/request_bigg_version.html</loc>
   </url>
   <url>
-    <loc>/reference/request_foodb_compound.html</loc>
+    <loc>https://tidymass.github.io/massdatabase/reference/request_foodb_compound.html</loc>
   </url>
   <url>
-    <loc>/reference/request_foodb_compound_info.html</loc>
+    <loc>https://tidymass.github.io/massdatabase/reference/request_foodb_compound_info.html</loc>
   </url>
   <url>
-    <loc>/reference/request_foodb_food_info.html</loc>
+    <loc>https://tidymass.github.io/massdatabase/reference/request_foodb_food_info.html</loc>
   </url>
 </urlset>

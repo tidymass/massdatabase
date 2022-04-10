@@ -1,0 +1,139 @@
+destination: docs
+
+url: https://tidymass.github.io/massdatabase/
+
+home:
+  strip_header: false
+  title: massdatabase
+  links:
+  - text: Find me
+    href: https://www.shenxt.info/
+
+development:
+  mode: auto
+  version_label: danger
+  version_tooltip: "Under development"
+
+template:
+  params:
+    docsearch:
+      api_key: 21ff2860978c5d2ceb7d4150364070ff
+      index_name: massdatabase
+    bootswatch: flatly
+    ganalytics: UA-000000-01
+
+reference:
+  - title: BIGG
+    desc: BIGG database
+    contents:
+    - down_bigg_model
+    - request_bigg_model_info
+    - request_bigg_universal_metabolite_info
+    - request_bigg_universal_metabolite
+    - request_bigg_universal_reaction_info
+    - request_bigg_universal_reaction
+    - request_bigg_version
+
+  - title: FoodB
+    desc: FoodB database
+    contents:
+    - request_foodb_compound_info
+    - request_foodb_compound
+    - request_foodb_food_info
+
+  - title: Data
+    desc: Some data embed in massdatabase
+    contents:
+    - hilic.pos
+    - hilic.neg
+    - rp.pos
+    - rp.neg
+    - msDatabase_rplc0.0.2
+    - msDatabase_hilic0.0.2
+    - annotate_result
+
+  - title: Other functions
+    desc: Other usefull functions in massdatabase
+    contents:
+    - massdatabase_logo
+
+navbar:
+  title: "sparklyr"
+  # type: inverse
+  structure:
+    left: [home, articles, news, reference, database]
+    right: [github, twitter]
+  components:
+    articles:
+      text: Help documents
+      menu:
+      - text: "Brief introduction"
+      - text: Brief introduction
+        href: articles/massdatabase_introduction.html
+      - text: Install massdatabase
+        href: articles/install.html
+      - text: -------
+      - text: "In-house and public database construction using massdatabase"
+      - text: In-house database construction
+        href: articles/database_construction.html
+      - text: Public database construction
+        href: articles/public_database_construction.html
+      - text: Output massdatabase database to mgf/msp for other tools
+        href: articles/output_database.html
+      - text: Correct retention times in database according to internal standards
+        href: articles/rt_correction.html
+      - text: -------
+      - text: "Metabolite identification"
+      - text: Metabolite identification using MS1 database
+        href: articles/metabolite_annotation_using_MS1.html
+      - text: Metabolite identification using MS2 database
+        href: articles/metabolite_annotation_using_MS2.html
+      - text: Metabolite identification using multiple databases
+        href: articles/multiple_databases.html
+      - text: Identify single peak
+        href: articles/identify_single_peak.html
+      - text: -------
+      - text: "Others"
+      - text: Other usefull tools
+        href: articles/other_tools.html
+      - text: -------
+      - text: "massdatabase for mass_dataset class object"
+      - text: "Work with mass_dataset class object"
+        href: articles/work_with_mass_dataset.html
+      - text: "Annotate single peak in mass_dataset"
+        href: articles/annotate_single_peak_mass_dataset.html
+      - text: "MS2 plot in mass_dataset"
+        href: articles/ms2_plot_mass_dataset.html
+    twitter:
+      icon: "fab fa-twitter fa-lg"
+      href: https://twitter.com/xiaotaoshen1990
+    contact:
+      text: Contact us
+      href: articles/contact_us.html
+    database:
+      text: Public databases
+      href: articles/public_databases.html
+    news:
+      text: News
+      menu:
+      - text: "Blog posts"
+      - text: "Version 0.9.2"
+        href: articles/Version0_9_2.html
+      - text: "------------------"
+      - text: "Change log"
+        href: news/index.html
+
+footer:
+  structure:
+    left: [package, developed_by, from]
+    right: [contact, email, wechat, tidymass]
+  components:
+    from: <br> from <i class="fa fa-university"></i> Stanford University <br> <i class="fa fa-clinic-medical"></i>School of Medicine <br> <i class="fa fa-dna"></i> Genetics Department
+    contact: <b>Contact Us:</b> <br>
+    email: <i class="fa fa-envelope"></i> shenxt1990@outlook.com <br>
+    wechat: <i class="fa fa-weixin"></i>  [shenxt1990](https://www.shenxt.info/files/wechat_QR.jpg) <br>
+    tidymass: <i class="fa fa-network-wired"></i> [A part of tidymass](https://www.tidymass.org/)
+
+
+toc:
+  depth: 3

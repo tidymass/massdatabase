@@ -1,6 +1,6 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# metid <img src="man/figures/logo.png" align="right" alt="" width="120" />
+# massDatabase <img src="man/figures/logo.png" align="right" alt="" width="120" />
 
 [![](https://www.r-pkg.org/badges/version/massdatabase?color=green)](https://cran.r-project.org/package=massdatabase)
 [![](https://img.shields.io/github/languages/code-size/tidymass/massdatabase.svg)](https://github.com/tidymass/massdatabase)
