@@ -25,7 +25,7 @@ request_foodb_compound_info <-
           paste0(url, "?page=", idx)
         x <-
           rvest::read_html(x = new_url)
-        
+
         x <-
           x %>%
           rvest::html_table(fill = TRUE) %>%
@@ -52,9 +52,9 @@ request_foodb_compound_info <-
 #' @export
 #' @examples
 #' x = request_foodb_compound( compound_id = "FDB000004", return_form = "list")
-#' x
-#' y = request_foodb_compound( compound_id = "FDB000004", return_form = "data.frame")
-#'
+#' x[1:2]
+#' y = request_foodb_compound(compound_id = "FDB000004", return_form = "data.frame")
+#' head(y)
 
 request_foodb_compound <-
   function(url = "https://foodb.ca/compounds",
@@ -67,9 +67,9 @@ request_foodb_compound <-
       XML::xmlTreeParse(file = result, asText = TRUE)
     result <-
       XML::xmlToList(result)
-    
+
     # names(result)
-    
+
     if (return_form == "list") {
       result <- result
     } else{
@@ -101,39 +101,39 @@ request_foodb_compound <-
           smiles = ifelse(is.null(result$smiles), NA, result$smiles),
           inchi = ifelse(is.null(result$inchi), NA, result$inchi),
           inchikey = ifelse(is.null(result$inchikey), NA, result$inchikey),
-          state = ifelse(is.null(result$state), NA, is.null(result$state)),
-          pathways = ifelse(is.null(result$pathways), NA, is.null(result$pathways)),
-          hmdb_id = ifelse(is.null(result$hmdb_id), NA, is.null(result$hmdb_id)),
+          state = ifelse(is.null(result$state), NA, result$state),
+          pathways = ifelse(is.null(result$pathways), NA, result$pathways),
+          hmdb_id = ifelse(is.null(result$hmdb_id), NA, result$hmdb_id),
           pubchem_compound_id = ifelse(
             is.null(result$pubchem_compound_id),
             NA,
-            is.null(result$pubchem_compound_id)
+            result$pubchem_compound_id
           ),
           chemspider_id = ifelse(
             is.null(result$chemspider_id),
             NA,
-            is.null(result$chemspider_id)
+            result$chemspider_id
           ),
-          kegg_id = ifelse(is.null(result$kegg_id), NA, is.null(result$kegg_id)),
-          chebi_id = ifelse(is.null(result$chebi_id), NA, is.null(result$chebi_id)),
-          biocyc_id = ifelse(is.null(result$biocyc_id), NA, is.null(result$biocyc_id)),
-          het_id = ifelse(is.null(result$het_id), NA, is.null(result$het_id)),
-          wikipidia = ifelse(is.null(result$wikipidia), NA, is.null(result$wikipidia)),
-          vmh_id = ifelse(is.null(result$vmh_id), NA, is.null(result$vmh_id)),
-          fbonto_id = ifelse(is.null(result$fbonto_id), NA, is.null(result$fbonto_id)),
-          foodb_id = ifelse(is.null(result$foodb_id), NA, is.null(result$foodb_id)),
+          kegg_id = ifelse(is.null(result$kegg_id), NA, result$kegg_id),
+          chebi_id = ifelse(is.null(result$chebi_id), NA, result$chebi_id),
+          biocyc_id = ifelse(is.null(result$biocyc_id), NA, result$biocyc_id),
+          het_id = ifelse(is.null(result$het_id), NA, result$het_id),
+          wikipidia = ifelse(is.null(result$wikipidia), NA, result$wikipidia),
+          vmh_id = ifelse(is.null(result$vmh_id), NA, result$vmh_id),
+          fbonto_id = ifelse(is.null(result$fbonto_id), NA, result$fbonto_id),
+          foodb_id = ifelse(is.null(result$foodb_id), NA, result$foodb_id),
           general_references = ifelse(
             is.null(result$general_references),
             NA,
-            is.null(result$general_references)
+           result$general_references
           ),
           foods = foods,
-          flavors = ifelse(is.null(result$flavors), NA, is.null(result$flavors)),
-          enzymes = ifelse(is.null(result$enzymes), NA, is.null(result$enzymes)),
+          flavors = ifelse(is.null(result$flavors), NA, result$flavors),
+          enzymes = ifelse(is.null(result$enzymes), NA, result$enzymes),
           health_effects = ifelse(
             is.null(result$health_effects),
             NA,
-            is.null(result$health_effects)
+            result$health_effects
           )
         )
     }
@@ -169,7 +169,7 @@ request_foodb_food_info <-
           paste0(url, "?page=", idx)
         x <-
           rvest::read_html(x = new_url)
-        
+
         x <-
           x %>%
           rvest::html_table(fill = TRUE) %>%
@@ -179,6 +179,89 @@ request_foodb_food_info <-
       do.call(rbind, .) %>%
       as.data.frame()
     invisible(result)
+  }
+
+
+
+#' @title Request MS2 spectra of one compound in FoodB
+#' @description Request MS2 spectra of one compound in FoodB
+#' @author Xiaotao Shen
+#' \email{shenxt1990@@outlook.com}
+#' @param compound_id compound id. For example, FDB000004.
+#' @return A data frame
+#' @importFrom XML xmlTreeParse xmlToList
+#' @importFrom magrittr %>%
+#' @importFrom rvest read_html html_element html_attr
+#' @export
+#' @examples
+#' x = request_foodb_compound_ms2(compound_id = "FDB000004")
+
+request_foodb_compound_ms2 <-
+  function(compound_id = "FDB000013") {
+    url <- paste0("https://foodb.ca/compounds/", compound_id)
+
+    result <-
+      readLines(paste0(url, ".xml"))
+
+    result <-
+      XML::xmlTreeParse(file = result, asText = TRUE)
+
+    result <-
+      XML::xmlToList(result)
+
+    spectra <-
+      result$spectra %>%
+      as.data.frame()
+
+    idx <-
+      which(unname(unlist(spectra[1,])) == "Specdb::MsMs")
+
+    if (length(idx) == 0) {
+      message('No MS/MS.')
+      return(NA)
+    }
+
+    ms2_id <-
+      unname(unlist(spectra[2, idx, drop = TRUE]))
+
+    ms2_url <- "https://foodb.ca/spectra/ms_ms/"
+
+    ms2_spectra <-
+      lapply(ms2_id, function(temp_id) {
+        # cat(temp_id, " ")
+        html_document <-
+          rvest::read_html(paste0(ms2_url, temp_id))
+        link <-
+          html_document %>%
+          rvest::html_element("tr:nth-child(1) a") %>%
+          rvest::html_attr("href")
+        if (is.na(link)) {
+          return(NULL)
+        }
+        ms2 <-
+          read.table(link, header = FALSE)
+        colnames(ms2) <-
+          c("mz", "intensity")
+
+        ms1_info <-
+          html_document %>%
+          rvest::html_table()
+
+        ms1_info <-
+          rbind(ms1_info[[1]],
+                ms1_info[[2]])
+
+        colnames(ms1_info) <-
+          c("name", "value")
+
+        list(ms1_info = ms1_info,
+             ms2 = ms2)
+
+      })
+
+    names(ms2_spectra) <- ms2_id
+    ms2_spectra
+
   }
 
 

@@ -41,6 +41,12 @@ reference:
     - request_foodb_compound
     - request_foodb_food_info
 
+  - title: CHEBI
+    desc: CHEBI database
+    contents:
+    - download_chebi_compound
+    - read_chebi_compound
+
   - title: Data
     desc: Some data embed in massdatabase
     contents:

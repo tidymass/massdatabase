@@ -7,6 +7,7 @@
 #' @importFrom dplyr case_when everything select filter
 #' @importFrom purrr map map2 walk
 #' @importFrom crayon green
+#' @importFrom utils download.file head read.table
 #' @export
 #' @examples
 #' massdatabase_logo()

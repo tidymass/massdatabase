@@ -44,7 +44,7 @@ request_bigg_version <-
 #' @return version.
 #' @export
 
-down_bigg_model <-
+download_bigg_model <-
   function(model_id = "iND750") {
     url <-
       paste0('http://bigg.ucsd.edu/static/models/',
@@ -54,7 +54,6 @@ down_bigg_model <-
   }
 
 
-
 #' @title Request BIGG model information
 #' @description Request BIGG model information
 #' @author Xiaotao Shen
@@ -62,10 +61,10 @@ down_bigg_model <-
 #' @param url url http://bigg.ucsd.edu/api/v2/models
 #' @return model inforamtion
 #' @importFrom curl curl
-#' @importFrom stringr str_replace_all str_extract str_replace str_split 
+#' @importFrom stringr str_replace_all str_extract str_replace str_split
 #' @importFrom stringr str_trim
 #' @export
-#' @examples 
+#' @examples
 #' x <- request_bigg_model_info()
 #' head(x)
 request_bigg_model_info <-
@@ -80,18 +79,18 @@ request_bigg_model_info <-
       out %>%
       stringr::str_replace_all("\"", "") %>%
       stringr::str_replace_all("\\{results\\: ", "")
-    
+
     model_count <-
       stringr::str_extract(out, "results_count\\: [0-9]{2,3}") %>%
       stringr::str_replace("results_count\\: ", "") %>%
       as.numeric()
-    
+
     out <-
       out %>%
       stringr::str_replace_all("\\, results_count\\: [0-9]{2,3}\\}", "") %>%
       stringr::str_replace(pattern = "^\\[", "") %>%
       stringr::str_replace(pattern = "\\]$", "")
-    
+
     out <-
       out %>%
       stringr::str_split(pattern = "\\}, \\{") %>%
@@ -107,16 +106,16 @@ request_bigg_model_info <-
           }) %>%
           do.call(rbind, .) %>%
           as.data.frame()
-        
+
         x1 <- matrix(data = x[, 2], nrow = 1) %>%
           as.data.frame()
-        
+
         colnames(x1) <- x$V1
         x1
       }) %>%
       do.call(rbind, .) %>%
       as.data.frame()
-    
+
     out$gene_count <- as.numeric(out$gene_count)
     out$reaction_count <- as.numeric(out$reaction_count)
     out$metabolite_count <- as.numeric(out$metabolite_count)
@@ -132,10 +131,10 @@ request_bigg_model_info <-
 #' @param url url http://bigg.ucsd.edu/api/v2/universal/metabolites
 #' @return universal metabolite inforamtion
 #' @importFrom curl curl
-#' @importFrom stringr str_replace_all str_extract str_replace str_split 
+#' @importFrom stringr str_replace_all str_extract str_replace str_split
 #' @importFrom stringr str_trim
 #' @export
-#' @examples 
+#' @examples
 #' x <- request_bigg_universal_metabolite_info()
 #' dim(x)
 #' head(x)
@@ -147,23 +146,23 @@ request_bigg_universal_metabolite_info <-
     open(x)
     out <- readLines(x)
     close(x)
-    
+
     out <-
       out %>%
       stringr::str_replace_all("\"", "") %>%
       stringr::str_replace_all("\\{results\\: ", "")
-    
+
     metabolite_count <-
       stringr::str_extract(out, "results_count\\: [0-9]{2,5}") %>%
       stringr::str_replace("results_count\\: ", "") %>%
       as.numeric()
-    
+
     out <-
       out %>%
       stringr::str_replace_all("\\, results_count\\: [0-9]{2,5}\\}", "") %>%
       stringr::str_replace(pattern = "^\\[", "") %>%
       stringr::str_replace(pattern = "\\]$", "")
-    
+
     out <-
       out %>%
       stringr::str_split(pattern = "\\}, \\{") %>%
@@ -181,9 +180,9 @@ request_bigg_universal_metabolite_info <-
       }) %>%
       do.call(rbind, .) %>%
       as.data.frame()
-    
+
     colnames(out) <- c("bigg_id", "name", "model_bigg_id")
-    
+
     invisible(out)
   }
 
@@ -197,10 +196,10 @@ request_bigg_universal_metabolite_info <-
 #' @param return_form data.frame or list.
 #' @return universal metabolite inforamtion
 #' @importFrom curl curl
-#' @importFrom stringr str_replace_all str_extract str_replace str_split 
+#' @importFrom stringr str_replace_all str_extract str_replace str_split
 #' @importFrom stringr str_trim
 #' @export
-#' @examples 
+#' @examples
 #' x <- request_bigg_universal_metabolite(metabolite_id = "g3p", return_form = "list")
 #' x
 #' y <- request_bigg_universal_metabolite(metabolite_id = "g3p", return_form = "data.frame")
@@ -216,22 +215,22 @@ request_bigg_universal_metabolite <-
     open(x)
     out <- readLines(x)
     close(x)
-    
+
     out <-
       out %>%
       stringr::str_replace_all("\"", "") %>%
       stringr::str_replace_all("\\{results\\: ", "")
-    
+
     out <-
       out %>%
       stringr::str_replace(pattern = "^\\{", "") %>%
       stringr::str_replace(pattern = "\\}$", "")
-    
+
     database_link <-
       stringr::str_extract(string = out, pattern = "database_links: .+\\}, bigg_id:") %>%
       stringr::str_replace("database_links: \\{", "") %>%
       stringr::str_replace("\\}, bigg_id:", "")
-    
+
     database_link <-
       database_link %>%
       stringr::str_split("\\],") %>%
@@ -247,24 +246,24 @@ request_bigg_universal_metabolite <-
           stringr::str_replace("\\}", "") %>%
           paste(collapse = "{}") %>%
           stringr::str_replace_all("CHEBI:", "")
-        
+
         database <-
           x %>%
           stringr::str_split("\\: \\[") %>%
           `[[`(1) %>%
           `[`(1)
-        
+
         data.frame(database = database,
                    id = id)
       }) %>%
       do.call(rbind, .) %>%
       as.data.frame()
-    
+
     bigg_id <-
       stringr::str_extract(string = out, pattern = "\\}, bigg_id: [a-zA-Z0-9_-]{1,100}, formulae:") %>%
       stringr::str_replace(", formulae:", "") %>%
       stringr::str_replace("\\}, bigg_id: ", "")
-    
+
     formula <-
       stringr::str_extract(string = out, pattern = "formulae: .{1,100}, old_identifiers") %>%
       stringr::str_replace("formulae: ", "") %>%
@@ -272,7 +271,7 @@ request_bigg_universal_metabolite <-
       stringr::str_replace("\\[", "") %>%
       stringr::str_replace("\\]", "") %>%
       stringr::str_replace_all(", ", "{}")
-    
+
     old_identifiers <-
       stringr::str_extract(string = out, pattern = "old_identifiers: .{1,100}, charges:") %>%
       stringr::str_replace("old_identifiers: ", "") %>%
@@ -280,7 +279,7 @@ request_bigg_universal_metabolite <-
       stringr::str_replace("\\[", "") %>%
       stringr::str_replace("\\]", "") %>%
       stringr::str_replace_all(", ", "{}")
-    
+
     charges <-
       stringr::str_extract(string = out, pattern = "charges: .{1,100}, name:") %>%
       stringr::str_replace("charges: ", "") %>%
@@ -288,18 +287,18 @@ request_bigg_universal_metabolite <-
       stringr::str_replace("\\[", "") %>%
       stringr::str_replace("\\]", "") %>%
       stringr::str_replace_all(", ", "{}")
-    
+
     name <-
       stringr::str_extract(string = out, pattern = "name: .{1,300}, compartments_in_models:") %>%
       stringr::str_replace("name: ", "") %>%
       stringr::str_replace(", compartments_in_models:", "")
-    
+
     compartments_in_models <-
       stringr::str_extract(string = out, pattern = "compartments_in_models: .+\\}\\]") %>%
       stringr::str_replace("compartments_in_models: ", "") %>%
       stringr::str_replace("\\[", "") %>%
       stringr::str_replace("\\]", "")
-    
+
     compartments_in_models <-
       compartments_in_models %>%
       stringr::str_split("\\}, \\{") %>%
@@ -310,10 +309,10 @@ request_bigg_universal_metabolite <-
       stringr::str_split(", organism: |, model_bigg_id: ") %>%
       do.call(rbind, .) %>%
       as.data.frame()
-    
+
     colnames(compartments_in_models) <-
       c("bigg_id", "organism", "model_bigg_id")
-    
+
     if (return_form == "list") {
       return_result <-
         list(
@@ -332,7 +331,7 @@ request_bigg_universal_metabolite <-
       model_bigg_id <-
         compartments_in_models$model_bigg_id %>%
         paste(collapse = "{}")
-      
+
       return_result <-
         data.frame(
           bigg_id = bigg_id,
@@ -343,7 +342,7 @@ request_bigg_universal_metabolite <-
           organism = organism,
           model_bigg_id = model_bigg_id
         )
-      
+
       database_link <-
         database_link %>%
         dplyr::mutate(
@@ -359,7 +358,7 @@ request_bigg_universal_metabolite <-
             TRUE ~ database
           )
         )
-      
+
       missing_id <-
         setdiff(
           c(
@@ -377,7 +376,7 @@ request_bigg_universal_metabolite <-
           ),
           database_link$database
         )
-      
+
       if (length(missing_id) > 0) {
         new_database_link <-
           data.frame(database = missing_id, id = NA)
@@ -386,15 +385,15 @@ request_bigg_universal_metabolite <-
                 new_database_link) %>%
           dplyr::filter(database != "")
       }
-      
+
       database_link <-
         database_link %>%
         dplyr::arrange(database)
-      
+
       id <-
         as.data.frame(matrix(database_link$id, nrow = 1))
       colnames(id) <- database_link$database
-      
+
       return_result <-
         cbind(return_result,
               id)
@@ -411,10 +410,10 @@ request_bigg_universal_metabolite <-
 #' @param url url http://bigg.ucsd.edu/api/v2/universal/reactions
 #' @return universal metabolite inforamtion
 #' @importFrom curl curl
-#' @importFrom stringr str_replace_all str_extract str_replace str_split 
+#' @importFrom stringr str_replace_all str_extract str_replace str_split
 #' @importFrom stringr str_trim
 #' @export
-#' @examples 
+#' @examples
 #' x <- request_bigg_universal_reaction_info()
 #' dim(x)
 #' head(x)
@@ -425,23 +424,23 @@ request_bigg_universal_reaction_info <-
     open(x)
     out <- readLines(x)
     close(x)
-    
+
     out <-
       out %>%
       stringr::str_replace_all("\"", "") %>%
       stringr::str_replace_all("\\{results\\: ", "")
-    
+
     reaction_count <-
       stringr::str_extract(out, "results_count\\: [0-9]{2,5}") %>%
       stringr::str_replace("results_count\\: ", "") %>%
       as.numeric()
-    
+
     out <-
       out %>%
       stringr::str_replace_all("\\, results_count\\: [0-9]{2,5}\\}", "") %>%
       stringr::str_replace(pattern = "^\\[", "") %>%
       stringr::str_replace(pattern = "\\]$", "")
-    
+
     out <-
       out %>%
       stringr::str_split(pattern = "\\}, \\{") %>%
@@ -459,9 +458,9 @@ request_bigg_universal_reaction_info <-
       }) %>%
       do.call(rbind, .) %>%
       as.data.frame()
-    
+
     colnames(out) <- c("bigg_id", "name", "model_bigg_id")
-    
+
     invisible(out)
   }
 
@@ -478,10 +477,10 @@ request_bigg_universal_reaction_info <-
 #' @param return_form data.frame or list.
 #' @return universal metabolite inforamtion
 #' @importFrom curl curl
-#' @importFrom stringr str_replace_all str_extract str_replace str_split 
+#' @importFrom stringr str_replace_all str_extract str_replace str_split
 #' @importFrom stringr str_trim
 #' @export
-#' @examples 
+#' @examples
 #' x <- request_bigg_universal_reaction(reaction_id = "ADA", return_form = "list")
 #' x
 #' y <- request_bigg_universal_reaction(reaction_id = "ADA", return_form = "data.frame")
@@ -497,22 +496,22 @@ request_bigg_universal_reaction <-
     open(x)
     out <- readLines(x)
     close(x)
-    
+
     out <-
       out %>%
       stringr::str_replace_all("\"", "") %>%
       stringr::str_replace_all("\\{results\\: ", "")
-    
+
     out <-
       out %>%
       stringr::str_replace(pattern = "^\\{", "") %>%
       stringr::str_replace(pattern = "\\}$", "")
-    
+
     models_containing_reaction <-
       stringr::str_extract(string = out, pattern = "models_containing_reaction: \\[.+\\}\\], reaction_string: ") %>%
       stringr::str_replace("models_containing_reaction: \\[", "") %>%
       stringr::str_replace("\\], reaction_string: ", "")
-    
+
     models_containing_reaction <-
       models_containing_reaction %>%
       stringr::str_split("\\}, \\{") %>%
@@ -524,19 +523,19 @@ request_bigg_universal_reaction <-
         x <-
           stringr::str_replace(x, "bigg_id: ", "")
         x
-        
+
       }) %>%
       do.call(rbind, .) %>%
       as.data.frame()
-    
+
     colnames(models_containing_reaction) <-
       c("bigg_id", "organism")
-    
+
     bigg_id <-
       stringr::str_extract(string = out, pattern = "\\]\\}\\, bigg_id\\: .{1,20}, old_identifiers\\: ") %>%
       stringr::str_replace("\\]\\}, bigg_id\\: ", "") %>%
       stringr::str_replace("\\, old_identifiers\\: ", "")
-    
+
     old_identifiers <-
       stringr::str_extract(string = out, pattern = "old_identifiers: .{1,50}, name: ") %>%
       stringr::str_replace("old_identifiers: ", "") %>%
@@ -544,26 +543,26 @@ request_bigg_universal_reaction <-
       stringr::str_replace("\\[", "") %>%
       stringr::str_replace("\\]", "") %>%
       stringr::str_replace_all(", ", "{}")
-    
+
     pseudoreaction <-
       stringr::str_extract(string = out, pattern = "pseudoreaction: .{1,20}") %>%
       stringr::str_replace("pseudoreaction: ", "")
-    
+
     name <-
       stringr::str_extract(string = out, pattern = "name: .{1,100}, pseudoreaction:") %>%
       stringr::str_replace("name: ", "") %>%
       stringr::str_replace(", pseudoreaction:", "")
-    
+
     reaction_string <-
       stringr::str_extract(string = out, pattern = "reaction_string: .{1,100}, metabolites: ") %>%
       stringr::str_replace("reaction_string: ", "") %>%
       stringr::str_replace(", metabolites: ", "")
-    
+
     metabolites <-
       stringr::str_extract(string = out, pattern = "metabolites: \\[.+, database_links: ") %>%
       stringr::str_replace("metabolites: \\[\\{", "") %>%
       stringr::str_replace("\\}\\], database_links: ", "")
-    
+
     metabolites <-
       metabolites %>%
       stringr::str_split("\\}, \\{") %>%
@@ -574,20 +573,20 @@ request_bigg_universal_reaction <-
         x <-
           stringr::str_replace_all(x, "bigg_id: ", "")
         x
-        
+
       }) %>%
       do.call(rbind, .) %>%
       as.data.frame()
-    
+
     colnames(metabolites) <-
       c("bigg_id", "name", "compartment_bigg_id", "stoichiometry")
-    
+
     database_link <-
       stringr::str_extract(string = out, pattern = "database_links:.+\\}, bigg_id: ") %>%
       stringr::str_replace("database_links: \\{", "") %>%
       stringr::str_replace("\\]\\}, bigg_id:", "") %>%
       stringr::str_trim()
-    
+
     database_link <-
       database_link %>%
       stringr::str_split("\\],") %>%
@@ -603,20 +602,20 @@ request_bigg_universal_reaction <-
           stringr::str_replace("\\}", "") %>%
           paste(collapse = "{}") %>%
           stringr::str_replace_all("CHEBI:", "")
-        
+
         database <-
           x %>%
           stringr::str_split("\\: \\[") %>%
           `[[`(1) %>%
           `[`(1)
-        
+
         data.frame(database = database,
                    id = id)
       }) %>%
       do.call(rbind, .) %>%
       as.data.frame()
-    
-    
+
+
     if (return_form == "list") {
       return_result <-
         list(
@@ -636,23 +635,23 @@ request_bigg_universal_reaction <-
       models_bigg_organism <-
         models_containing_reaction$organism %>%
         paste(collapse = "{}")
-      
+
       metabolite_bigg_id <-
         metabolites$bigg_id %>%
         paste(collapse = "{}")
-      
+
       metabolite_name <-
         metabolites$name %>%
         paste(collapse = "{}")
-      
+
       metabolites_compartment_bigg_id <-
         metabolites$compartment_bigg_id %>%
         paste(collapse = "{}")
-      
+
       metabolites_stoichiometry <-
         metabolites$stoichiometry %>%
         paste(collapse = "{}")
-      
+
       return_result <-
         data.frame(
           bigg_id = bigg_id,
@@ -667,7 +666,7 @@ request_bigg_universal_reaction <-
           metabolites_compartment_bigg_id = metabolites_compartment_bigg_id,
           metabolites_stoichiometry = metabolites_stoichiometry
         )
-      
+
       database_link <-
         database_link %>%
         dplyr::mutate(
@@ -681,7 +680,7 @@ request_bigg_universal_reaction <-
             TRUE ~ database
           )
         )
-      
+
       missing_id <-
         setdiff(
           c(
@@ -695,7 +694,7 @@ request_bigg_universal_reaction <-
           ),
           database_link$database
         )
-      
+
       if (length(missing_id) > 0) {
         new_database_link <-
           data.frame(database = missing_id, id = NA)
@@ -703,15 +702,15 @@ request_bigg_universal_reaction <-
           rbind(database_link,
                 new_database_link)
       }
-      
+
       database_link <-
         database_link %>%
         dplyr::arrange(database)
-      
+
       id <-
         as.data.frame(matrix(database_link$id, nrow = 1))
       colnames(id) <- database_link$database
-      
+
       return_result <-
         cbind(return_result,
               id)

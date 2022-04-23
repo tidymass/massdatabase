@@ -25,9 +25,9 @@ Request one specific the compound information in FoodB
 }
 \examples{
 x = request_foodb_compound( compound_id = "FDB000004", return_form = "list")
-x
-y = request_foodb_compound( compound_id = "FDB000004", return_form = "data.frame")
-
+x[1:2]
+y = request_foodb_compound(compound_id = "FDB000004", return_form = "data.frame")
+head(y)
 }
 \author{
 Xiaotao Shen
