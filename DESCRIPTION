@@ -1,7 +1,7 @@
 Type: Package
 Package: massdatabase
 Title: Play with databases about mass spectrometry
-Version: 0.99.02
+Version: 0.99.05
 Date: 2022-04-09
 Authors@R: c(
     person(given = "Xiaotao",
@@ -27,12 +27,13 @@ Imports:
     rvest,
     XML,
     Rdisop,
-    RColorBrewer,
     stringr,
     stringdist,
     magrittr,
     curl,
-    purrr
+    purrr,
+    metid,
+    masstools
 Suggests: 
     knitr,
     rmarkdown,
@@ -48,4 +49,5 @@ LazyData: true
 RoxygenNote: 7.1.2
 Remotes: 
     gitlab::jaspershen/metid
+    gitlab::jaspershen/masstools
 Config/testthat/edition: 3

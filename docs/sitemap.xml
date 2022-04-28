@@ -13,13 +13,73 @@
     <loc>https://tidymass.github.io/massdatabase/index.html</loc>
   </url>
   <url>
+    <loc>https://tidymass.github.io/massdatabase/news/index.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/massdatabase/reference/convert_gnps2metid.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/massdatabase/reference/convert_lipidbank2metid.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/massdatabase/reference/convert_massbank2metid.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/massdatabase/reference/convert_massbank2metid_nist.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/massdatabase/reference/convert_massbank2metid_riken.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/massdatabase/reference/convert_mona2metid.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/massdatabase/reference/convert_nist2metid.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/massdatabase/reference/convert_species2source.html</loc>
+  </url>
+  <url>
     <loc>https://tidymass.github.io/massdatabase/reference/down_bigg_model.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/massdatabase/reference/download_bigg_model.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/massdatabase/reference/download_chebi_compound.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/massdatabase/reference/download_lipidbank.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/massdatabase/reference/get_words_similarity.html</loc>
   </url>
   <url>
     <loc>https://tidymass.github.io/massdatabase/reference/index.html</loc>
   </url>
   <url>
     <loc>https://tidymass.github.io/massdatabase/reference/massdatabase_logo.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/massdatabase/reference/match_table.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/massdatabase/reference/read_chebi_compound.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/massdatabase/reference/read_msp_data.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/massdatabase/reference/read_msp_data_gnps.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/massdatabase/reference/read_msp_data_massbank.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/massdatabase/reference/read_msp_data_mona.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/massdatabase/reference/read_msp_data_nist.html</loc>
   </url>
   <url>
     <loc>https://tidymass.github.io/massdatabase/reference/request_bigg_model_info.html</loc>
@@ -46,6 +106,27 @@
     <loc>https://tidymass.github.io/massdatabase/reference/request_foodb_compound_info.html</loc>
   </url>
   <url>
+    <loc>https://tidymass.github.io/massdatabase/reference/request_foodb_compound_ms2.html</loc>
+  </url>
+  <url>
     <loc>https://tidymass.github.io/massdatabase/reference/request_foodb_food_info.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/massdatabase/reference/request_hmdb_metabolite.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/massdatabase/reference/request_lipidbank.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/massdatabase/reference/request_lipidmaps_lipid.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/massdatabase/reference/request_wikipedia_scientific_classification.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/massdatabase/reference/search_hmdb_database.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/massdatabase/reference/show_progresser.html</loc>
   </url>
 </urlset>

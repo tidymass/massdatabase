@@ -34,6 +34,52 @@ reference:
     - request_bigg_universal_reaction
     - request_bigg_version
 
+  - title: CHEBI
+    desc: CHEBI database
+    contents:
+    - download_chebi_compound
+    - read_chebi_compound
+
+  - title: GNPS
+    desc: GNPS database
+    contents:
+    - convert_gnps2metid
+
+  - title: HMDB
+    desc: HMDB database
+    contents:
+    - request_hmdb_metabolite
+    - search_hmdb_database
+
+  - title: LIPIDBANK
+    desc: LIPIDBANK database
+    contents:
+    - download_lipidbank
+    - request_lipidbank
+    - convert_lipidbank2metid
+
+  - title: MASSBANK
+    desc: MASSBANK database
+    contents:
+    - convert_massbank2metid
+    - convert_massbank2metid_nist
+    - convert_massbank2metid_riken
+
+  - title: MONA
+    desc: MONA database
+    contents:
+    - convert_mona2metid
+
+  - title: NIST
+    desc: NIST database
+    contents:
+    - convert_nist2metid
+
+  - title: LIPIDMAPS
+    desc: LIPIDMAPS database
+    contents:
+    - request_lipidmaps_lipid
+
   - title: FoodB
     desc: FoodB database
     contents:
@@ -41,33 +87,35 @@ reference:
     - request_foodb_compound
     - request_foodb_food_info
 
-  - title: CHEBI
-    desc: CHEBI database
+  - title: Wikipedia
+    desc: Wikipedia database
     contents:
-    - download_chebi_compound
-    - read_chebi_compound
+    - request_wikipedia_scientific_classification
+
+  - title: Read msp data
+    desc: Read msp data
+    contents:
+    - read_msp_data
+    - read_msp_data_massbank
+    - read_msp_data_mona
+    - read_msp_data_gnps
+    - read_msp_data_nist
 
   - title: Data
     desc: Some data embed in massdatabase
     contents:
-    - hilic.pos
-    - hilic.neg
-    - rp.pos
-    - rp.neg
-    - msDatabase_rplc0.0.2
-    - msDatabase_hilic0.0.2
-    - annotate_result
+    - match_table
 
   - title: Other functions
     desc: Other usefull functions in massdatabase
     contents:
-    - massdatabase_logo
+    - get_words_similarity
 
 navbar:
   title: "sparklyr"
   # type: inverse
   structure:
-    left: [home, articles, news, reference, database]
+    left: [home, articles, news, reference]
     right: [github, twitter]
   components:
     articles:
@@ -79,37 +127,6 @@ navbar:
       - text: Install massdatabase
         href: articles/install.html
       - text: -------
-      - text: "In-house and public database construction using massdatabase"
-      - text: In-house database construction
-        href: articles/database_construction.html
-      - text: Public database construction
-        href: articles/public_database_construction.html
-      - text: Output massdatabase database to mgf/msp for other tools
-        href: articles/output_database.html
-      - text: Correct retention times in database according to internal standards
-        href: articles/rt_correction.html
-      - text: -------
-      - text: "Metabolite identification"
-      - text: Metabolite identification using MS1 database
-        href: articles/metabolite_annotation_using_MS1.html
-      - text: Metabolite identification using MS2 database
-        href: articles/metabolite_annotation_using_MS2.html
-      - text: Metabolite identification using multiple databases
-        href: articles/multiple_databases.html
-      - text: Identify single peak
-        href: articles/identify_single_peak.html
-      - text: -------
-      - text: "Others"
-      - text: Other usefull tools
-        href: articles/other_tools.html
-      - text: -------
-      - text: "massdatabase for mass_dataset class object"
-      - text: "Work with mass_dataset class object"
-        href: articles/work_with_mass_dataset.html
-      - text: "Annotate single peak in mass_dataset"
-        href: articles/annotate_single_peak_mass_dataset.html
-      - text: "MS2 plot in mass_dataset"
-        href: articles/ms2_plot_mass_dataset.html
     twitter:
       icon: "fab fa-twitter fa-lg"
       href: https://twitter.com/xiaotaoshen1990

@@ -74,7 +74,7 @@ request_foodb_compound <-
       result <- result
     } else{
       version <- result$version
-      foods <- paste(unlist(result$foods[1,]), collapse = "{}")
+      foods <- paste(unlist(result$foods[1, ]), collapse = "{}")
       result <-
         data.frame(
           version = version,
@@ -109,11 +109,9 @@ request_foodb_compound <-
             NA,
             result$pubchem_compound_id
           ),
-          chemspider_id = ifelse(
-            is.null(result$chemspider_id),
-            NA,
-            result$chemspider_id
-          ),
+          chemspider_id = ifelse(is.null(result$chemspider_id),
+                                 NA,
+                                 result$chemspider_id),
           kegg_id = ifelse(is.null(result$kegg_id), NA, result$kegg_id),
           chebi_id = ifelse(is.null(result$chebi_id), NA, result$chebi_id),
           biocyc_id = ifelse(is.null(result$biocyc_id), NA, result$biocyc_id),
@@ -125,7 +123,7 @@ request_foodb_compound <-
           general_references = ifelse(
             is.null(result$general_references),
             NA,
-           result$general_references
+            result$general_references
           ),
           foods = foods,
           flavors = ifelse(is.null(result$flavors), NA, result$flavors),
@@ -214,7 +212,7 @@ request_foodb_compound_ms2 <-
       as.data.frame()
 
     idx <-
-      which(unname(unlist(spectra[1,])) == "Specdb::MsMs")
+      which(unname(unlist(spectra[1, ])) == "Specdb::MsMs")
 
     if (length(idx) == 0) {
       message('No MS/MS.')

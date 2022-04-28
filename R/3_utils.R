@@ -226,3 +226,35 @@ lipid_class_table <-
       "WWA"
     )
   )
+
+
+#' @title show_progresser
+#' @description show_progresser
+#' @author Xiaotao Shen
+#' \email{shenxt1990@@outlook.com}
+#' @param index index for loop
+#' @param progresser progresser
+#' @return A data.frame
+#' @importFrom magrittr %>%
+#' @importFrom dplyr case_when everything select filter
+#' @importFrom purrr map map2 walk
+#' @importFrom crayon green
+#' @export
+
+show_progresser <-
+  function(index = 1:1000,
+           progresser = c(1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100)) {
+    idx <-
+      seq(
+        from = 1,
+        to = max(index),
+        length.out = length(progresser)
+      ) %>%
+      round()
+
+    data.frame(idx = idx,
+               progresser = paste0(progresser, "%"))
+
+  }
+
+

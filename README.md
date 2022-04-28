@@ -14,9 +14,7 @@
 
 # About
 
-`massdatabase` is a R package which is used for metabolite identification based
-on in-house database and public database based on accurate mass (m/z),
-retention time (RT) and/or MS2 spectra.
+`massdatabase` is a R package which is used to play with databases about mass spectrometry data.
 
 <img src="man/figures/Figure_1.png" align="middle" alt="" width = "100%"/>
 

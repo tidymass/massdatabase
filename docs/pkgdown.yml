@@ -1,8 +1,8 @@
 pandoc: 2.14.0.3
-pkgdown: 2.0.2
+pkgdown: 2.0.1
 pkgdown_sha: ~
 articles: {}
-last_built: 2022-04-10T19:57Z
+last_built: 2022-04-28T21:00Z
 urls:
   reference: https://tidymass.github.io/massdatabase/reference
   article: https://tidymass.github.io/massdatabase/articles

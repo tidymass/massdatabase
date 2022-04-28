@@ -23,7 +23,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">massdatabase</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.01</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.05</span>
       </span>
     </div>
 
@@ -42,49 +42,6 @@
       <a href="../articles/install.html">Install massdatabase</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">In-house and public database construction using massdatabase</li>
-    <li>
-      <a href="../articles/database_construction.html">In-house database construction</a>
-    </li>
-    <li>
-      <a href="../articles/public_database_construction.html">Public database construction</a>
-    </li>
-    <li>
-      <a href="../articles/output_database.html">Output massdatabase database to mgf/msp for other tools</a>
-    </li>
-    <li>
-      <a href="../articles/rt_correction.html">Correct retention times in database according to internal standards</a>
-    </li>
-    <li class="divider">
-    <li class="dropdown-header">Metabolite identification</li>
-    <li>
-      <a href="../articles/metabolite_annotation_using_MS1.html">Metabolite identification using MS1 database</a>
-    </li>
-    <li>
-      <a href="../articles/metabolite_annotation_using_MS2.html">Metabolite identification using MS2 database</a>
-    </li>
-    <li>
-      <a href="../articles/multiple_databases.html">Metabolite identification using multiple databases</a>
-    </li>
-    <li>
-      <a href="../articles/identify_single_peak.html">Identify single peak</a>
-    </li>
-    <li class="divider">
-    <li class="dropdown-header">Others</li>
-    <li>
-      <a href="../articles/other_tools.html">Other usefull tools</a>
-    </li>
-    <li class="divider">
-    <li class="dropdown-header">massdatabase for mass_dataset class object</li>
-    <li>
-      <a href="../articles/work_with_mass_dataset.html">Work with mass_dataset class object</a>
-    </li>
-    <li>
-      <a href="../articles/annotate_single_peak_mass_dataset.html">Annotate single peak in mass_dataset</a>
-    </li>
-    <li>
-      <a href="../articles/ms2_plot_mass_dataset.html">MS2 plot in mass_dataset</a>
-    </li>
   </ul></li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -103,9 +60,6 @@
   </ul></li>
 <li>
   <a href="../reference/index.html">Reference</a>
-</li>
-<li>
-  <a href="../articles/public_databases.html">Public databases</a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
   <a href="https://github.com/tidymass/massdatabase/" class="external-link">
@@ -141,10 +95,6 @@
           <p class="section-desc"></p><p>BIGG database</p>
         </th>
       </tr></tbody><tbody><tr><td>
-          <p><code><a href="down_bigg_model.html">down_bigg_model()</a></code> </p>
-        </td>
-        <td><p>Download BIGG model data</p></td>
-      </tr><tr><td>
           <p><code><a href="request_bigg_model_info.html">request_bigg_model_info()</a></code> </p>
         </td>
         <td><p>Request BIGG model information</p></td>
@@ -169,6 +119,94 @@
         </td>
         <td><p>Request BIGG version</p></td>
       </tr></tbody><tbody><tr><th colspan="2">
+          <h2 id="chebi">CHEBI <a href="#chebi" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p><p>CHEBI database</p>
+        </th>
+      </tr></tbody><tbody><tr><td>
+          <p><code><a href="download_chebi_compound.html">download_chebi_compound()</a></code> </p>
+        </td>
+        <td><p>Download the CHEBI compound database</p></td>
+      </tr><tr><td>
+          <p><code><a href="read_chebi_compound.html">read_chebi_compound()</a></code> </p>
+        </td>
+        <td><p>Read the CHEBI compound database from download_chebi_compound function</p></td>
+      </tr></tbody><tbody><tr><th colspan="2">
+          <h2 id="gnps">GNPS <a href="#gnps" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p><p>GNPS database</p>
+        </th>
+      </tr></tbody><tbody><tr><td>
+          <p><code><a href="convert_gnps2metid.html">convert_gnps2metid()</a></code> </p>
+        </td>
+        <td><p>Convert GNPS data (list) to metID format database</p></td>
+      </tr></tbody><tbody><tr><th colspan="2">
+          <h2 id="hmdb">HMDB <a href="#hmdb" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p><p>HMDB database</p>
+        </th>
+      </tr></tbody><tbody><tr><td>
+          <p><code><a href="request_hmdb_metabolite.html">request_hmdb_metabolite()</a></code> </p>
+        </td>
+        <td><p>Request one specific the metabolite information in HMDB</p></td>
+      </tr><tr><td>
+          <p><code><a href="search_hmdb_database.html">search_hmdb_database()</a></code> </p>
+        </td>
+        <td><p>Search metabolite in HMDB</p></td>
+      </tr></tbody><tbody><tr><th colspan="2">
+          <h2 id="lipidbank">LIPIDBANK <a href="#lipidbank" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p><p>LIPIDBANK database</p>
+        </th>
+      </tr></tbody><tbody><tr><td>
+          <p><code><a href="download_lipidbank.html">download_lipidbank()</a></code> </p>
+        </td>
+        <td><p>Download lIPIDBANK database</p></td>
+      </tr><tr><td>
+          <p><code><a href="request_lipidbank.html">request_lipidbank()</a></code> </p>
+        </td>
+        <td><p>Request Lipidbank database</p></td>
+      </tr><tr><td>
+          <p><code><a href="convert_lipidbank2metid.html">convert_lipidbank2metid()</a></code> </p>
+        </td>
+        <td><p>Convert lipid bank data (data.frame) to metID format database</p></td>
+      </tr></tbody><tbody><tr><th colspan="2">
+          <h2 id="massbank">MASSBANK <a href="#massbank" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p><p>MASSBANK database</p>
+        </th>
+      </tr></tbody><tbody><tr><td>
+          <p><code><a href="convert_massbank2metid.html">convert_massbank2metid()</a></code> </p>
+        </td>
+        <td><p>Convert MassBank data (list) to metID format database</p></td>
+      </tr><tr><td>
+          <p><code><a href="convert_massbank2metid_nist.html">convert_massbank2metid_nist()</a></code> </p>
+        </td>
+        <td><p>Convert MassBank data (list, from NIST) to metID format database</p></td>
+      </tr><tr><td>
+          <p><code><a href="convert_massbank2metid_riken.html">convert_massbank2metid_riken()</a></code> </p>
+        </td>
+        <td><p>Convert MassBank data (list, from RIKEN) to metID format database</p></td>
+      </tr></tbody><tbody><tr><th colspan="2">
+          <h2 id="mona">MONA <a href="#mona" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p><p>MONA database</p>
+        </th>
+      </tr></tbody><tbody><tr><td>
+          <p><code><a href="convert_mona2metid.html">convert_mona2metid()</a></code> </p>
+        </td>
+        <td><p>Convert MoNA data (list) to metID format database</p></td>
+      </tr></tbody><tbody><tr><th colspan="2">
+          <h2 id="nist">NIST <a href="#nist" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p><p>NIST database</p>
+        </th>
+      </tr></tbody><tbody><tr><td>
+          <p><code><a href="convert_nist2metid.html">convert_nist2metid()</a></code> </p>
+        </td>
+        <td><p>Convert GNPS data (list) to metID format database</p></td>
+      </tr></tbody><tbody><tr><th colspan="2">
+          <h2 id="lipidmaps">LIPIDMAPS <a href="#lipidmaps" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p><p>LIPIDMAPS database</p>
+        </th>
+      </tr></tbody><tbody><tr><td>
+          <p><code><a href="request_lipidmaps_lipid.html">request_lipidmaps_lipid()</a></code> </p>
+        </td>
+        <td><p>Request one lipid information in LIPIDMAPS</p></td>
+      </tr></tbody><tbody><tr><th colspan="2">
           <h2 id="foodb">FoodB <a href="#foodb" class="anchor" aria-hidden="true"></a></h2>
           <p class="section-desc"></p><p>FoodB database</p>
         </th>
@@ -185,17 +223,53 @@
         </td>
         <td><p>Request all the food information in FoodB</p></td>
       </tr></tbody><tbody><tr><th colspan="2">
+          <h2 id="wikipedia">Wikipedia <a href="#wikipedia" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p><p>Wikipedia database</p>
+        </th>
+      </tr></tbody><tbody><tr><td>
+          <p><code><a href="request_wikipedia_scientific_classification.html">request_wikipedia_scientific_classification()</a></code> </p>
+        </td>
+        <td><p>Request the scientific classification of one species from wikipedia</p></td>
+      </tr></tbody><tbody><tr><th colspan="2">
+          <h2 id="read-msp-data">Read msp data <a href="#read-msp-data" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p><p>Read msp data</p>
+        </th>
+      </tr></tbody><tbody><tr><td>
+          <p><code><a href="read_msp_data.html">read_msp_data()</a></code> </p>
+        </td>
+        <td><p>read_msp_data</p></td>
+      </tr><tr><td>
+          <p><code><a href="read_msp_data_massbank.html">read_msp_data_massbank()</a></code> </p>
+        </td>
+        <td><p>read_msp_data_massbank</p></td>
+      </tr><tr><td>
+          <p><code><a href="read_msp_data_mona.html">read_msp_data_mona()</a></code> </p>
+        </td>
+        <td><p>read_msp_data_mona</p></td>
+      </tr><tr><td>
+          <p><code><a href="read_msp_data_gnps.html">read_msp_data_gnps()</a></code> </p>
+        </td>
+        <td><p>read_msp_data_gnps</p></td>
+      </tr><tr><td>
+          <p><code><a href="read_msp_data_nist.html">read_msp_data_nist()</a></code> </p>
+        </td>
+        <td><p>read_msp_data_nist</p></td>
+      </tr></tbody><tbody><tr><th colspan="2">
           <h2 id="data">Data <a href="#data" class="anchor" aria-hidden="true"></a></h2>
           <p class="section-desc"></p><p>Some data embed in massdatabase</p>
         </th>
-      </tr></tbody><tbody></tbody><tbody><tr><th colspan="2">
+      </tr></tbody><tbody><tr><td>
+          <p><code><a href="match_table.html">match_table</a></code> </p>
+        </td>
+        <td><p>match table</p></td>
+      </tr></tbody><tbody><tr><th colspan="2">
           <h2 id="other-functions">Other functions <a href="#other-functions" class="anchor" aria-hidden="true"></a></h2>
           <p class="section-desc"></p><p>Other usefull functions in massdatabase</p>
         </th>
       </tr></tbody><tbody><tr><td>
-          <p><code><a href="massdatabase_logo.html">massdatabase_logo()</a></code> </p>
+          <p><code><a href="get_words_similarity.html">get_words_similarity()</a></code> </p>
         </td>
-        <td><p>Show the base information of massdatabase pacakge</p></td>
+        <td><p>Get the similarity between two words</p></td>
       </tr></tbody></table></div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
