@@ -47,7 +47,7 @@ convert_mona2metid <-
           x <-
             t(x) %>%
             as.data.frame()
-          colnames(x) <- as.character(x[1, ])
+          colnames(x) <- as.character(x[1,])
           x <- x[-1, , drop = FALSE]
           new_name <-
             setdiff(all_names, colnames(x))
@@ -82,7 +82,7 @@ convert_mona2metid <-
         x <-
           t(x) %>%
           as.data.frame()
-        colnames(x) <- as.character(x[1, ])
+        colnames(x) <- as.character(x[1,])
         x <- x[-1, , drop = FALSE]
         new_name <-
           setdiff(all_names, colnames(x))
@@ -195,11 +195,9 @@ convert_mona2metid <-
 
     ms1_info <-
       ms1_info %>%
-      dplyr::rename(
-        Lab.ID = `DB#`,
-        mz = ExactMass,
-        Compound.name = Name
-      ) %>%
+      dplyr::rename(Lab.ID = `DB#`,
+                    mz = ExactMass,
+                    Compound.name = Name) %>%
       dplyr::mutate(
         MASSBANK.ID = Lab.ID,
         CAS.ID = NA,
@@ -228,14 +226,16 @@ convert_mona2metid <-
 
     ms1_info <-
       ms1_info %>%
-      dplyr::mutate(Polarity =
-                      case_when(
-                        Polarity == "POSITIVE" ~ "Positive",
-                        Polarity == "NEGATIVE" ~ "Negative",
-                        Polarity == "P" ~ "Positive",
-                        Polarity == "N" ~ "Negative",
-                        TRUE ~ Polarity
-                      ))
+      dplyr::mutate(
+        Polarity =
+          case_when(
+            Polarity == "POSITIVE" ~ "Positive",
+            Polarity == "NEGATIVE" ~ "Negative",
+            Polarity == "P" ~ "Positive",
+            Polarity == "N" ~ "Negative",
+            TRUE ~ Polarity
+          )
+      )
 
     ms1_info <-
       ms1_info %>%
@@ -247,7 +247,7 @@ convert_mona2metid <-
 
     if (length(remove_idx) > 0) {
       ms1_info <-
-        ms1_info[-remove_idx, ]
+        ms1_info[-remove_idx,]
 
       spectra_data <-
         spectra_data[-remove_idx]
@@ -269,7 +269,7 @@ convert_mona2metid <-
       as.data.frame()
 
     ms1_info2 <-
-      ms1_info2[match(ms1_info$Lab.ID, ms1_info2$Lab.ID), ]
+      ms1_info2[match(ms1_info$Lab.ID, ms1_info2$Lab.ID),]
 
     progresser <-
       show_progresser(index = seq_along(spectra_data),
@@ -329,3 +329,29 @@ convert_mona2metid <-
     save(mona_ms2, file = file.path(path, "mona_ms2"))
     invisible(mona_ms2)
   }
+
+#
+#
+# library(rvest)
+# result1 <-
+# read_html("https://mona.fiehnlab.ucdavis.edu/spectra/display/AC000002")
+#
+#
+# flat_html <- readLines(con = "https://mona.fiehnlab.ucdavis.edu/spectra/display/AC000002")
+#
+# result2 <-
+#   read_html("https://massbank.eu/MassBank/RecordDisplay?id=PR010017&dsn=RIKEN")
+#
+# result3 <-
+# read_html("https://www.lipidmaps.org/databases/lmsd/LMFA03060001")
+#
+# result1 %>%
+#   html_nodes("body")
+#
+# result1 %>%
+#   html_nodes("body") %>%
+#   html_text2()
+#
+# result3 %>%
+#   html_nodes("body") %>%
+#   html_text2()

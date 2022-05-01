@@ -95,4 +95,6 @@ globalVariables(names = c(".", "database",
                           "precursormz",
                           "precursortype",
                           "smiles",
-                          "tail"))
+                          "tail",
+                          "X1",
+                          "X2"))

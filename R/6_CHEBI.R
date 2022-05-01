@@ -65,8 +65,6 @@ download_chebi_compound <-
 
 
 
-
-
 #' @title Read the CHEBI compound database from download_chebi_compound function
 #' @description Read the CHEBI compound database from download_chebi_compound function
 #' @author Xiaotao Shen
@@ -226,4 +224,275 @@ read_chebi_compound <-
                        by = c("COMPOUND_ID"))
 
     invisible(chebi_data)
+  }
+
+
+
+
+#' @title Request CHEBI compound
+#' @description Request CHEBI compound
+#' @author Xiaotao Shen
+#' \email{shenxt1990@@outlook.com}
+#' @param url url https://www.ebi.ac.uk/chebi/searchId.do?chebiId=
+#' @param compound_id compound_id, for example, CHEBI:18358
+#' @return Compound information (list)
+#' @importFrom stringr str_replace_all str_extract str_replace str_split
+#' @importFrom stringr str_trim
+#' @importFrom dplyr select filter bind_rows
+#' @importFrom tibble as_tibble
+#' @importFrom rvest html_elements html_table
+#' @importFrom purrr map
+#' @export
+#' @examples
+#' request_chebi_compound(compound_id = "CHEBI:18358")
+#' request_chebi_compound(compound_id = "CHEBI:18377")
+#' request_chebi_compound(compound_id = "CHEBI:18399")
+request_chebi_compound <-
+  function(url = "https://www.ebi.ac.uk/chebi/searchId.do?chebiId=",
+           compound_id = "CHEBI:18358") {
+    result <-
+      rvest::read_html(x = paste0(url, compound_id))
+
+    main <-
+      tryCatch(
+        result %>%
+          rvest::html_elements(".gridLayoutCellStructure+ td") %>%
+          rvest::html_table() %>%
+          `[[`(1) %>%
+          dplyr::select(X1, X2) %>%
+          dplyr::filter(!X1 %in% c("", "Supplier Information", "Download")) %>%
+          t() %>%
+          tibble::as_tibble(),
+        error = function(e)
+          NULL
+      )
+
+    if (is.null(main)) {
+      stop("Can't find ", compound_id, ", check it.")
+    }
+
+
+    colnames(main) <- as.character(main[1, ])
+    main <- main[-1, , drop = FALSE]
+
+    base_info <-
+      tryCatch(
+        result %>%
+          rvest::html_elements(".small-boxed-section+ .small-boxed-section") %>%
+          rvest::html_table() %>%
+          `[[`(1) %>%
+          dplyr::select(X1, X2),
+        error = function(e)
+          NULL
+      )
+
+    if (is.null(base_info)) {
+      base_info <-
+        tryCatch(
+          result %>%
+            rvest::html_elements(".chebiTableContent+ .small-boxed-section") %>%
+            rvest::html_table() %>%
+            `[[`(1) %>%
+            dplyr::select(X1, X2),
+          error = function(e)
+            NULL
+        )
+    }
+
+    base_info <-
+      base_info$X1[1] %>%
+      stringr::str_split("\n") %>%
+      `[[`(1) %>%
+      stringr::str_trim()
+
+    base_info <- base_info[base_info != ""]
+
+    base_info <-
+      matrix(base_info, nrow = 2) %>%
+      tibble::as_tibble()
+
+    colnames(base_info) <- as.character(base_info[1, ])
+
+    base_info <- base_info[-1, , drop = FALSE]
+
+    others <-
+      result %>%
+      rvest::html_elements(css = ".chebiTableContent") %>%
+      purrr::map(function(x) {
+        x <-
+          tryCatch(
+            rvest::html_table(x),
+            error = function(e)
+              NULL
+          )
+        if (!is.null(x)) {
+          x <-
+            x %>%
+            dplyr::filter(X1 != "")
+        }
+        x
+      })
+
+    remain_idx <-
+      lapply(others, is.null) %>%
+      unlist() %>%
+      `!`() %>%
+      which()
+
+    others <- others[remain_idx]
+
+    ###source
+    source <-
+      lapply(others, function(x) {
+        if (any(x$X1 == "Metabolite of Species")) {
+          return(x)
+        } else{
+          return(NULL)
+        }
+      }) %>%
+      dplyr::bind_rows()
+
+    if (nrow(source) == 0) {
+      source <- NULL
+    } else{
+      source$X1[2] <-
+        source$X1[2] %>%
+        stringr::str_split("\n") %>%
+        `[[`(1) %>%
+        stringr::str_trim() %>%
+        paste(collapse = "")
+
+      source$X2[2] <-
+        source$X2[2] %>%
+        stringr::str_split("\n") %>%
+        `[[`(1) %>%
+        stringr::str_trim() %>%
+        paste(collapse = "")
+
+      colnames(source) <- as.character(source[1, ])
+      source <- source[-1, , drop = FALSE]
+
+    }
+
+    ###Roles Classification
+    roles_classification <-
+      lapply(others, function(x) {
+        if (any(x$X1 == "Roles Classification")) {
+          return(x)
+        } else{
+          return(NULL)
+        }
+      }) %>%
+      dplyr::bind_rows()
+
+    roles_classification <-
+      roles_classification[-1, , drop = FALSE]
+
+    roles_classification$X2 <-
+      roles_classification$X2 %>%
+      stringr::str_split("\n") %>%
+      lapply(function(x) {
+        x <-
+          x %>%
+          stringr::str_trim()
+        x <- x[x != ""]
+        x %>%
+          paste(collapse = " ")
+      }) %>%
+      unlist()
+
+    roles_classification <-
+      roles_classification %>%
+      t() %>%
+      tibble::as_tibble()
+
+    colnames(roles_classification) <-
+      as.character(roles_classification[1, ])
+
+    roles_classification <- roles_classification[-1, , drop = FALSE]
+
+    ###IUPAC Name
+    iupac_name <-
+      lapply(others, function(x) {
+        if (any(x$X1 == "IUPAC Name")) {
+          return(x)
+        } else{
+          return(NULL)
+        }
+      }) %>%
+      dplyr::bind_rows()
+
+    colnames(iupac_name) <- as.character(iupac_name[1, ])
+    iupac_name <- iupac_name[-1, , drop = FALSE]
+
+    ###Synonyms
+    synonyms <-
+      lapply(others, function(x) {
+        if (any(x$X1 == "Synonyms")) {
+          return(x)
+        } else{
+          return(NULL)
+        }
+      }) %>%
+      dplyr::bind_rows()
+
+    colnames(synonyms) <- as.character(synonyms[1, ])
+    synonyms <- synonyms[-1, , drop = FALSE]
+
+    ###Manual Xrefs
+    manual_xrefs <-
+      lapply(others, function(x) {
+        if (any(x$X1 == "Manual Xrefs")) {
+          return(x)
+        } else{
+          return(NULL)
+        }
+      }) %>%
+      dplyr::bind_rows()
+
+    if (nrow(manual_xrefs) == 0) {
+      manual_xrefs <- NULL
+    } else{
+      manual_xrefs <-
+        manual_xrefs %>%
+        dplyr::filter(!is.na(X2))
+
+      colnames(manual_xrefs) <- as.character(manual_xrefs[1, ])
+      manual_xrefs <- manual_xrefs[-1, , drop = FALSE]
+
+    }
+
+    ###Registry Numbers
+    registry_numbers <-
+      lapply(others, function(x) {
+        if (any(x$X1 == "Registry Numbers")) {
+          return(x)
+        } else{
+          return(NULL)
+        }
+      }) %>%
+      dplyr::bind_rows()
+
+    if (nrow(registry_numbers) == 0) {
+      registry_numbers <- NULL
+    } else{
+      registry_numbers <-
+        registry_numbers %>%
+        dplyr::filter(!is.na(X2))
+
+      colnames(registry_numbers) <-
+        as.character(registry_numbers[1, ])
+      registry_numbers <- registry_numbers[-1, , drop = FALSE]
+    }
+
+    list(
+      main = main,
+      base_info = base_info,
+      source = source,
+      roles_classification = roles_classification,
+      iupac_name = iupac_name,
+      synonyms = synonyms,
+      manual_xrefs = manual_xrefs,
+      registry_numbers = registry_numbers
+    )
   }

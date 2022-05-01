@@ -1,3 +1,37 @@
+#' @title Download the MassBank compound database
+#' @description Download the MassBank compound database
+#' @author Xiaotao Shen
+#' \email{shenxt1990@@outlook.com}
+#' @param url Default is "https://github.com/MassBank/MassBank-data/releases/download/2021.12".
+#' @param source nist or riken.
+#' @param path Default is ..
+#' @return Downloaded files.
+#' @importFrom magrittr %>%
+#' @export
+download_massbank_compound <-
+  function(url = "https://github.com/MassBank/MassBank-data/releases/download/2021.12",
+           source = c("nist", "riken"),
+           path = ".") {
+    source <- match.arg(source)
+    path <- file.path(path, "massbank_compound")
+    dir.create(path)
+    if(source == "riken"){
+      message("Download MassBank_RIKEN.msp...")
+      download.file(
+        url = paste0(url, "/MassBank_RIKEN.msp"),
+        destfile = file.path(path, "MassBank_RIKEN.msp")
+      )
+    }else{
+      message("Download MassBank_NIST.msp...")
+      download.file(
+        url = paste0(url, "/MassBank_NIST.msp"),
+        destfile = file.path(path, "MassBank_NIST.msp")
+      )
+    }
+    message("Done.")
+  }
+
+
 #' @title Convert MassBank data (list) to metID format database
 #' @description Convert MassBank data (list) to metID format database
 #' @author Xiaotao Shen
@@ -33,8 +67,6 @@ convert_massbank2metid <-
                                    threads = threads)
     }
   }
-
-
 
 
 
