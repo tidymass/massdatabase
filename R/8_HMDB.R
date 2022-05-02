@@ -10,12 +10,12 @@
 #' @importFrom magrittr %>%
 #' @export
 #' @examples
-#' x = request_hmdb_metabolite(metabolite_id = "HMDB0000001", return_form = "list")
+#' x = request_data(metabolite_id = "HMDB0000001", return_form = "list")
 #' x[1:2]
-#' y = request_hmdb_metabolite(metabolite_id = "HMDB0000001", return_form = "data.frame")
+#' y = request_data(metabolite_id = "HMDB0000001", return_form = "data.frame")
 #' head(y)
 
-request_hmdb_metabolite <-
+request_data <-
   function(url = "https://hmdb.ca/metabolites",
            metabolite_id = "HMDB0000001",
            return_form = c("list" , "data.frame")) {
@@ -34,13 +34,17 @@ request_hmdb_metabolite <-
     } else{
       version <- result$version
       monisotopic_moleculate_weight <-
-        ifelse(is.null(result$monisotopic_moleculate_weight),
-               NA,
-               as.numeric(result$monisotopic_moleculate_weight))
+        ifelse(
+          is.null(result$monisotopic_moleculate_weight),
+          NA,
+          as.numeric(result$monisotopic_moleculate_weight)
+        )
       average_molecular_weight <-
-        ifelse(is.null(result$average_molecular_weight),
-               NA,
-               as.numeric(result$average_molecular_weight))
+        ifelse(
+          is.null(result$average_molecular_weight),
+          NA,
+          as.numeric(result$average_molecular_weight)
+        )
       chemical_formula <-
         ifelse(is.null(result$chemical_formula),
                NA,
@@ -117,7 +121,7 @@ request_hmdb_metabolite <-
 #' \email{shenxt1990@@outlook.com}
 #' @param name metabolite name
 #' @param mz mz
-#' @param hmdb_metabolite_database hmdb_metabolite_database, metID format
+#' @param data_database data_database, metID format
 #' @param mz_error_cutoff mz_error_cutoff
 #' @param similarity_score_cutoff similarity_score_cutoff
 #' @return a data frmae
@@ -128,11 +132,11 @@ request_hmdb_metabolite <-
 search_hmdb_database <-
   function(name = "5-methoxysalicylic acid",
            mz = 168.042625,
-           hmdb_metabolite_database,
+           data_database,
            mz_error_cutoff = 100,
            similarity_score_cutoff = 0.5) {
     metabolite_database <-
-      hmdb_metabolite_database@spectra.info
+      data_database@spectra.info
 
     mz <- as.numeric(mz)
 
@@ -200,4 +204,266 @@ search_hmdb_database <-
       dplyr::arrange(dplyr::desc(similarity_score)) %>%
       dplyr::mutate(query = name) %>%
       dplyr::select(query, Compound.name, Synonyms, dplyr::everything())
+  }
+
+
+#' @title Convert HMDB data (MS1 or MS2) to metID format database
+#' @description Convert HMDB data (MS1 or MS2) to metID format database
+#' @author Xiaotao Shen
+#' \email{shenxt1990@@outlook.com}
+#' @param data for MS1, it is a data.from from read_xml_data_hmdb.
+#' @param path Default is .
+#' @param threads threads
+#' @param ms1_or_ms2 MS1 or MS2 data.
+#' @return metid database class
+#' @importFrom magrittr %>%
+#' @importFrom plyr . dlply
+#' @importFrom metid construct_database
+#' @export
+
+convert_hmdb2metid <-
+  function(data,
+           path = ".",
+           threads = 5,
+           ms1_or_ms2 = c("ms1", "ms2")) {
+    dir.create(path, showWarnings = FALSE, recursive = TRUE)
+    ms1_or_ms2 <- match.arg(ms1_or_ms2)
+
+    if (ms1_or_ms2 == "ms1") {
+      data <-
+        data %>%
+        dplyr::filter(!is.na(monisotopic_molecular_weight))
+
+      data[which(data == "", arr.ind = TRUE)] <- NA
+
+      data <-
+        data %>%
+        dplyr::rename(
+          mz = average_molecular_weight,
+          Create_date = creation_date,
+          Updated_date = update_date,
+          Lab.ID = accession,
+          Compound.name = name,
+          Description = description,
+          Synonyms = synonyms,
+          Formula = chemical_formula,
+          IUPAC_name = iupac_name,
+          Traditional_IUPAC_name = traditional_iupac,
+          CAS.ID = cas_registry_number,
+          SMILES.ID = smiles,
+          INCHI.ID = inchi,
+          INCHIKEY.ID = inchikey,
+          Kingdom = kingdom,
+          Super_class = super_class,
+          Class = class,
+          Sub_class = sub_class,
+          State = state,
+          Biospecimen_locations = biospecimen_locations,
+          Cellular_locations = cellular_locations,
+          Tissue_locations = tissue_locations,
+          CHEMSPIDER.ID = chemspider_id,
+          DRUGBANK.ID = drugbank_id,
+          FOODB.ID = foodb_id,
+          PUBCHEM.ID = pubchem_compound_id,
+          CHEBI.ID = chebi_id,
+          KEGG.ID = kegg_id,
+          BIOCYC.ID = biocyc_id,
+          BIGG.ID = bigg_id,
+          WIKIPEDIA.ID = wikipedia_id,
+          METLIN.ID = metlin_id
+        ) %>%
+        dplyr::mutate(
+          HMDB.ID = Lab.ID,
+          RT = NA,
+          mz.pos = NA,
+          mz.neg = NA,
+          Submitter = "HMDB",
+          From_human = "Yes"
+        ) %>%
+        dplyr::select(
+          Lab.ID,
+          Compound.name,
+          mz,
+          RT,
+          CAS.ID,
+          HMDB.ID,
+          KEGG.ID,
+          Formula,
+          mz.pos,
+          mz.neg,
+          Submitter,
+          everything()
+        )
+
+      temp_file <- tempfile()
+      dir.create(temp_file, showWarnings = FALSE)
+
+      readr::write_csv(x = data,
+                       file = file.path(temp_file, "data.csv"))
+
+      hmdb_ms1 <-
+        metid::construct_database(
+          path = temp_file,
+          version =  as.character(Sys.Date()),
+          metabolite.info.name = "data.csv",
+          source = "HMDB",
+          link = "https://hmdb.ca/",
+          creater = "Xiaotao Shen",
+          email = "shenxt@stanford.edu",
+          rt = FALSE,
+          threads = threads
+        )
+
+      save(hmdb_ms1, file = file.path(path, "hmdb_ms1"))
+      invisible(hmdb_ms1)
+    } else{
+      remove_idx <-
+        data %>%
+        lapply(function(x) {
+          nrow(x$ms2)
+        }) %>%
+        unlist() %>%
+        `==`(0) %>%
+        which()
+
+      if (length(remove_idx) > 0) {
+        data <-
+          data[-remove_idx]
+      }
+
+      spectra_info <-
+        data %>%
+        purrr::map(function(x) {
+          x$ms1_info
+        }) %>%
+        dplyr::bind_rows() %>%
+        as.data.frame()
+
+      spectra_data <-
+        data %>%
+        purrr::map(function(x) {
+          x$ms2
+        })
+
+      spectra_info[which(spectra_info == "NA", arr.ind = TRUE)] <-
+        NA
+      spectra_info[which(spectra_info == "n/a", arr.ind = TRUE)] <-
+        NA
+      spectra_info[which(spectra_info == "N/A", arr.ind = TRUE)] <-
+        NA
+
+      spectra_info <-
+        spectra_info %>%
+        dplyr::select(HMDB.ID,
+                      Instrument_type,
+                      Polarity,
+                      collision_energy_voltage,
+                      adduct)
+
+      remove_idx <-
+        which(is.na(spectra_info$Polarity))
+
+      if (length(remove_idx) > 0) {
+        spectra_info <-
+          spectra_info[-remove_idx,]
+
+        spectra_data <-
+          spectra_data[-remove_idx]
+      }
+
+      spectra_info <-
+        spectra_info %>%
+        dplyr::mutate(
+          Polarity = case_when(
+            Polarity == "positive" ~ "Positive",
+            Polarity == "negative" ~ "Negative",
+            TRUE ~ Polarity
+          )
+        )
+
+      spectra_info$Lab.ID <-
+        masstools::name_duplicated(spectra_info$HMDB.ID) %>%
+        paste("shen", sep = "_")
+
+      spectra_info2 <-
+        spectra_info %>%
+        plyr::dlply(.variables = .(HMDB.ID)) %>%
+        purrr::map(function(y) {
+          if (sum(is.na(y$collision_energy_voltage)) > 0) {
+            y$collision_energy_voltage[is.na(y$collision_energy_voltage)] <-
+              paste("Unknown",
+                    1:length(y$collision_energy_voltage[is.na(y$collision_energy_voltage)]),
+                    sep = "_")
+          }
+          y
+        }) %>%
+        dplyr::bind_rows() %>%
+        as.data.frame()
+
+      spectra_info2 <-
+        spectra_info2[match(spectra_info$Lab.ID, spectra_info2$Lab.ID),]
+
+      spectra_data2 <-
+        1:length(spectra_data) %>%
+        purrr::map(function(i) {
+          x <- spectra_data[[i]]
+          x <- list(x)
+          names(x) <-
+            spectra_info2$collision_energy_voltage[i]
+          x
+        })
+
+      names(spectra_data2) <- spectra_info2$Lab.ID
+
+      ######positive mode
+      spectra_info2$Lab.ID == names(spectra_data2)
+
+      index_pos <- which(spectra_info2$Polarity == "Positive")
+      index_neg <- which(spectra_info2$Polarity == "Negative")
+
+      spectra_info_pos <- spectra_info2[index_pos,]
+      spectra_data_pos <- spectra_data2[index_pos]
+
+      spectra_info_neg <- spectra_info2[index_neg,]
+      spectra_data_neg <- spectra_data2[index_neg]
+
+      colnames(spectra_info2)
+      colnames(hmdb_ms1@spectra.info)
+
+      spectra_info2 <-
+        spectra_info2 %>%
+        dplyr::rename(CE = "collision_energy_voltage")
+
+      spectra_info2 <-
+        spectra_info2 %>%
+        dplyr::left_join(hmdb_ms1@spectra.info %>% dplyr::select(-Lab.ID),
+                         by = c("HMDB.ID"))
+
+      temp_file <- tempfile()
+      dir.create(temp_file, showWarnings = FALSE)
+
+      readr::write_csv(x = spectra_info2,
+                       file = file.path(temp_file, "spectra_info2.csv"))
+
+      hmdb_ms2 <-
+        metid::construct_database(
+          path = temp_file,
+          version =  as.character(Sys.Date()),
+          metabolite.info.name = "spectra_info2.csv",
+          source = "HMDB",
+          link = "https://hmdb.ca/",
+          creater = "Xiaotao Shen",
+          email = "shenxt@stanford.edu",
+          rt = FALSE,
+          threads = threads
+        )
+
+      hmdb_ms2@spectra.data$Spectra.positive <- spectra_data_pos
+      hmdb_ms2@spectra.data$Spectra.negative <- spectra_data_neg
+
+      save(hmdb_ms2, file = file.path(path, "hmdb_ms2"))
+      message("Done.")
+      invisible(hmdb_ms2)
+    }
+
   }

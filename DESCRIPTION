@@ -1,7 +1,7 @@
 Type: Package
 Package: massdatabase
 Title: Play with databases about mass spectrometry
-Version: 0.99.06
+Version: 0.99.07
 Date: 2022-04-09
 Authors@R: c(
     person(given = "Xiaotao",
@@ -34,7 +34,8 @@ Imports:
     purrr,
     metid,
     masstools,
-    tibble
+    tibble,
+    xml2
 Suggests: 
     knitr,
     rmarkdown,

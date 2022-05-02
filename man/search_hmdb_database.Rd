@@ -7,7 +7,7 @@
 search_hmdb_database(
   name = "5-methoxysalicylic acid",
   mz = 168.042625,
-  hmdb_metabolite_database,
+  data_database,
   mz_error_cutoff = 100,
   similarity_score_cutoff = 0.5
 )
@@ -17,7 +17,7 @@ search_hmdb_database(
 
 \item{mz}{mz}
 
-\item{hmdb_metabolite_database}{hmdb_metabolite_database, metID format}
+\item{data_database}{data_database, metID format}
 
 \item{mz_error_cutoff}{mz_error_cutoff}
 
