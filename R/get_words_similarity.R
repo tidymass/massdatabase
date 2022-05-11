@@ -21,9 +21,9 @@ get_words_similarity <-
            ...) {
     new_word1 <-
       word1 %>%
-      lapply(function(x){
+      lapply(function(x) {
         x %>%
-        stringr::str_extract_all("[0-9a-zA-Z]{1,100}") %>%
+          stringr::str_extract_all("[0-9a-zA-Z]{1,100}") %>%
           `[[`(1) %>%
           paste(collapse = "") %>%
           stringr::str_to_lower()
@@ -32,7 +32,7 @@ get_words_similarity <-
 
     new_word2 <-
       word2 %>%
-      lapply(function(x){
+      lapply(function(x) {
         x %>%
           stringr::str_extract_all("[0-9a-zA-Z]{1,100}") %>%
           `[[`(1) %>%
@@ -46,4 +46,3 @@ get_words_similarity <-
                           ...)
 
   }
-

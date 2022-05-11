@@ -258,3 +258,253 @@ show_progresser <-
   }
 
 
+
+
+
+keep_one_from_multiple <-
+  function(df) {
+    df %>%
+      apply(1, function(x) {
+        x <- as.character(x)
+        x <- x[!is.na(x)]
+        if (length(x) == 0) {
+          return(NA)
+        } else{
+          x[1]
+        }
+      })
+  }
+
+
+standard_hmdb_id <-
+  function(id) {
+    id %>%
+      purrr::map(function(x) {
+        # cat(x, " ")
+        if (is.na(x)) {
+          return(NA)
+        }
+        if (nchar(x) == 9) {
+          x %>%
+            stringr::str_replace("HMDB", "HMDB00") %>%
+            return()
+        } else{
+          return(x)
+        }
+      }) %>%
+      unlist() %>%
+      unname()
+  }
+
+
+update_metid_database_info <-
+  function(database,
+           ref_database,
+           by = c("CAS.ID",
+                  "HMDB.ID",
+                  "KEGG.ID"),
+           combine_columns = c("CAS.ID", "HMDB.ID", "KEGG.ID", "PUBCHEM.ID"),
+           new_columns = c("Kingdom", "Super_class", "Class", "Sub_class")) {
+    all_names <- c(by, combine_columns) %>%
+      unique()
+    if (any(!all_names %in% colnames(database@spectra.info))) {
+      stop(paste(all_names[which(!all_names %in% colnames(database@spectra.info))], collapse = ", "),
+           " are not in database.")
+    }
+
+    if (any(!all_names %in% colnames(ref_database@spectra.info))) {
+      stop(paste(all_names[which(!all_names %in% colnames(ref_database@spectra.info))], collapse = ", "),
+           " are not in ref_database.")
+    }
+
+    if (any(!new_columns %in% colnames(ref_database@spectra.info))) {
+      stop(paste(new_columns[which(!new_columns %in% colnames(ref_database@spectra.info))], collapse = ", "),
+           " are not in ref_database.")
+    }
+
+    database@spectra.info <-
+      database@spectra.info %>%
+        as.data.frame()
+
+    ref_database@spectra.info <-
+      ref_database@spectra.info %>%
+      as.data.frame()
+
+    idx <-
+      by %>%
+      purrr::map(function(x) {
+        match(database@spectra.info[, x,],
+              ref_database@spectra.info[, x],
+              incomparables = NA)
+      }) %>%
+      dplyr::bind_cols()
+
+    idx <-
+      idx %>%
+      keep_one_from_multiple %>%
+      as.numeric()
+
+    ###combine columns
+    message("Combining columns...")
+    for (x in combine_columns) {
+      value <-
+        data.frame(database@spectra.info[, x],
+                   ref_database@spectra.info[idx, x]) %>%
+        keep_one_from_multiple()
+      database@spectra.info[, x] <- value
+    }
+    message("Done.")
+
+
+    ###new columns
+    if (!is.null(new_columns)) {
+      if (length(new_columns) > 0) {
+        message("Adding new columns...")
+
+        database@spectra.info <-
+          database@spectra.info %>%
+          dplyr::select(!dplyr::one_of(new_columns))
+
+        for (x in new_columns) {
+          value <- ref_database@spectra.info[idx, x]
+          database@spectra.info <-
+            database@spectra.info %>%
+            dplyr::mutate(x = value)
+          colnames(database@spectra.info)[ncol(database@spectra.info)] <-
+            x
+        }
+
+        message("Done.")
+      }
+    }
+
+    return(database)
+  }
+
+
+
+
+merge_same_source <-
+  function(source_system) {
+    id <-
+      source_system %>%
+      dplyr::select(tidyselect::ends_with("ID"))
+
+    source <-
+      source_system %>%
+      dplyr::select(tidyselect::starts_with("From"))
+
+    from <-
+      grep("From_", colnames(source), value = TRUE)
+
+    duplicated_from <-
+      from %>%
+      stringr::str_extract("^From_[a-zA-Z]{1,20}")
+
+    unique_from <-
+      duplicated_from[duplicated(duplicated_from)] %>%
+      unique()
+
+    if (length(unique_from) == 0) {
+      return(source_system)
+    }
+
+    new_source <-
+      seq_along(unique_from) %>%
+      purrr::map(function(i) {
+        idx <-
+          which(duplicated_from == unique_from[i])
+        x <-
+        source[, idx] %>%
+          apply(1, function(y) {
+            y <- as.character(y)
+            y <- y[!is.na(y)]
+            if (length(y) == 0) {
+              return(NA)
+            }
+
+            if (any(y == "Yes")) {
+              return("Yes")
+            }
+            return("No")
+          })
+        unname(x)
+      }) %>%
+      dplyr::bind_cols() %>%
+      as.data.frame()
+
+    colnames(new_source) <- unique_from
+
+    remove_idx <-
+      which(duplicated_from %in% unique_from)
+
+    source <-
+      cbind(source[, -remove_idx],
+            new_source)
+    cbind(id, source)
+  }
+
+
+
+
+
+update_metid_database_source_system <-
+  function(database,
+           source_system,
+           by = c("CAS.ID", "HMDB.ID", "KEGG.ID"),
+           prefer = c("database", "source_system")) {
+    prefer <- match.arg(prefer)
+
+    source <-
+    source_system %>%
+      dplyr::select(tidyselect::starts_with("From_"))
+
+    database@spectra.info <-
+      database@spectra.info %>%
+      as.data.frame()
+
+    idx <-
+      by %>%
+      purrr::map(function(x) {
+        match(database@spectra.info[, x ,drop = TRUE],
+              source_system[, x,drop = TRUE],
+              incomparables = NA)
+      }) %>%
+      dplyr::bind_cols()
+
+    idx <-
+      idx %>%
+      keep_one_from_multiple %>%
+      as.numeric()
+
+    database_source <-
+      database@spectra.info %>%
+      dplyr::select(tidyselect::starts_with("From"))
+
+    if(ncol(database_source) == 0){
+      database_source <- NULL
+    }
+
+    if(prefer == "database"){
+      final_source <-
+        data.frame(database_source, source[idx,])
+    }else{
+      final_source <-
+        data.frame(source[idx,], database_source)
+    }
+
+
+    final_source <-
+    merge_same_source(final_source)
+
+    rownames(final_source) <- NULL
+
+    database@spectra.info <-
+      database@spectra.info %>%
+      dplyr::select(-tidyselect::starts_with("From"))
+
+    database@spectra.info <-
+      cbind(database@spectra.info, final_source)
+
+    return(database)
+  }

@@ -1,3 +1,25 @@
+#' @title Download GNPS MS2 database (msp)
+#' @description Download GNPS MS2 database (msp)
+#' @author Xiaotao Shen
+#' \email{shenxt1990@@outlook.com}
+#' @param url Default is "https://gnps-external.ucsd.edu/gnpslibrary".
+#' @param gnps_library See here: https://gnps-external.ucsd.edu/gnpslibrary.
+#' @param path Default is .
+#' @return Downloaded files.
+#' @importFrom magrittr %>%
+#' @export
+download_gnps_spectral_library <-
+  function(url = "https://gnps-external.ucsd.edu/gnpslibrary",
+           gnps_library = "HMDB",
+           path = ".") {
+    message("Downloading...\n")
+    download.file(
+      url = paste0(url, "/", gnps_library, ".msp"),
+      destfile = file.path(path, paste0(gnps_library, ".msp"))
+    )
+    message("Done.\n")
+  }
+
 #' @title Convert GNPS data (list) to metID format database
 #' @description Convert GNPS data (list) to metID format database
 #' @author Xiaotao Shen
@@ -47,7 +69,7 @@ convert_gnps2metid <-
           x <-
             t(x) %>%
             as.data.frame()
-          colnames(x) <- as.character(x[1, ])
+          colnames(x) <- as.character(x[1,])
           x <- x[-1, , drop = FALSE]
           new_name <-
             setdiff(all_names, colnames(x))
@@ -82,7 +104,7 @@ convert_gnps2metid <-
         x <-
           t(x) %>%
           as.data.frame()
-        colnames(x) <- as.character(x[1, ])
+        colnames(x) <- as.character(x[1,])
         x <- x[-1, , drop = FALSE]
         new_name <-
           setdiff(all_names, colnames(x))
@@ -330,7 +352,7 @@ convert_gnps2metid <-
 
     if (length(remove_idx) > 0) {
       ms1_info <-
-        ms1_info[-remove_idx, ]
+        ms1_info[-remove_idx,]
 
       spectra_data <-
         spectra_data[-remove_idx]
@@ -353,7 +375,7 @@ convert_gnps2metid <-
       as.data.frame()
 
     ms1_info2 <-
-      ms1_info2[match(ms1_info$Lab.ID, ms1_info2$Lab.ID), ]
+      ms1_info2[match(ms1_info$Lab.ID, ms1_info2$Lab.ID),]
 
     progresser <-
       show_progresser(index = seq_along(spectra_data),
@@ -413,4 +435,3 @@ convert_gnps2metid <-
     save(gnps_ms2, file = file.path(path, "gnps_ms2"))
     invisible(gnps_ms2)
   }
-

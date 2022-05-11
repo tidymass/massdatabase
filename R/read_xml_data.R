@@ -21,10 +21,12 @@ read_xml_data <-
     xml_data <- readr::read_lines(file)
     if (source == "hmdb") {
       data <-
-        read_xml_data_hmdb(file = file,
-                           ms1_or_ms2 = ms1_or_ms2,
-                           path = path,
-                           threads = threads)
+        read_xml_data_hmdb(
+          file = file,
+          ms1_or_ms2 = ms1_or_ms2,
+          path = path,
+          threads = threads
+        )
     }
 
     return(data)

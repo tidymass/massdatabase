@@ -5,17 +5,13 @@
 \title{Request all the food information in FoodB}
 \usage{
 request_foodb_food_info(
-  url = "https://foodb.ca/foods",
-  sleep = 1,
-  pages = c(1:32)
+ 
+    url = c("https://raw.githubusercontent.com/jaspershen/databases/main/data/foodb_compound_info.rda",
+    "https://foodb.ca/downloads")
 )
 }
 \arguments{
-\item{url}{Default is "https://foodb.ca/foods".}
-
-\item{sleep}{Default is 1 second.}
-
-\item{pages}{default is from 1:2838}
+\item{url}{Default is "https://foodb.ca/downloads".}
 }
 \value{
 A data frame.
@@ -24,7 +20,7 @@ A data frame.
 Request all the food information in FoodB
 }
 \examples{
-x = request_foodb_food_info(pages = 1)
+x = request_foodb_food_info()
 head(x)
 }
 \author{

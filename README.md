@@ -34,8 +34,6 @@ or [Github](https://github.com/tidymass/massdatabase)
 remotes::install_github("tidymass/massdatabase")
 ```
 
-`massdatabase` is a part of `tidymass`, so you can also install it by installing [`tidymass`](https://www.tidymass.org/).
-
 # Usage
 
 Please see the `Help documents` page to get the instruction of `massdatabase`.

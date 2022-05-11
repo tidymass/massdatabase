@@ -8,7 +8,7 @@
 #' @return Downloaded files.
 #' @importFrom magrittr %>%
 #' @export
-download_lipidbank <-
+download_lipidbank_lipid_class <-
   function(url = "https://lipidbank.jp/download/",
            lipid_class = c(
              "All data",
@@ -68,10 +68,10 @@ download_lipidbank <-
 #' @importFrom magrittr %>%
 #' @export
 #' @examples
-#' x = request_lipidbank(lipid_class = "Wax")
+#' x = request_lipidbank_lipid_class(lipid_class = "Wax")
 #' head(x)
 
-request_lipidbank <-
+request_lipidbank_lipid_class <-
   function(url = "https://lipidbank.jp/",
            lipid_class = c(
              "All data",

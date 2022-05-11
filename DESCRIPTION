@@ -35,7 +35,11 @@ Imports:
     metid,
     masstools,
     tibble,
-    xml2
+    xml2,
+    tidyselect,
+    progress,
+    ChemmineR,
+    KEGGREST
 Suggests: 
     knitr,
     rmarkdown,

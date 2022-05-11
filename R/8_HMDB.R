@@ -10,12 +10,12 @@
 #' @importFrom magrittr %>%
 #' @export
 #' @examples
-#' x = request_data(metabolite_id = "HMDB0000001", return_form = "list")
+#' x = request_hmdb_metabolite(metabolite_id = "HMDB0000001", return_form = "list")
 #' x[1:2]
-#' y = request_data(metabolite_id = "HMDB0000001", return_form = "data.frame")
+#' y = request_hmdb_metabolite(metabolite_id = "HMDB0000001", return_form = "data.frame")
 #' head(y)
 
-request_data <-
+request_hmdb_metabolite <-
   function(url = "https://hmdb.ca/metabolites",
            metabolite_id = "HMDB0000001",
            return_form = c("list" , "data.frame")) {

@@ -106,10 +106,86 @@ reference:
     contents:
     - match_table
 
+  - title: Request information
+    desc: Request information from the website of database
+    contents:
+    - request_bigg_model_info
+    - request_bigg_universal_metabolite_info
+    - request_bigg_universal_metabolite
+    - request_bigg_universal_reaction_info
+    - request_bigg_universal_reaction
+    - request_bigg_version
+    - request_chebi_compound
+    - request_foodb_compound_info
+    - request_foodb_compound_ms2
+    - request_foodb_compound
+    - request_foodb_food_info
+    - request_hmdb_metabolite
+    - request_kegg_compound_info
+    - request_kegg_compound
+    - request_kegg_drug_info
+    - request_kegg_drug
+    - request_lipidbank_lipid_class
+    - request_lipidmaps_lipid
+    - request_wikipedia_compound
+    - request_wikipedia_scientific_classification
+
+  - title: Download database
+    desc: Download databases
+    contents:
+    - download_bigg_model
+    - download_bigg_universal_metabolite
+    - download_chebi_compound
+    - download_foodb_compound
+    - download_gnps_spectral_library
+    - download_kegg_compound
+    - download_kegg_drug
+    - download_lipidbank_lipid_class
+    - download_lipidmaps_lipid
+    - download_massbank_compound
+
+  - title: Read downloaded database
+    desc: Read downloaded database
+    contents:
+    - read_bigg_universal_metabolite
+    - read_chebi_compound
+    - read_foodb_compound
+    - read_kegg_compound
+    - read_kegg_drug
+    - read_msp_data_gnps
+    - read_msp_data_massbank
+    - read_msp_data_mona
+    - read_msp_data_nist
+    - read_msp_data
+    - read_sdf_data_lipidmaps
+    - read_xml_data_hmdb
+    - read_xml_data
+
+  - title: Convert database to specific format
+    desc: Convert database to specific format
+    contents:
+    - convert_bigg_universal2metid
+    - convert_chebi2metid
+    - convert_foodb2metid
+    - convert_gnps2metid
+    - convert_hmdb2metid
+    - convert_kegg2metid
+    - convert_lipidbank2metid
+    - convert_lipidmaps2metid
+    - convert_massbank2metid_nist
+    - convert_massbank2metid_riken
+    - convert_massbank2metid
+    - convert_mona2metid
+    - convert_nist2metid
+
   - title: Other functions
     desc: Other usefull functions in massdatabase
     contents:
     - get_words_similarity
+    - convert_species2source
+    - massdatabase_logo
+    - search_hmdb_database
+    - show_progresser
 
 navbar:
   title: "sparklyr"
@@ -139,9 +215,6 @@ navbar:
     news:
       text: News
       menu:
-      - text: "Blog posts"
-      - text: "Version 0.9.2"
-        href: articles/Version0_9_2.html
       - text: "------------------"
       - text: "Change log"
         href: news/index.html
@@ -156,7 +229,6 @@ footer:
     email: <i class="fa fa-envelope"></i> shenxt1990@outlook.com <br>
     wechat: <i class="fa fa-weixin"></i>  [shenxt1990](https://www.shenxt.info/files/wechat_QR.jpg) <br>
     tidymass: <i class="fa fa-network-wired"></i> [A part of tidymass](https://www.tidymass.org/)
-
 
 toc:
   depth: 3

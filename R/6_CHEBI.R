@@ -10,7 +10,7 @@
 download_chebi_compound <-
   function(url = "https://ftp.ebi.ac.uk/pub/databases/chebi/Flat_file_tab_delimited/",
            path = ".") {
-    path <- file.path(path, "CHEBI_compound")
+    path <- file.path(path, "data")
     dir.create(path)
     message("Download chebiId_inchi.tsv...\n")
     download.file(
@@ -80,7 +80,7 @@ download_chebi_compound <-
 #' @export
 read_chebi_compound <-
   function(path = ".") {
-    path <- file.path(path, "CHEBI_compound")
+    path <- file.path(path, "data")
 
     chebiid_inchi <-
       readr::read_delim(file.path(path, "chebiId_inchi.tsv")) %>%
@@ -495,4 +495,121 @@ request_chebi_compound <-
       manual_xrefs = manual_xrefs,
       registry_numbers = registry_numbers
     )
+  }
+
+
+
+
+
+
+#' @title Convert BIGG universal metabolites (data.frame,
+#' from read_chebi_metabolite)
+#' to metID format database
+#' @description Convert BIGG universal metabolites (data.frame,
+#' from read_chebi_metabolite)
+#' to metID format database
+#' @author Xiaotao Shen
+#' \email{shenxt1990@@outlook.com}
+#' @param data data.frame, from read_chebi_metabolite function
+#' @param path Default is .
+#' @param threads threads
+#' @return metid database class
+#' @importFrom magrittr %>%
+#' @importFrom plyr . dlply
+#' @importFrom metid construct_database
+#' @importFrom dplyr one_of
+#' @export
+
+convert_chebi2metid <-
+  function(data,
+           path = ".",
+           threads = 5) {
+    dir.create(path, showWarnings = FALSE, recursive = TRUE)
+
+    data <-
+      data %>%
+      dplyr::rename(
+        Lab.ID = COMPOUND_ID,
+        Formula = FORMULA,
+        mz = MONOISOTOPIC_MASS,
+        Charge = CHARGE,
+        INCHI.ID = InChI,
+        Species = SPECIES,
+        Species.ID = SPECIES_ACCESSION,
+        Status = STATUS,
+        Database_source = SOURCE,
+        Compound.name = NAME,
+        Definition = DEFINITION,
+        Star = STAR,
+        Updated_date = MODIFIED_ON
+      ) %>%
+      dplyr::mutate(
+        CHEBI.ID = Lab.ID,
+        RT = NA,
+        mz.pos = NA,
+        mz.neg = NA,
+        Submitter = "CHEBI"
+      ) %>%
+      dplyr::select(
+        Lab.ID,
+        Compound.name,
+        mz,
+        RT,
+        CAS.ID,
+        HMDB.ID,
+        KEGG.ID,
+        Formula,
+        mz.pos,
+        mz.neg,
+        Submitter,
+        everything()
+      ) %>%
+      as.data.frame()
+
+    data[which(data == "null", arr.ind = TRUE)] <-
+      NA
+
+    data$mz <- as.numeric(data$mz)
+
+    ###remove mz is NA
+    data <-
+      data %>%
+      dplyr::filter(!is.na(mz))
+
+    species <-
+      sort(unique(unlist(
+        stringr::str_split(data$Species[!is.na(data$Species)], "\\{\\}")
+      )))
+
+    species.id <-
+      sort(unique(unlist(
+        stringr::str_split(data$Species.ID[!is.na(data$Species.ID)], "\\{\\}")
+      )))
+
+    # library("taxize")
+    # gnr_resolve(species[1])
+
+    temp_file <- tempfile()
+    dir.create(temp_file, showWarnings = FALSE)
+    readr::write_csv(x = data,
+                     file = file.path(temp_file, "data.csv"))
+
+    chebi_ms1 <-
+      metid::construct_database(
+        path = temp_file,
+        version = as.character(Sys.Date()),
+        metabolite.info.name = "data.csv",
+        source = "CHEBI",
+        link = "https://www.ebi.ac.uk/chebi/init.do",
+        creater = "Xiaotao Shen",
+        email = "shenxt@stanford.edu",
+        rt = FALSE,
+        threads = threads
+      )
+
+    unlink(file.path(temp_file, "data.csv"))
+    unlink(temp_file)
+
+    save(chebi_ms1, file = file.path(path, "chebi_ms1"))
+    invisible(chebi_ms1)
   }

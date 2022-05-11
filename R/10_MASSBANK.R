@@ -15,13 +15,13 @@ download_massbank_compound <-
     source <- match.arg(source)
     path <- file.path(path, "massbank_compound")
     dir.create(path)
-    if(source == "riken"){
+    if (source == "riken") {
       message("Download MassBank_RIKEN.msp...")
       download.file(
         url = paste0(url, "/MassBank_RIKEN.msp"),
         destfile = file.path(path, "MassBank_RIKEN.msp")
       )
-    }else{
+    } else{
       message("Download MassBank_NIST.msp...")
       download.file(
         url = paste0(url, "/MassBank_NIST.msp"),
@@ -119,7 +119,7 @@ convert_massbank2metid_nist <-
           x <-
             t(x) %>%
             as.data.frame()
-          colnames(x) <- as.character(x[1, ])
+          colnames(x) <- as.character(x[1,])
           x <- x[-1, , drop = FALSE]
           new_name <-
             setdiff(all_names, colnames(x))
@@ -154,7 +154,7 @@ convert_massbank2metid_nist <-
         x <-
           t(x) %>%
           as.data.frame()
-        colnames(x) <- as.character(x[1, ])
+        colnames(x) <- as.character(x[1,])
         x <- x[-1, , drop = FALSE]
         new_name <-
           setdiff(all_names, colnames(x))
@@ -255,7 +255,7 @@ convert_massbank2metid_nist <-
 
     if (length(remove_idx) > 0) {
       ms1_info <-
-        ms1_info[-remove_idx, ]
+        ms1_info[-remove_idx,]
 
       spectra_data <-
         spectra_data[-remove_idx]
@@ -277,7 +277,7 @@ convert_massbank2metid_nist <-
       as.data.frame()
 
     ms1_info2 <-
-      ms1_info2[match(ms1_info$Lab.ID, ms1_info2$Lab.ID), ]
+      ms1_info2[match(ms1_info$Lab.ID, ms1_info2$Lab.ID),]
 
     progresser <-
       show_progresser(index = seq_along(spectra_data),
@@ -390,7 +390,7 @@ convert_massbank2metid_riken <-
           x <-
             t(x) %>%
             as.data.frame()
-          colnames(x) <- as.character(x[1, ])
+          colnames(x) <- as.character(x[1,])
           x <- x[-1, , drop = FALSE]
           new_name <-
             setdiff(all_names, colnames(x))
@@ -425,7 +425,7 @@ convert_massbank2metid_riken <-
         x <-
           t(x) %>%
           as.data.frame()
-        colnames(x) <- as.character(x[1, ])
+        colnames(x) <- as.character(x[1,])
         x <- x[-1, , drop = FALSE]
         new_name <-
           setdiff(all_names, colnames(x))
@@ -553,7 +553,7 @@ convert_massbank2metid_riken <-
 
     if (length(remove_idx) > 0) {
       ms1_info <-
-        ms1_info[-remove_idx, ]
+        ms1_info[-remove_idx,]
 
       spectra_data <-
         spectra_data[-remove_idx]
@@ -577,7 +577,7 @@ convert_massbank2metid_riken <-
       as.data.frame()
 
     ms1_info2 <-
-      ms1_info2[match(ms1_info$Lab.ID, ms1_info2$Lab.ID), ]
+      ms1_info2[match(ms1_info$Lab.ID, ms1_info2$Lab.ID),]
 
     progresser <-
       show_progresser(index = seq_along(spectra_data),
