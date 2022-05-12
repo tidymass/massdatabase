@@ -29,60 +29,60 @@ knitr::opts_chunk$set(
 
 # **Request**
 
-Get the information of all compounds in KEGG (https://www.genome.jp/kegg/compound/).
+Get the information of all pathways in KEGG (https://www.genome.jp/kegg/pathway.html).
 
-```{r,eval=FALSE,warning=FALSE, R.options="", message=TRUE, cache=TRUE}
+```{r,eval=TRUE,warning=FALSE, R.options="", message=TRUE, cache=TRUE}
 library(massdatabase)
-compound_info <- 
-  request_kegg_compound_info()
-head(compound_info)
+pathway_info <- 
+  request_kegg_pathway_info(organism = "hsa")
+head(pathway_info)
+```
+Get the information of one pathway.
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=TRUE, cache=TRUE}
+pathway <- 
+  request_kegg_pathway(pathway_id = "hsa00010")
+pathway
 ```
 
-During the installation, it will ask if you want to update some packages for few times, just enter `enter` key to skip it.
+# **Download**
 
-# **Install `metdatabase` from GitHub**
+Download the human pathway data.
 
-You can just use the `remotes` to install `metdatabase`. 
-
-```{r,eval=FALSE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
-remotes::install_github("tidymass/metdatabase", dependencies = TRUE)
+```{r,eval=TRUE,warning=FALSE, R.options="", message=TRUE, cache=TRUE}
+download_kegg_pathway(path = "kegg_human_pathway",
+                      sleep = 1,
+                      organism = "hsa")
 ```
 
-During the installation, it will ask if you want to update some packages for few times, just enter `enter` key to skip it.
+# **Read**
 
-If there is a error like below:
+Read the download pathway data.
 
-```
-Error: Failed to install 'metdatabase' from GitHub: HTTP error 403. API rate limit exceeded for 171.66.10.237. (But here's the good news: Authenticated requests get a higher rate limit. Check out the documentation for more details.)
-```
-
-Try to resolve it by:
-
-1. In you R console, type this code:
-
-```{r,eval=FALSE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
-usethis::create_github_token()
-```
-
-It will open a page in browser, and create a "New personal access token" and copy it.
-
-2. Then type this code:
-
-```{r,eval=FALSE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
-usethis::edit_r_environ()
+```{r,eval=TRUE,warning=FALSE, R.options="", message=TRUE, cache=TRUE}
+data <- 
+  read_kegg_pathway(path = "kegg_human_pathway")
+class(data)
+length(data)
+data[[1]]$pathway_id
+data[[1]]$pathway_name
+data[[1]]$pathway_class
+data[[1]]$compound_list
+data[[1]]$related_module
 ```
 
-and then add one line like below:
+# **Convert it to metpath class database**
 
+```{r,eval=TRUE,warning=FALSE, R.options="", message=TRUE, cache=TRUE}
+# kegg_human_pathway <- 
+# convert_kegg2metpath(data = data, 
+#                      path = "kegg_human_pathway", 
+#                      threads = 3)
 ```
-GITHUB_PAT=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
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=TRUE, cache=TRUE}
+# kegg_human_pathway
 ```
-> The `GITHUB_PAT` should be yours that is created in step 1.
-
-And then restart R session and try again.
-
-
-[Let me know if you have any questions](shenxt1990@outlook.com).
 
 # **Session information**
 

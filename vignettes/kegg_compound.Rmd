@@ -31,12 +31,49 @@ knitr::opts_chunk$set(
 
 Get the information of all compounds in KEGG (https://www.genome.jp/kegg/compound/).
 
-```{r,eval=FALSE,warning=FALSE, R.options="", message=TRUE, cache=TRUE}
+```{r,eval=TRUE,warning=FALSE, R.options="", message=TRUE, cache=TRUE}
 library(massdatabase)
 compound_info <- 
   request_kegg_compound_info()
 head(compound_info)
 ```
+
+Get the information of all drugs in KEGG (https://www.genome.jp/kegg/drug/).
+
+```{r,eval=TRUE, warning=FALSE, R.options="", message=TRUE, cache=TRUE}
+drug_info <- 
+  request_kegg_drug_info()
+head(drug_info)
+```
+
+Get one metabolite information.
+
+```{r,eval=TRUE, warning=FALSE, R.options="", message=TRUE, cache=TRUE}
+x <-
+  request_kegg_compound(compound_id = "C02886", return_form = "list")
+x
+```
+
+```{r,eval=TRUE, warning=FALSE, R.options="", message=TRUE, cache=TRUE}
+y <-
+  request_kegg_compound(compound_id = "C02886", return_form = "data.frame")
+y
+```
+
+Get one drug information.
+
+```{r,eval=TRUE, warning=FALSE, R.options="", message=TRUE, cache=TRUE}
+x <-
+  request_kegg_drug(drug_id = "D00001", return_form = "list")
+x
+```
+
+```{r,eval=TRUE, warning=FALSE, R.options="", message=TRUE, cache=TRUE}
+y <-
+  request_kegg_drug(drug_id = "D00001", return_form = "data.frame")
+y
+```
+
 
 # **Session information**
 

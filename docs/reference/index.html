@@ -23,7 +23,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">massdatabase</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.07</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.10</span>
       </span>
     </div>
 
@@ -34,14 +34,18 @@
      
     <span class="caret"></span>
   </a>
-  <ul class="dropdown-menu" role="menu"><li class="dropdown-header">Brief introduction</li>
-    <li>
-      <a href="../articles/massdatabase_introduction.html">Brief introduction</a>
-    </li>
-    <li>
+  <ul class="dropdown-menu" role="menu"><li>
       <a href="../articles/install.html">Install massdatabase</a>
     </li>
+    <li class="dropdown-header">Compound database</li>
+    <li>
+      <a href="../articles/kegg_compound.html">KEGG compound database</a>
+    </li>
     <li class="divider">
+    <li class="dropdown-header">Pathway database</li>
+    <li>
+      <a href="../articles/kegg_pathway.html">KEGG pathway database</a>
+    </li>
   </ul></li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -145,7 +149,7 @@
       </tr><tr><td>
           <p><code><a href="request_kegg_compound.html">request_kegg_compound()</a></code> </p>
         </td>
-        <td><p>Request one specific the compound information in KEGG</p></td>
+        <td><p>Request one specific compound information in KEGG</p></td>
       </tr><tr><td>
           <p><code><a href="request_kegg_drug_info.html">request_kegg_drug_info()</a></code> </p>
         </td>
@@ -153,7 +157,7 @@
       </tr><tr><td>
           <p><code><a href="request_kegg_drug.html">request_kegg_drug()</a></code> </p>
         </td>
-        <td><p>Request one specific the drug information in KEGG</p></td>
+        <td><p>Request one specific drug information in KEGG</p></td>
       </tr><tr><td>
           <p><code><a href="request_lipidbank_lipid_class.html">request_lipidbank_lipid_class()</a></code> </p>
         </td>
@@ -170,6 +174,14 @@
           <p><code><a href="request_wikipedia_scientific_classification.html">request_wikipedia_scientific_classification()</a></code> </p>
         </td>
         <td><p>Request the scientific classification of one species from wikipedia</p></td>
+      </tr><tr><td>
+          <p><code><a href="request_kegg_pathway_info.html">request_kegg_pathway_info()</a></code> </p>
+        </td>
+        <td><p>Request all pathway information in KEGG</p></td>
+      </tr><tr><td>
+          <p><code><a href="request_kegg_pathway.html">request_kegg_pathway()</a></code> </p>
+        </td>
+        <td><p>Request one specific pathway information in KEGG</p></td>
       </tr></tbody><tbody><tr><th colspan="2">
           <h2 id="download-database">Download database <a href="#download-database" class="anchor" aria-hidden="true"></a></h2>
           <p class="section-desc"></p><p>Download databases</p>
@@ -214,6 +226,14 @@
           <p><code><a href="download_massbank_compound.html">download_massbank_compound()</a></code> </p>
         </td>
         <td><p>Download the MassBank compound database</p></td>
+      </tr><tr><td>
+          <p><code><a href="download_kegg_pathway.html">download_kegg_pathway()</a></code> </p>
+        </td>
+        <td><p>Download KEGG pathway data</p></td>
+      </tr><tr><td>
+          <p><code><a href="download_smpdb_pathway.html">download_smpdb_pathway()</a></code> </p>
+        </td>
+        <td><p>Download SMPDB pathway data</p></td>
       </tr></tbody><tbody><tr><th colspan="2">
           <h2 id="read-downloaded-database">Read downloaded database <a href="#read-downloaded-database" class="anchor" aria-hidden="true"></a></h2>
           <p class="section-desc"></p><p>Read downloaded database</p>
@@ -271,6 +291,14 @@ download_bigg_universal_metabolite function</p></td>
           <p><code><a href="read_xml_data.html">read_xml_data()</a></code> </p>
         </td>
         <td><p>read_xml_data</p></td>
+      </tr><tr><td>
+          <p><code><a href="read_kegg_pathway.html">read_kegg_pathway()</a></code> </p>
+        </td>
+        <td><p>Read the KEGG pathway database from download_kegg_pathway function</p></td>
+      </tr><tr><td>
+          <p><code><a href="read_smpdb_pathway.html">read_smpdb_pathway()</a></code> </p>
+        </td>
+        <td><p>Read the SMPDB pathway database from download_smpdb_pathway function</p></td>
       </tr></tbody><tbody><tr><th colspan="2">
           <h2 id="convert-database-to-specific-format">Convert database to specific format <a href="#convert-database-to-specific-format" class="anchor" aria-hidden="true"></a></h2>
           <p class="section-desc"></p><p>Convert database to specific format</p>
@@ -337,6 +365,12 @@ to metID format database</p></td>
           <p><code><a href="convert_nist2metid.html">convert_nist2metid()</a></code> </p>
         </td>
         <td><p>Convert GNPS data (list) to metID format database</p></td>
+      </tr><tr><td>
+          <p><code><a href="convert_kegg2metpath.html">convert_kegg2metpath()</a></code> <code><a href="convert_kegg2metpath.html">convert_kegg2metpath()</a></code> </p>
+        </td>
+        <td><p>Convert KEGG pathway data (list,
+from read_kegg_pathway function)
+to metpath format database</p></td>
       </tr></tbody><tbody><tr><th colspan="2">
           <h2 id="data">Data <a href="#data" class="anchor" aria-hidden="true"></a></h2>
           <p class="section-desc"></p><p>Some data embed in massdatabase</p>
@@ -345,6 +379,10 @@ to metID format database</p></td>
           <p><code><a href="match_table.html">match_table</a></code> </p>
         </td>
         <td><p>match table</p></td>
+      </tr><tr><td>
+          <p><code><a href="smpdb_primary_pathway_id.html">smpdb_primary_pathway_id</a></code> </p>
+        </td>
+        <td><p>smpdb_primary_pathway_id</p></td>
       </tr></tbody><tbody><tr><th colspan="2">
           <h2 id="other-functions">Other functions <a href="#other-functions" class="anchor" aria-hidden="true"></a></h2>
           <p class="section-desc"></p><p>Other usefull functions in massdatabase</p>

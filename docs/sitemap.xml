@@ -13,6 +13,12 @@
     <loc>https://tidymass.github.io/massdatabase/articles/install.html</loc>
   </url>
   <url>
+    <loc>https://tidymass.github.io/massdatabase/articles/kegg_compound.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/massdatabase/articles/kegg_pathway.html</loc>
+  </url>
+  <url>
     <loc>https://tidymass.github.io/massdatabase/authors.html</loc>
   </url>
   <url>
@@ -38,6 +44,9 @@
   </url>
   <url>
     <loc>https://tidymass.github.io/massdatabase/reference/convert_kegg2metid.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/massdatabase/reference/convert_kegg2metpath.html</loc>
   </url>
   <url>
     <loc>https://tidymass.github.io/massdatabase/reference/convert_lipidbank2metid.html</loc>
@@ -88,6 +97,9 @@
     <loc>https://tidymass.github.io/massdatabase/reference/download_kegg_drug.html</loc>
   </url>
   <url>
+    <loc>https://tidymass.github.io/massdatabase/reference/download_kegg_pathway.html</loc>
+  </url>
+  <url>
     <loc>https://tidymass.github.io/massdatabase/reference/download_lipidbank.html</loc>
   </url>
   <url>
@@ -98,6 +110,9 @@
   </url>
   <url>
     <loc>https://tidymass.github.io/massdatabase/reference/download_massbank_compound.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/massdatabase/reference/download_smpdb_pathway.html</loc>
   </url>
   <url>
     <loc>https://tidymass.github.io/massdatabase/reference/get_words_similarity.html</loc>
@@ -127,6 +142,9 @@
     <loc>https://tidymass.github.io/massdatabase/reference/read_kegg_drug.html</loc>
   </url>
   <url>
+    <loc>https://tidymass.github.io/massdatabase/reference/read_kegg_pathway.html</loc>
+  </url>
+  <url>
     <loc>https://tidymass.github.io/massdatabase/reference/read_msp_data.html</loc>
   </url>
   <url>
@@ -143,6 +161,9 @@
   </url>
   <url>
     <loc>https://tidymass.github.io/massdatabase/reference/read_sdf_data_lipidmaps.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/massdatabase/reference/read_smpdb_pathway.html</loc>
   </url>
   <url>
     <loc>https://tidymass.github.io/massdatabase/reference/read_xml_data.html</loc>
@@ -199,6 +220,12 @@
     <loc>https://tidymass.github.io/massdatabase/reference/request_kegg_drug_info.html</loc>
   </url>
   <url>
+    <loc>https://tidymass.github.io/massdatabase/reference/request_kegg_pathway.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/massdatabase/reference/request_kegg_pathway_info.html</loc>
+  </url>
+  <url>
     <loc>https://tidymass.github.io/massdatabase/reference/request_lipidbank.html</loc>
   </url>
   <url>
@@ -218,5 +245,8 @@
   </url>
   <url>
     <loc>https://tidymass.github.io/massdatabase/reference/show_progresser.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/massdatabase/reference/smpdb_primary_pathway_id.html</loc>
   </url>
 </urlset>
