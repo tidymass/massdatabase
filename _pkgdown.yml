@@ -63,6 +63,7 @@ reference:
     - download_lipidmaps_lipid
     - download_massbank_compound
     - download_kegg_pathway
+    - download_smpdb_pathway
 
   - title: Read downloaded database
     desc: Read downloaded database
@@ -81,6 +82,7 @@ reference:
     - read_xml_data_hmdb
     - read_xml_data
     - read_kegg_pathway
+    - read_smpdb_pathway
 
   - title: Convert database to specific format
     desc: Convert database to specific format
@@ -99,11 +101,13 @@ reference:
     - convert_mona2metid
     - convert_nist2metid
     - convert_kegg2metpath
+    - convert_kegg2metpath
 
   - title: Data
     desc: Some data embed in massdatabase
     contents:
     - match_table
+    - smpdb_primary_pathway_id
 
   - title: Other functions
     desc: Other usefull functions in massdatabase
@@ -127,9 +131,12 @@ navbar:
       - text: Install massdatabase
         href: articles/install.html
       - text: "Compound database"
-      - text: "KEGG"
+      - text: "KEGG compound database"
         href: articles/kegg_compound.html
       - text: -------
+      - text: "Pathway database"
+      - text: "KEGG pathway database"
+        href: articles/kegg_pathway.html
     twitter:
       icon: "fab fa-twitter fa-lg"
       href: https://twitter.com/xiaotaoshen1990

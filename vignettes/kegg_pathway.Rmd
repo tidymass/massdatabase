@@ -1,0 +1,93 @@
+---
+title: "KEGG pathway"
+author:
+- name: Xiaotao Shen (https://www.shenxt.info/)
+date: "Created on 2022-05-11 and updated on `r Sys.Date()`"
+output:
+  html_document:
+    df_print: paged
+    toc: no
+  pdf_document:
+    toc: no
+vignette: >
+  %\VignetteIndexEntry{kegg_pathway}
+  %\VignettePackage{massdatabase}
+  % \VignetteEngine{knitr::rmarkdown}
+  % \usepackage[utf8]{inputenc}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE, echo=FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  warning = FALSE,
+  message = TRUE,
+  out.width = "100%"
+)
+```
+
+# **Request**
+
+Get the information of all compounds in KEGG (https://www.genome.jp/kegg/compound/).
+
+```{r,eval=FALSE,warning=FALSE, R.options="", message=TRUE, cache=TRUE}
+library(massdatabase)
+compound_info <- 
+  request_kegg_compound_info()
+head(compound_info)
+```
+
+During the installation, it will ask if you want to update some packages for few times, just enter `enter` key to skip it.
+
+# **Install `metdatabase` from GitHub**
+
+You can just use the `remotes` to install `metdatabase`. 
+
+```{r,eval=FALSE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+remotes::install_github("tidymass/metdatabase", dependencies = TRUE)
+```
+
+During the installation, it will ask if you want to update some packages for few times, just enter `enter` key to skip it.
+
+If there is a error like below:
+
+```
+Error: Failed to install 'metdatabase' from GitHub: HTTP error 403. API rate limit exceeded for 171.66.10.237. (But here's the good news: Authenticated requests get a higher rate limit. Check out the documentation for more details.)
+```
+
+Try to resolve it by:
+
+1. In you R console, type this code:
+
+```{r,eval=FALSE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+usethis::create_github_token()
+```
+
+It will open a page in browser, and create a "New personal access token" and copy it.
+
+2. Then type this code:
+
+```{r,eval=FALSE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+usethis::edit_r_environ()
+```
+
+and then add one line like below:
+
+```
+GITHUB_PAT=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
+```
+> The `GITHUB_PAT` should be yours that is created in step 1.
+
+And then restart R session and try again.
+
+
+[Let me know if you have any questions](shenxt1990@outlook.com).
+
+# **Session information**
+
+```{r,eval=TRUE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
+sessionInfo()
+```
+
+

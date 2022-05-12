@@ -174,6 +174,10 @@ globalVariables(
     "kegg_drug_database",
     "model_id",
     "public_id",
-    "kegg_pathway_database"
+    "kegg_pathway_database",
+    "data",
+    "smpdb_primary_pathway_id",
+    "Subject",
+    "SMPDB ID"
   )
 )

@@ -1,7 +1,7 @@
-Type: Package
 Package: massdatabase
+Type: Package
 Title: Play with databases about mass spectrometry
-Version: 0.99.07
+Version: 0.99.10
 Date: 2022-04-09
 Authors@R: c(
     person(given = "Xiaotao",

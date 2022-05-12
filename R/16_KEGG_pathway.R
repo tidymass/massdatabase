@@ -189,7 +189,7 @@ read_kegg_pathway <-
 #' @param data list, from read_kegg_pathway function
 #' @param path Default is .
 #' @param threads threads
-#' @return metpath database class
+#' @return metpath pathway_database class
 #' @importFrom magrittr %>%
 #' @importFrom plyr . dlply
 #' @importClassesFrom metpath pathway_database
