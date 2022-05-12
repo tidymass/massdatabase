@@ -173,6 +173,7 @@ globalVariables(
     "kegg_compound_database",
     "kegg_drug_database",
     "model_id",
-    "public_id"
+    "public_id",
+    "kegg_pathway_database"
   )
 )

@@ -250,8 +250,16 @@ read_chebi_compound <-
 request_chebi_compound <-
   function(url = "https://www.ebi.ac.uk/chebi/searchId.do?chebiId=",
            compound_id = "CHEBI:18358") {
+
     result <-
-      rvest::read_html(x = paste0(url, compound_id))
+      tryCatch(rvest::read_html(x = paste0(url, compound_id)),
+               error = function(e) NULL)
+
+    if(is.null(result)){
+      message("Check url: ", paste0(url, compound_id))
+      return(NULL)
+    }
+
 
     main <-
       tryCatch(

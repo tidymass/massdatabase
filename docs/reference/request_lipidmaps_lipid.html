@@ -23,13 +23,13 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">massdatabase</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.05</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.07</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"><li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Help documents
      
     <span class="caret"></span>
@@ -44,16 +44,12 @@
     <li class="divider">
   </ul></li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     News
      
     <span class="caret"></span>
   </a>
-  <ul class="dropdown-menu" role="menu"><li class="dropdown-header">Blog posts</li>
-    <li>
-      <a href="../articles/Version0_9_2.html">Version 0.9.2</a>
-    </li>
-    <li class="divider">
+  <ul class="dropdown-menu" role="menu"><li class="divider">
     <li>
       <a href="../news/index.html">Change log</a>
     </li>
@@ -123,43 +119,11 @@
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">request_lipidmaps_lipid</span><span class="op">(</span>lipid_id <span class="op">=</span> <span class="st">"LMFA01030001"</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                                                                                      Synonyms</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 5Z,8Z,11Z,14Z-icosatetraenoic acid{}AA{}Arachidonate{}cis-5,8,11,14-Eicosatetraenoic acid{}(all-Z)-5,8,11,14-Eicosatetraenoic acid{}all-cis-5,8,11,14-Eicosatetraenoic acid</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        Common_Name                     Systematic_Name        LM_ID Status</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 Arachidonic acid 5Z,8Z,11Z,14Z-eicosatetraenoic acid LMFA01030001 Active</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Exact_Mass  Formula  Abbrev         Category</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2   304.2402 C20H32O2 FA 20:4 Fatty Acyls [FA]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                          Main.Class                        Sub.Class</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 Fatty Acids and Conjugates [FA01] Unsaturated fatty acids [FA0103]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                      InChiKey</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 YZXBAPSDXZZRGB-DOFZRALJSA-N</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                                                                            InChi</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 InChI=1S/C20H32O2/c1-2-3-4-5-6-7-8-9-10-11-12-13-14-15-16-17-18-19-20(21)22/h6-7,9-10,12-13,15-16H,2-5,8,11,14,17-19H2,1H3,(H,21,22)/b7-6-,10-9-,13-12-,16-15-</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                        SMILES         Curated.from</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 C(O)(=O)CCC/C=C\\C/C=C\\C/C=C\\C/C=C\\CCCCC Homo sapiens (#9606)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   NCBI.taxonomy.class        Wikipedia KEGG.ID     HMDB.ID CHEBI.ID</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2   Mammalia (#40674) Arachidonic acid  C00219 HMDB0001043    15843</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   LIPIDBANK.ID PubChem.CID PlantFA.ID SwissLipids.ID Cayman.ID Created.at</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2      DFA0213      444899      10144  SLM:000000296  10007268       &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      Updated.at</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 25th Apr 2022</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Check this url: https://www.lipidmaps.org/databases/lmsd/LMFA01030001</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
 <span class="r-in"><span class="fu">request_lipidmaps_lipid</span><span class="op">(</span>lipid_id <span class="op">=</span> <span class="st">"LMGL00000140"</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Synonyms  Common_Name</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2       NA Crasseride 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                       Systematic_Name</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 1-O-(1'S,2'S,3'R,4'R,5'S-tetrahydroxycyclopentyl)-2-(14-methyl-pentadecanoyl)-3-(10-methyl-hexadecanyl)-sn-glycerol</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          LM_ID Status Exact_Mass  Formula Abbrev           Category</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 LMGL00000140 Active   700.5853 C41H80O8     NA Glycerolipids [GL]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                   Main.Class Sub.Class                    InChiKey</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 Other Glycerolipids [GL00]      &lt;NA&gt; DPGGHWKQIMRSAT-WUNDXSHJSA-N</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                                                                                                                                             InChi</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 InChI=1S/C41H80O8/c1-5-6-7-22-27-34(4)28-23-18-14-12-16-20-25-30-47-31-35(32-48-41-39(45)37(43)38(44)40(41)46)49-36(42)29-24-19-15-11-9-8-10-13-17-21-26-33(2)3/h33-35,37-41,43-46H,5-32H2,1-4H3/t34?,35-,37+,38+,39-,40-/m0/s1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                 SMILES</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 C(O[C@@H]1[C@H]([C@@H]([C@H]([C@@H]1O)O)O)O)[C@@]([H])(OC(CCCCCCCCCCCCC(C)C)=O)COCCCCCCCCCC(C)CCCCCC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               Curated.from  NCBI.taxonomy.class PubChem.CID    Created.at</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 Pseudoceratina (#283601) Demospongiae (#6042)    10439725 10th Dec 2020</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      Updated.at</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 10th Dec 2020</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Check this url: https://www.lipidmaps.org/databases/lmsd/LMGL00000140</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
 </code></pre></div>
     </div>
   </div>
@@ -170,7 +134,8 @@
 
 
       <footer><div class="copyright">
-  <p></p><p>massdatabase Developed by Xiaotao Shen. <br> from <i class="fa fa-university"></i> Stanford University <br><i class="fa fa-clinic-medical"></i>School of Medicine <br><i class="fa fa-dna"></i> Genetics Department</p>
+  <p></p><p>massdatabase Developed by Xiaotao Shen. <br> from
+<i class="fa fa-university"></i> Stanford University <br><i class="fa fa-clinic-medical"></i>School of Medicine <br><i class="fa fa-dna"></i> Genetics Department</p>
 </div>
 
 <div class="pkgdown">

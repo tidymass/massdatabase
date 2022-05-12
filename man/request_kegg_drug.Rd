@@ -2,7 +2,7 @@
 % Please edit documentation in R/16_KEGG.R
 \name{request_kegg_drug}
 \alias{request_kegg_drug}
-\title{Request one specific the drug information in KEGG}
+\title{Request one specific drug information in KEGG}
 \usage{
 request_kegg_drug(drug_id = "D00001", return_form = c("list", "data.frame"))
 }
@@ -15,7 +15,7 @@ request_kegg_drug(drug_id = "D00001", return_form = c("list", "data.frame"))
 A data frame or list.
 }
 \description{
-Request one specific the drug information in KEGG
+Request one specific drug information in KEGG
 }
 \examples{
 x = request_kegg_drug(drug_id = "D00001", return_form = "list")

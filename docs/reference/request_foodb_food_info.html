@@ -23,13 +23,13 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">massdatabase</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.05</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.07</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"><li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Help documents
      
     <span class="caret"></span>
@@ -44,16 +44,12 @@
     <li class="divider">
   </ul></li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     News
      
     <span class="caret"></span>
   </a>
-  <ul class="dropdown-menu" role="menu"><li class="dropdown-header">Blog posts</li>
-    <li>
-      <a href="../articles/Version0_9_2.html">Version 0.9.2</a>
-    </li>
-    <li class="divider">
+  <ul class="dropdown-menu" role="menu"><li class="divider">
     <li>
       <a href="../news/index.html">Change log</a>
     </li>
@@ -88,7 +84,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Request all the food information in FoodB</h1>
-    <small class="dont-index">Source: <a href="https://github.com/tidymass/massdatabase/blob/HEAD/R/FOODB.R" class="external-link"><code>R/FOODB.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/tidymass/massdatabase/blob/HEAD/R/14_FOODB.R" class="external-link"><code>R/14_FOODB.R</code></a></small>
     <div class="hidden name"><code>request_foodb_food_info.Rd</code></div>
     </div>
 
@@ -98,20 +94,16 @@
 
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">request_foodb_food_info</span><span class="op">(</span>
-  url <span class="op">=</span> <span class="st">"https://foodb.ca/foods"</span>,
-  sleep <span class="op">=</span> <span class="fl">1</span>,
-  pages <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">32</span><span class="op">)</span>
+ 
+    url <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"https://raw.githubusercontent.com/jaspershen/databases/main/data/foodb_compound_info.rda"</span>,
+    <span class="st">"https://foodb.ca/downloads"</span><span class="op">)</span>
 <span class="op">)</span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>url</dt>
-<dd><p>Default is "https://foodb.ca/foods".</p></dd>
-<dt>sleep</dt>
-<dd><p>Default is 1 second.</p></dd>
-<dt>pages</dt>
-<dd><p>default is from 1:2838</p></dd>
+<dd><p>Default is "https://foodb.ca/downloads".</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>
@@ -125,23 +117,17 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">x</span> <span class="op">=</span> <span class="fu">request_foodb_food_info</span><span class="op">(</span>pages <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  </span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">x</span> <span class="op">=</span> <span class="fu">request_foodb_food_info</span><span class="op">(</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                      Name                Scientific name       Food group</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1                                                                        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 FOOD00001      Angelica               Angelica keiskei Herbs and Spices</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 FOOD00002 Savoy cabbage Brassica oleracea var. sabauda       Vegetables</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 FOOD00003 Silver linden                 Tilia argentea Herbs and Spices</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 FOOD00004          Kiwi            Actinidia chinensis           Fruits</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6 FOOD00005        Allium                         Allium       Vegetables</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             Food subgroup      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1                         Clear</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2                   Herbs      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3                Cabbages      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4                   Herbs      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5         Tropical fruits      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6 Onion-family vegetables      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 2</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   public_id name                                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> FDB000004 Cyanidin 3-(6''-acetyl-galactoside)    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> FDB000013 Cyanidin 3-(6''-succinyl-glucoside)    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> FDB000014 Pelargonidin 3-(6''-succinyl-glucoside)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> FDB000024 Petunidin 3-O-(6''-acetyl-galactoside) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> FDB000025 Peonidin 3-(6''-acetyl-galactoside)    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> FDB000027 Malvidin 3-(6''-acetyl-galactoside)    </span>
 </code></pre></div>
     </div>
   </div>
@@ -152,7 +138,8 @@
 
 
       <footer><div class="copyright">
-  <p></p><p>massdatabase Developed by Xiaotao Shen. <br> from <i class="fa fa-university"></i> Stanford University <br><i class="fa fa-clinic-medical"></i>School of Medicine <br><i class="fa fa-dna"></i> Genetics Department</p>
+  <p></p><p>massdatabase Developed by Xiaotao Shen. <br> from
+<i class="fa fa-university"></i> Stanford University <br><i class="fa fa-clinic-medical"></i>School of Medicine <br><i class="fa fa-dna"></i> Genetics Department</p>
 </div>
 
 <div class="pkgdown">

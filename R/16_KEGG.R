@@ -48,8 +48,8 @@ request_kegg_drug_info <-
 
 
 
-#' @title Request one specific the compound information in KEGG
-#' @description Request one specific the compound information in KEGG
+#' @title Request one specific compound information in KEGG
+#' @description Request one specific compound information in KEGG
 #' @author Xiaotao Shen
 #' \email{shenxt1990@@outlook.com}
 #' @param compound_id compound id. For example, C02886
@@ -186,8 +186,8 @@ request_kegg_compound <-
 
 
 
-#' @title Request one specific the drug information in KEGG
-#' @description Request one specific the drug information in KEGG
+#' @title Request one specific drug information in KEGG
+#' @description Request one specific drug information in KEGG
 #' @author Xiaotao Shen
 #' \email{shenxt1990@@outlook.com}
 #' @param drug_id drug id. For example, D00001

@@ -2,7 +2,7 @@
 % Please edit documentation in R/16_KEGG.R
 \name{request_kegg_compound}
 \alias{request_kegg_compound}
-\title{Request one specific the compound information in KEGG}
+\title{Request one specific compound information in KEGG}
 \usage{
 request_kegg_compound(
   compound_id = "C02886",
@@ -18,7 +18,7 @@ request_kegg_compound(
 A data frame or list.
 }
 \description{
-Request one specific the compound information in KEGG
+Request one specific compound information in KEGG
 }
 \examples{
 x = request_kegg_compound(compound_id = "C02886", return_form = "list")

@@ -23,89 +23,6 @@ template:
     ganalytics: UA-000000-01
 
 reference:
-  - title: BIGG
-    desc: BIGG database
-    contents:
-    - down_bigg_model
-    - request_bigg_model_info
-    - request_bigg_universal_metabolite_info
-    - request_bigg_universal_metabolite
-    - request_bigg_universal_reaction_info
-    - request_bigg_universal_reaction
-    - request_bigg_version
-
-  - title: CHEBI
-    desc: CHEBI database
-    contents:
-    - download_chebi_compound
-    - read_chebi_compound
-
-  - title: GNPS
-    desc: GNPS database
-    contents:
-    - convert_gnps2metid
-
-  - title: HMDB
-    desc: HMDB database
-    contents:
-    - request_hmdb_metabolite
-    - search_hmdb_database
-
-  - title: LIPIDBANK
-    desc: LIPIDBANK database
-    contents:
-    - download_lipidbank
-    - request_lipidbank
-    - convert_lipidbank2metid
-
-  - title: MASSBANK
-    desc: MASSBANK database
-    contents:
-    - convert_massbank2metid
-    - convert_massbank2metid_nist
-    - convert_massbank2metid_riken
-
-  - title: MONA
-    desc: MONA database
-    contents:
-    - convert_mona2metid
-
-  - title: NIST
-    desc: NIST database
-    contents:
-    - convert_nist2metid
-
-  - title: LIPIDMAPS
-    desc: LIPIDMAPS database
-    contents:
-    - request_lipidmaps_lipid
-
-  - title: FoodB
-    desc: FoodB database
-    contents:
-    - request_foodb_compound_info
-    - request_foodb_compound
-    - request_foodb_food_info
-
-  - title: Wikipedia
-    desc: Wikipedia database
-    contents:
-    - request_wikipedia_scientific_classification
-
-  - title: Read msp data
-    desc: Read msp data
-    contents:
-    - read_msp_data
-    - read_msp_data_massbank
-    - read_msp_data_mona
-    - read_msp_data_gnps
-    - read_msp_data_nist
-
-  - title: Data
-    desc: Some data embed in massdatabase
-    contents:
-    - match_table
-
   - title: Request information
     desc: Request information from the website of database
     contents:
@@ -129,6 +46,8 @@ reference:
     - request_lipidmaps_lipid
     - request_wikipedia_compound
     - request_wikipedia_scientific_classification
+    - request_kegg_pathway_info
+    - request_kegg_pathway
 
   - title: Download database
     desc: Download databases
@@ -143,6 +62,7 @@ reference:
     - download_lipidbank_lipid_class
     - download_lipidmaps_lipid
     - download_massbank_compound
+    - download_kegg_pathway
 
   - title: Read downloaded database
     desc: Read downloaded database
@@ -160,6 +80,7 @@ reference:
     - read_sdf_data_lipidmaps
     - read_xml_data_hmdb
     - read_xml_data
+    - read_kegg_pathway
 
   - title: Convert database to specific format
     desc: Convert database to specific format
@@ -177,6 +98,12 @@ reference:
     - convert_massbank2metid
     - convert_mona2metid
     - convert_nist2metid
+    - convert_kegg2metpath
+
+  - title: Data
+    desc: Some data embed in massdatabase
+    contents:
+    - match_table
 
   - title: Other functions
     desc: Other usefull functions in massdatabase
@@ -197,11 +124,11 @@ navbar:
     articles:
       text: Help documents
       menu:
-      - text: "Brief introduction"
-      - text: Brief introduction
-        href: articles/massdatabase_introduction.html
       - text: Install massdatabase
         href: articles/install.html
+      - text: "Compound database"
+      - text: "KEGG"
+        href: articles/kegg_compound.html
       - text: -------
     twitter:
       icon: "fab fa-twitter fa-lg"
