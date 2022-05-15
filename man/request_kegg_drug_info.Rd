@@ -13,7 +13,7 @@ A data frame.
 Request all drug information in KEGG
 }
 \examples{
-head(request_kegg_drug_info, 3)
+head(request_kegg_drug_info(), 3)
 }
 \author{
 Xiaotao Shen

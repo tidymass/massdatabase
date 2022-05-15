@@ -178,6 +178,7 @@ globalVariables(
     "data",
     "smpdb_primary_pathway_id",
     "Subject",
-    "SMPDB ID"
+    "SMPDB ID",
+    "equation"
   )
 )

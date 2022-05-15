@@ -21,9 +21,9 @@ A data frame or list.
 Request one specific compound information in KEGG
 }
 \examples{
-x = request_kegg_compound(compound_id = "C02886", return_form = "list")
+x = request_kegg_compound("C02886", "list")
 x[1:2]
-y = request_kegg_compound(compound_id = "C02886", return_form = "data.frame")
+y = request_kegg_compound("C02886", "data.frame")
 head(y)
 }
 \author{

@@ -42,6 +42,10 @@ reference:
     - request_kegg_compound
     - request_kegg_drug_info
     - request_kegg_drug
+    - request_kegg_rclass_info
+    - request_kegg_reaction_info
+    - request_kegg_rclass
+    - request_kegg_reaction
     - request_lipidbank_lipid_class
     - request_lipidmaps_lipid
     - request_wikipedia_compound
@@ -63,6 +67,8 @@ reference:
     - download_lipidmaps_lipid
     - download_massbank_compound
     - download_kegg_pathway
+    - download_kegg_rclass
+    - download_kegg_reaction
     - download_smpdb_pathway
 
   - title: Read downloaded database

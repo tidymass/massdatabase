@@ -13,7 +13,7 @@ A data frame.
 Request all compound information in KEGG
 }
 \examples{
-head(request_kegg_compound_info, 3)
+head(request_kegg_compound_info(), 3)
 }
 \author{
 Xiaotao Shen

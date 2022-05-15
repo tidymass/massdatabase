@@ -1,3 +1,70 @@
+#' @title Request all reaction class information in KEGG
+#' @description Request all reaction class information in KEGG
+#' @author Xiaotao Shen
+#' \email{shenxt1990@@outlook.com}
+#' @return A data frame.
+#' @importFrom KEGGREST keggGet keggList
+#' @importFrom magrittr %>%
+#' @importFrom tidyr separate
+#' @export
+#' @examples
+#' head(request_kegg_rclass_info(), 3)
+
+request_kegg_rclass_info <-
+  function() {
+    rclass_id <-
+      KEGGREST::keggList(database = "rclass")
+
+    result <-
+      data.frame(KEGG.ID = names(rclass_id),
+                 name = unname(rclass_id)) %>%
+      dplyr::mutate(KEGG.ID = stringr::str_replace(KEGG.ID, "rc\\:", ""))
+    return(result)
+  }
+
+
+
+#' @title Request all reaction information in KEGG
+#' @description Request all reaction information in KEGG
+#' @author Xiaotao Shen
+#' \email{shenxt1990@@outlook.com}
+#' @return A data frame.
+#' @importFrom KEGGREST keggGet keggList
+#' @importFrom magrittr %>%
+#' @importFrom tidyr separate
+#' @export
+#' @examples
+#' head(request_kegg_reaction_info(), 3)
+
+request_kegg_reaction_info <-
+  function() {
+    reaction_id <-
+      KEGGREST::keggList(database = "reaction")
+
+    result <-
+      data.frame(KEGG.ID = names(reaction_id),
+                 name = unname(reaction_id)) %>%
+      dplyr::mutate(KEGG.ID = stringr::str_replace(KEGG.ID, "rn\\:", ""))
+
+    result <-
+      result %>%
+      tidyr::separate(col = name,
+                      sep = ";",
+                      into = c("name", "equation")) %>%
+      dplyr::mutate(name = stringr::str_trim(name),
+                    equation = stringr::str_trim(equation))
+
+    idx <- which(is.na(result$equation))
+
+    if (length(idx) > 0) {
+      result$equation[idx] <- result$name[idx]
+      result$name[idx] <- NA
+    }
+
+    return(result)
+  }
+
+
 #' @title Request all compound information in KEGG
 #' @description Request all compound information in KEGG
 #' @author Xiaotao Shen
@@ -7,7 +74,7 @@
 #' @importFrom magrittr %>%
 #' @export
 #' @examples
-#' head(request_kegg_compound_info, 3)
+#' head(request_kegg_compound_info(), 3)
 
 request_kegg_compound_info <-
   function() {
@@ -30,7 +97,7 @@ request_kegg_compound_info <-
 #' @importFrom magrittr %>%
 #' @export
 #' @examples
-#' head(request_kegg_drug_info, 3)
+#' head(request_kegg_drug_info(), 3)
 
 request_kegg_drug_info <-
   function() {
@@ -46,6 +113,45 @@ request_kegg_drug_info <-
 
 
 
+#' @title Request one specific reaction class information in KEGG
+#' @description Request one specific reaction class information in KEGG
+#' @author Xiaotao Shen
+#' \email{shenxt1990@@outlook.com}
+#' @param rclass_id reaction class id. For example, RC00001
+#' @return A data frame or list.
+#' @importFrom KEGGREST keggGet
+#' @importFrom magrittr %>%
+#' @export
+#' @examples
+#' x = request_kegg_rclass("RC00001")
+#' x
+
+request_kegg_rclass <-
+  function(rclass_id = "RC00001") {
+    x <-
+      KEGGREST::keggGet(dbentries = rclass_id)[[1]]
+    return(x)
+  }
+
+#' @title Request one specific reaction information in KEGG
+#' @description Request one reaction compound information in KEGG
+#' @author Xiaotao Shen
+#' \email{shenxt1990@@outlook.com}
+#' @param reaction_id reaction id. For example, R00001
+#' @return A data frame or list.
+#' @importFrom KEGGREST keggGet
+#' @importFrom magrittr %>%
+#' @export
+#' @examples
+#' x = request_kegg_reaction("R00001")
+#' x
+
+request_kegg_reaction <-
+  function(reaction_id = "R00001") {
+    x <-
+      KEGGREST::keggGet(dbentries = reaction_id)[[1]]
+    return(x)
+  }
 
 
 #' @title Request one specific compound information in KEGG
@@ -59,9 +165,9 @@ request_kegg_drug_info <-
 #' @importFrom magrittr %>%
 #' @export
 #' @examples
-#' x = request_kegg_compound(compound_id = "C02886", return_form = "list")
+#' x = request_kegg_compound("C02886", "list")
 #' x[1:2]
-#' y = request_kegg_compound(compound_id = "C02886", return_form = "data.frame")
+#' y = request_kegg_compound("C02886", "data.frame")
 #' head(y)
 
 request_kegg_compound <-
@@ -209,6 +315,71 @@ request_kegg_drug <-
     request_kegg_compound(compound_id = drug_id,
                           return_form = return_form)
   }
+
+
+
+
+
+
+#' @title Download KEGG reaction class database
+#' @description Download KEGG reaction class database
+#' @author Xiaotao Shen
+#' \email{shenxt1990@@outlook.com}
+#' @param path Default is .
+#' @param sleep Default is 1 second.
+#' @return KEGG reaction database, R format.
+#' @export
+
+download_kegg_rclass <-
+  function(path = ".",
+           sleep = 1) {
+    dir.create(path, recursive = TRUE, showWarnings = FALSE)
+    kegg_id <-
+      request_kegg_rclass_info()
+
+    pb <- progress::progress_bar$new(total = nrow(kegg_id))
+
+    kegg_rclass_database <-
+      seq_along(kegg_id$KEGG.ID) %>%
+      purrr::map(function(i) {
+        pb$tick()
+        Sys.sleep(time = sleep)
+        KEGGREST::keggGet(dbentries = kegg_id$KEGG.ID[i])[[1]]
+      })
+    save(kegg_rclass_database,
+         file = file.path(path, "kegg_rclass_database"))
+  }
+
+
+#' @title Download KEGG reaction database
+#' @description Download KEGG reaction database
+#' @author Xiaotao Shen
+#' \email{shenxt1990@@outlook.com}
+#' @param path Default is .
+#' @param sleep Default is 1 second.
+#' @return KEGG reaction database, R format.
+#' @export
+
+download_kegg_reaction <-
+  function(path = ".",
+           sleep = 1) {
+    dir.create(path, recursive = TRUE, showWarnings = FALSE)
+    kegg_id <-
+      request_kegg_reaction_info()
+
+    pb <- progress::progress_bar$new(total = nrow(kegg_id))
+
+    kegg_reaction_database <-
+      seq_along(kegg_id$KEGG.ID) %>%
+      purrr::map(function(i) {
+        pb$tick()
+        Sys.sleep(time = sleep)
+        KEGGREST::keggGet(dbentries = kegg_id$KEGG.ID[i])[[1]]
+      })
+    save(kegg_reaction_database,
+         file = file.path(path, "kegg_reaction_database"))
+  }
+
 
 #' @title Download KEGG compound data
 #' @description Download KEGG compound data
