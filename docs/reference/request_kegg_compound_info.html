@@ -23,7 +23,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">massdatabase</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.10</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.11</span>
       </span>
     </div>
 
@@ -112,11 +112,15 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">request_kegg_compound_info</span>, <span class="fl">3</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 function ()                                                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 {                                                           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3     compound_id &lt;- KEGGREST::keggList(database = "compound")</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu">request_kegg_compound_info</span><span class="op">(</span><span class="op">)</span>, <span class="fl">3</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   KEGG.ID</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  C00001</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  C00002</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  C00003</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                             Synonyms</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                                                                                         H2O; Water</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2                                                                     ATP; Adenosine 5'-triphosphate</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 NAD+; NAD; Nicotinamide adenine dinucleotide; DPN; Diphosphopyridine nucleotide; Nadide; beta-NAD+</span>
 </code></pre></div>
     </div>
   </div>

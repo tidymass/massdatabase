@@ -100,6 +100,12 @@
     <loc>https://tidymass.github.io/massdatabase/reference/download_kegg_pathway.html</loc>
   </url>
   <url>
+    <loc>https://tidymass.github.io/massdatabase/reference/download_kegg_rclass.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/massdatabase/reference/download_kegg_reaction.html</loc>
+  </url>
+  <url>
     <loc>https://tidymass.github.io/massdatabase/reference/download_lipidbank.html</loc>
   </url>
   <url>
@@ -224,6 +230,18 @@
   </url>
   <url>
     <loc>https://tidymass.github.io/massdatabase/reference/request_kegg_pathway_info.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/massdatabase/reference/request_kegg_rclass.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/massdatabase/reference/request_kegg_rclass_info.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/massdatabase/reference/request_kegg_reaction.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/massdatabase/reference/request_kegg_reaction_info.html</loc>
   </url>
   <url>
     <loc>https://tidymass.github.io/massdatabase/reference/request_lipidbank.html</loc>
