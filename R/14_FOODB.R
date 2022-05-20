@@ -1,5 +1,5 @@
-#' @title Request all the compound information in FoodB
-#' @description Request all the compound information in FoodB
+#' @title Request all the compound information in FooDB based on web crawler
+#' @description Request all the compound information in FooDB based on web crawler
 #' @author Xiaotao Shen
 #' \email{shenxt1990@@outlook.com}
 #' @param url Default is "https://foodb.ca/compounds".
@@ -10,10 +10,10 @@
 #' @importFrom magrittr %>%
 #' @export
 #' @examples
-#' x = request_foodb_compound_info(pages = 1)
+#' x = request_foodb_compound_info_crawler(pages = 1)
 #' head(x)
 
-request_foodb_compound_info <-
+request_foodb_compound_info_crawler <-
   function(url = "https://foodb.ca/compounds",
            sleep = 1,
            pages = c(1:2838)) {
@@ -74,7 +74,7 @@ request_foodb_compound <-
       result <- result
     } else{
       version <- result$version
-      foods <- paste(unlist(result$foods[1,]), collapse = "{}")
+      foods <- paste(unlist(result$foods[1, ]), collapse = "{}")
       result <-
         data.frame(
           version = version,
@@ -138,27 +138,30 @@ request_foodb_compound <-
     invisible(result)
   }
 
-
-
 #' @title Request all the food information in FoodB
 #' @description Request all the food information in FoodB
 #' @author Xiaotao Shen
 #' \email{shenxt1990@@outlook.com}
 #' @param url Default is "https://foodb.ca/downloads".
+#' @param sleep sleep default is 1 second.
+#' @param pages default is from 1:2838
 #' @return A data frame.
 #' @importFrom rvest read_html html_table
 #' @importFrom magrittr %>%
 #' @importFrom utils download.file untar
 #' @export
 #' @examples
-#' x = request_foodb_food_info()
+#' x = request_foodb_compound_info()
 #' head(x)
 
-request_foodb_food_info <-
+request_foodb_compound_info <-
   function(url = c(
     "https://raw.githubusercontent.com/jaspershen/databases/main/data/foodb_compound_info.rda",
-    "https://foodb.ca/downloads"
-  )) {
+    "https://foodb.ca/downloads",
+    "https://foodb.ca/compounds"
+  ),
+  sleep = 1,
+  pages = 1:2838) {
     url <- match.arg(url)
     if (url == "https://raw.githubusercontent.com/jaspershen/databases/main/data/foodb_compound_info.rda") {
       temp_file <- tempfile()
@@ -170,7 +173,13 @@ request_foodb_food_info <-
       load(file.path(temp_file, "foodb_compound_info.rda"))
 
       unlink(temp_file)
-    } else{
+      x <-
+        food_compound_info %>%
+        dplyr::select(public_id, name)
+      return(x)
+    }
+
+    if (url ==  "https://foodb.ca/downloads") {
       temp_file <- tempfile()
       dir.create(temp_file, showWarnings = FALSE)
       options(timeout = 10000)
@@ -186,29 +195,17 @@ request_foodb_food_info <-
                         show_col_types = FALSE)
 
       unlink(temp_file)
+      x <-
+        food_compound_info %>%
+        dplyr::select(public_id, name)
+      return(x)
     }
 
-    food_compound_info %>%
-      dplyr::select(public_id, name)
+    if (url == "https://foodb.ca/compounds") {
+      request_foodb_compound_info_crawler(sleep = sleep,
+                                          pages = pages)
+    }
 
-    # result <-
-    #   purrr::map(pages, function(idx) {
-    #     cat(idx, " ")
-    #     Sys.sleep(sleep)
-    #     new_url <-
-    #       paste0(url, "?page=", idx)
-    #     x <-
-    #       rvest::read_html(x = new_url)
-    #
-    #     x <-
-    #       x %>%
-    #       rvest::html_table(fill = TRUE) %>%
-    #       `[[`(1)
-    #     x
-    #   }) %>%
-    #   do.call(rbind, .) %>%
-    #   as.data.frame()
-    # invisible(result)
   }
 
 
@@ -244,7 +241,7 @@ request_foodb_compound_ms2 <-
       as.data.frame()
 
     idx <-
-      which(unname(unlist(spectra[1,])) == "Specdb::MsMs")
+      which(unname(unlist(spectra[1, ])) == "Specdb::MsMs")
 
     if (length(idx) == 0) {
       message('No MS/MS.')
@@ -419,8 +416,8 @@ download_foodb_compound <-
     dir.create(path, recursive = TRUE, showWarnings = FALSE)
 
     foodb_id <-
-      request_foodb_food_info(url =
-                                "https://raw.githubusercontent.com/jaspershen/databases/main/data/foodb_compound_info.rda")
+      request_foodb_compound_info(url =
+                                    "https://raw.githubusercontent.com/jaspershen/databases/main/data/foodb_compound_info.rda")
 
     if (all(compound_id != "all")) {
       foodb_id <-
@@ -445,7 +442,7 @@ download_foodb_compound <-
           )
         if (is.null(result)) {
           return(NULL)
-        }else{
+        } else{
           return(result)
         }
       })
@@ -474,7 +471,6 @@ download_foodb_compound <-
 #' @export
 read_foodb_compound <-
   function(path = ".") {
-
     load(file.path(path, "foodb_compound_database"))
 
     pb <-
@@ -486,7 +482,7 @@ read_foodb_compound <-
         # cat(x$accession, " ")
         pb$tick()
         x <- foodb_compound_database[[i]]
-        if(is.null(x)){
+        if (is.null(x)) {
           return(NULL)
         }
         Kingdom <-
@@ -502,56 +498,61 @@ read_foodb_compound <-
         State <- ifelse(is.null(x$state), NA, x$state)
         HMDB.ID <- ifelse(is.null(x$hmdb_id), NA, x$hmdb_id)
         PUBCHEM.ID <-
-          ifelse(is.null(x$pubchem_compound_id), NA, x$pubchem_compound_id)
+          ifelse(is.null(x$pubchem_compound_id),
+                 NA,
+                 x$pubchem_compound_id)
         CHEMSPIDER.ID <-
           ifelse(is.null(x$chemspider_id), NA, x$chemspider_id)
         KEGG.ID <- ifelse(is.null(x$kegg_id), NA, x$kegg_id)
         CHEBI.ID <- ifelse(is.null(x$chebi_id), NA, x$chebi_id)
         BIOCYC.ID <- ifelse(is.null(x$biocyc_id), NA, x$biocyc_id)
         HET.ID <- ifelse(is.null(x$het_id), NA, x$het_id)
-        WIKIPEDIA.ID <- ifelse(is.null(x$wikipidia), NA, x$wikipidia)
+        WIKIPEDIA.ID <-
+          ifelse(is.null(x$wikipidia), NA, x$wikipidia)
         VMH.ID <- ifelse(is.null(x$vmh_id), NA, x$vmh_id)
         Synonyms = ifelse(is.null(x$synonyms), NA, paste(unname(unlist(x$synonyms)), collapse = "{}"))
         foods <- x$foods
-        if(is.null(foods)){
+        if (is.null(foods)) {
           Food_name <- NA
           Food_type <- NA
           Food_category <- NA
           Food_scientific_name <- NA
-        }else{
-          if(class(foods)[1] == "list"){
+        } else{
+          if (class(foods)[1] == "list") {
             foods <-
               foods %>%
-              lapply(function(y){
-                data.frame(name = ifelse(is.null(y$name), NA, y$name),
-                           food_type = ifelse(is.null(y$food_type), NA, y$food_type),
-                           category = ifelse(is.null(y$category), NA, y$category),
-                           name_scientific = ifelse(is.null(y$name_scientific), NA, y$name_scientific))
+              lapply(function(y) {
+                data.frame(
+                  name = ifelse(is.null(y$name), NA, y$name),
+                  food_type = ifelse(is.null(y$food_type), NA, y$food_type),
+                  category = ifelse(is.null(y$category), NA, y$category),
+                  name_scientific = ifelse(is.null(y$name_scientific), NA, y$name_scientific)
+                )
               }) %>%
               dplyr::bind_rows() %>%
               as.data.frame()
 
-            Food_name <- as.character(foods[,"name"]) %>%
+            Food_name <- as.character(foods[, "name"]) %>%
               paste(collapse = "{}")
-            Food_type <- as.character(foods[,"food_type"]) %>%
+            Food_type <- as.character(foods[, "food_type"]) %>%
               paste(collapse = "{}")
-            Food_category <- as.character(foods[,"category"]) %>%
+            Food_category <- as.character(foods[, "category"]) %>%
               paste(collapse = "{}")
             Food_scientific_name <-
-              as.character(foods[,"name_scientific"]) %>%
+              as.character(foods[, "name_scientific"]) %>%
               paste(collapse = "{}")
 
-          }else{
+          } else{
             colnames(foods) <- paste("V", 1:ncol(foods), sep = "")
 
             foods <-
-              foods[1:4,,drop = FALSE] %>%
+              foods[1:4, , drop = FALSE] %>%
               as.data.frame() %>%
-              apply(2, function(y){
+              apply(2, function(y) {
                 y <-
                   y %>%
-                  lapply(function(z){
-                    if(is.null(z)) {
+                  lapply(function(z) {
+                    if (is.null(z)) {
                       return(NA)
                     } else{
                       return(z)
@@ -560,14 +561,14 @@ read_foodb_compound <-
                   unlist()
                 y
               })
-            Food_name <- as.character(foods["name", ]) %>%
+            Food_name <- as.character(foods["name",]) %>%
               paste(collapse = "{}")
-            Food_type <- as.character(foods["food_type", ]) %>%
+            Food_type <- as.character(foods["food_type",]) %>%
               paste(collapse = "{}")
-            Food_category <- as.character(foods["category", ]) %>%
+            Food_category <- as.character(foods["category",]) %>%
               paste(collapse = "{}")
             Food_scientific_name <-
-              as.character(foods["name_scientific", ]) %>%
+              as.character(foods["name_scientific",]) %>%
               paste(collapse = "{}")
           }
         }
@@ -592,7 +593,11 @@ read_foodb_compound <-
           ),
           IUPAC_name = ifelse(is.null(x$iupac_name), NA, x$iupac_name),
           Traditional_IUPAC_name = ifelse(is.null(x$traditional_iupac), NA, x$traditional_iupac),
-          CAS.ID = ifelse(is.null(x$cas_registry_number), NA, x$cas_registry_number),
+          CAS.ID = ifelse(
+            is.null(x$cas_registry_number),
+            NA,
+            x$cas_registry_number
+          ),
           SMILES.ID = ifelse(is.null(x$smiles), NA, x$smiles),
           INCHI.ID = ifelse(is.null(x$inchi), NA, x$inchi),
           INCHIKEY.ID = ifelse(is.null(x$inchikey), NA, x$inchikey),
@@ -630,7 +635,7 @@ read_foodb_compound <-
     foodb_result$Submitter = "FOODB"
 
     foodb_result <-
-    foodb_result %>%
+      foodb_result %>%
       dplyr::filter(!is.na(mz) & !is.na(Formula))
 
     return(foodb_result)
@@ -668,16 +673,16 @@ convert_foodb2metid <-
 
     foodb_ms1 <-
       metid::construct_database(
-      path = temp_file,
-      version = as.character(Sys.Date()),
-      metabolite.info.name = "data.csv",
-      source = "FOODB",
-      link = "https://foodb.ca/",
-      creater = "Xiaotao Shen",
-      email = "shenxt@stanford.edu",
-      rt = FALSE,
-      threads = threads
-    )
+        path = temp_file,
+        version = as.character(Sys.Date()),
+        metabolite.info.name = "data.csv",
+        source = "FOODB",
+        link = "https://foodb.ca/",
+        creater = "Xiaotao Shen",
+        email = "shenxt@stanford.edu",
+        rt = FALSE,
+        threads = threads
+      )
 
     unlink(file.path(temp_file, "data.csv"))
     unlink(temp_file)

@@ -36,7 +36,6 @@ reference:
     - request_foodb_compound_info
     - request_foodb_compound_ms2
     - request_foodb_compound
-    - request_foodb_food_info
     - request_hmdb_metabolite
     - request_kegg_compound_info
     - request_kegg_compound

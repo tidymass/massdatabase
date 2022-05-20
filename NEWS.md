@@ -13,3 +13,7 @@
 # Version 0.99.11
 
 * New function for KEGG reaction and reaction pair database.
+
+# Version 0.99.12
+
+* Fix bugs.

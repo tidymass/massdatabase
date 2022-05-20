@@ -2,18 +2,20 @@
 % Please edit documentation in R/14_FOODB.R
 \name{request_foodb_compound_info}
 \alias{request_foodb_compound_info}
-\title{Request all the compound information in FoodB}
+\title{Request all the food information in FoodB}
 \usage{
 request_foodb_compound_info(
-  url = "https://foodb.ca/compounds",
+ 
+    url = c("https://raw.githubusercontent.com/jaspershen/databases/main/data/foodb_compound_info.rda",
+    "https://foodb.ca/downloads", "https://foodb.ca/compounds"),
   sleep = 1,
-  pages = c(1:2838)
+  pages = 1:2838
 )
 }
 \arguments{
-\item{url}{Default is "https://foodb.ca/compounds".}
+\item{url}{Default is "https://foodb.ca/downloads".}
 
-\item{sleep}{Default is 1 second.}
+\item{sleep}{sleep default is 1 second.}
 
 \item{pages}{default is from 1:2838}
 }
@@ -21,10 +23,10 @@ request_foodb_compound_info(
 A data frame.
 }
 \description{
-Request all the compound information in FoodB
+Request all the food information in FoodB
 }
 \examples{
-x = request_foodb_compound_info(pages = 1)
+x = request_foodb_compound_info()
 head(x)
 }
 \author{
