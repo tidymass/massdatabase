@@ -148,7 +148,10 @@ Get one specific HMDB compound information.
 
 ```{r,eval=TRUE,warning=FALSE, R.options="", message=TRUE, cache=TRUE}
 x <- 
-  request_hmdb_metabolite(compound_id = "HMDB0000001", return_form = "list")
+  request_hmdb_metabolite(metabolite_id = "HMDB0000001",
+                          return_form = "list")
+names(x)
+head(x)
 ```
 
 # **KEGG database** 
