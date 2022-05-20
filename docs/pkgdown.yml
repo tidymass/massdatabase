@@ -5,7 +5,8 @@ articles:
   install: install.html
   kegg_compound: kegg_compound.html
   kegg_pathway: kegg_pathway.html
-last_built: 2022-05-15T06:31Z
+  request_functions: request_functions.html
+last_built: 2022-05-20T07:22Z
 urls:
   reference: https://tidymass.github.io/massdatabase/reference
   article: https://tidymass.github.io/massdatabase/articles
