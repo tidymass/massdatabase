@@ -137,6 +137,8 @@ navbar:
         href: articles/install.html
       - text: "Request functions in massdatabase"
         href: articles/request_functions.html
+      - text: "Download functions in massdatabase"
+        href: articles/download_functions.html
       - text: "Compound database"
       - text: "KEGG compound database"
         href: articles/kegg_compound.html

@@ -2,11 +2,12 @@ pandoc: 2.17.1.1
 pkgdown: 2.0.1
 pkgdown_sha: ~
 articles:
+  download_functions: download_functions.html
   install: install.html
   kegg_compound: kegg_compound.html
   kegg_pathway: kegg_pathway.html
   request_functions: request_functions.html
-last_built: 2022-05-20T17:47Z
+last_built: 2022-05-30T07:52Z
 urls:
   reference: https://tidymass.github.io/massdatabase/reference
   article: https://tidymass.github.io/massdatabase/articles
