@@ -139,7 +139,7 @@ navbar:
         href: articles/request_functions.html
       - text: "Download functions in massdatabase"
         href: articles/download_functions.html
-    -   text: "Read and convert functions in massdatabase"
+      - text: "Read and convert functions in massdatabase"
         href: articles/read_convert_functions.html
       - text: "Compound database"
       - text: "KEGG compound database"

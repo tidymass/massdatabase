@@ -6,8 +6,9 @@ articles:
   install: install.html
   kegg_compound: kegg_compound.html
   kegg_pathway: kegg_pathway.html
+  read_convert_functions: read_convert_functions.html
   request_functions: request_functions.html
-last_built: 2022-05-30T07:52Z
+last_built: 2022-06-01T07:03Z
 urls:
   reference: https://tidymass.github.io/massdatabase/reference
   article: https://tidymass.github.io/massdatabase/articles
