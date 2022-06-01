@@ -220,7 +220,7 @@ read_smpdb_pathway <-
 #' @importClassesFrom metpath pathway_database
 #' @export
 
-convert_kegg2metpath <-
+convert_smpdb2metpath <-
   function(data,
            path = ".",
            threads = 5) {

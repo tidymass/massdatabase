@@ -106,7 +106,7 @@ reference:
     - convert_mona2metid
     - convert_nist2metid
     - convert_kegg2metpath
-    - convert_kegg2metpath
+    - convert_smpdf2metpath
 
   - title: Data
     desc: Some data embed in massdatabase
@@ -139,6 +139,8 @@ navbar:
         href: articles/request_functions.html
       - text: "Download functions in massdatabase"
         href: articles/download_functions.html
+    -   text: "Read and convert functions in massdatabase"
+        href: articles/read_convert_functions.html
       - text: "Compound database"
       - text: "KEGG compound database"
         href: articles/kegg_compound.html
