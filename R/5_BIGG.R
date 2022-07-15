@@ -59,7 +59,7 @@ download_bigg_model <-
 #' @author Xiaotao Shen
 #' \email{shenxt1990@@outlook.com}
 #' @param url url http://bigg.ucsd.edu/api/v2/models
-#' @return model inforamtion
+#' @return model information
 #' @importFrom curl curl
 #' @importFrom stringr str_replace_all str_extract str_replace str_split
 #' @importFrom stringr str_trim
@@ -129,7 +129,7 @@ request_bigg_model_info <-
 #' @author Xiaotao Shen
 #' \email{shenxt1990@@outlook.com}
 #' @param url url http://bigg.ucsd.edu/api/v2/universal/metabolites
-#' @return universal metabolite inforamtion
+#' @return universal metabolite information
 #' @importFrom curl curl
 #' @importFrom stringr str_replace_all str_extract str_replace str_split
 #' @importFrom stringr str_trim
@@ -194,7 +194,7 @@ request_bigg_universal_metabolite_info <-
 #' @param url url http://bigg.ucsd.edu/api/v2/universal/metabolites
 #' @param metabolite_id metabolite_id, for example, g3p
 #' @param return_form data.frame or list.
-#' @return universal metabolite inforamtion
+#' @return universal metabolite information
 #' @importFrom curl curl
 #' @importFrom stringr str_replace_all str_extract str_replace str_split
 #' @importFrom stringr str_trim
@@ -673,7 +673,7 @@ convert_bigg_universal2metid <-
 #' @author Xiaotao Shen
 #' \email{shenxt1990@@outlook.com}
 #' @param url url http://bigg.ucsd.edu/api/v2/universal/reactions
-#' @return universal metabolite inforamtion
+#' @return universal metabolite information
 #' @importFrom curl curl
 #' @importFrom stringr str_replace_all str_extract str_replace str_split
 #' @importFrom stringr str_trim
@@ -733,6 +733,77 @@ request_bigg_universal_reaction_info <-
 
 
 
+
+
+
+
+#' @title Request BIGG reaction information for specific species (model)
+#' @description Request BIGG reaction information for specific species
+#' @author Xiaotao Shen
+#' \email{shenxt1990@@outlook.com}
+#' @param model_bigg_id please use the model bigg id using the
+#' request_bigg_model_info function. Default is iAB_RBC_283 (human)
+#' @return reaction information
+#' @importFrom curl curl
+#' @importFrom stringr str_replace_all str_extract str_replace str_split
+#' @importFrom stringr str_trim
+#' @export
+#' @examples
+#' x <- request_bigg_universal_reaction_info()
+#' dim(x)
+#' head(x)
+request_bigg_reaction_info <-
+  function(model_bigg_id = "iAB_RBC_283") {
+    url <-
+      paste0("http://bigg.ucsd.edu/api/v2/models/",
+             model_bigg_id,
+             "/reactions")
+    x <-
+      curl::curl(url = url)
+    open(x)
+    out <- readLines(x)
+    close(x)
+
+    out <-
+      out %>%
+      stringr::str_replace_all("\"", "") %>%
+      stringr::str_replace_all("\\{results\\: ", "")
+
+    reaction_count <-
+      stringr::str_extract(out, "results_count\\: [0-9]{2,5}") %>%
+      stringr::str_replace("results_count\\: ", "") %>%
+      as.numeric()
+
+    out <-
+      out %>%
+      stringr::str_replace_all("\\, results_count\\: [0-9]{2,5}\\}", "") %>%
+      stringr::str_replace(pattern = "^\\[", "") %>%
+      stringr::str_replace(pattern = "\\]$", "")
+
+    out <-
+      out %>%
+      stringr::str_split(pattern = "\\}, \\{") %>%
+      `[[`(1) %>%
+      stringr::str_replace_all("^\\{", "") %>%
+      stringr::str_replace_all("\\}$", "") %>%
+      lapply(function(x) {
+        x <-
+          x %>%
+          stringr::str_split(", name\\: ") %>%
+          `[[`(1) %>%
+          stringr::str_split(", model_bigg_id\\: ") %>%
+          unlist() %>%
+          stringr::str_replace_all("bigg_id: ", "")
+      }) %>%
+      do.call(rbind, .) %>%
+      as.data.frame()
+
+    colnames(out) <- c("bigg_id", "name", "model_bigg_id")
+
+    invisible(out)
+  }
+
+
 #' @title Request BIGG reaction
 #' @description Request BIGG reaction
 #' @author Xiaotao Shen
@@ -740,7 +811,7 @@ request_bigg_universal_reaction_info <-
 #' @param url url http://bigg.ucsd.edu/api/v2/universal/reactions
 #' @param reaction_id reaction_id, for example, ADA
 #' @param return_form data.frame or list.
-#' @return universal metabolite inforamtion
+#' @return universal metabolite information
 #' @importFrom curl curl
 #' @importFrom stringr str_replace_all str_extract str_replace str_split
 #' @importFrom stringr str_trim

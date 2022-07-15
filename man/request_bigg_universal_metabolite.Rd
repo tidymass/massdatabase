@@ -18,7 +18,7 @@ request_bigg_universal_metabolite(
 \item{return_form}{data.frame or list.}
 }
 \value{
-universal metabolite inforamtion
+universal metabolite information
 }
 \description{
 Request BIGG metabolite

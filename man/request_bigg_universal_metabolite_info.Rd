@@ -12,7 +12,7 @@ request_bigg_universal_metabolite_info(
 \item{url}{url http://bigg.ucsd.edu/api/v2/universal/metabolites}
 }
 \value{
-universal metabolite inforamtion
+universal metabolite information
 }
 \description{
 Request BIGG universal metabolite information

@@ -8,6 +8,7 @@
 #' @importFrom purrr map map2 walk
 #' @importFrom crayon green
 #' @importFrom utils download.file head read.table
+#' @importFrom ggplot2 aes ggplot
 #' @export
 #' @examples
 #' massdatabase_logo()
@@ -17,12 +18,15 @@ massdatabase_logo <- function() {
   message(crayon::green("Version", massdatabase_version, "(", update_date, ')\n'))
   cat(crayon::green("More information: google tidymass massdatabase.\n"))
   cat(crayon::green(
-    c("                          _____        _        _", "                         |  __ \\      | |      | |",
+    c(
+      "                          _____        _        _",
+      "                         |  __ \\      | |      | |",
       "  _ __ ___   __ _ ___ ___| |  | | __ _| |_ __ _| |__   __ _ ___  ___",
       " | '_ ` _ \\ / _` / __/ __| |  | |/ _` | __/ _` | '_ \\ / _` / __|/ _ \\",
       " | | | | | | (_| \\__ \\__ \\ |__| | (_| | || (_| | |_) | (_| \\__ \\  __/",
       " |_| |_| |_|\\__,_|___/___/_____/ \\__,_|\\__\\__,_|_.__/ \\__,_|___/\\___|",
-      "")
+      ""
+    )
 
   ), sep = "\n")
 }

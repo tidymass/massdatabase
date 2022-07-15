@@ -17,3 +17,8 @@
 # Version 0.99.12
 
 * Fix bugs.
+
+
+# Version 0.99.13
+
+* New function: request_bigg_reaction_info

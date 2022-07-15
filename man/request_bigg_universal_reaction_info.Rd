@@ -12,7 +12,7 @@ request_bigg_universal_reaction_info(
 \item{url}{url http://bigg.ucsd.edu/api/v2/universal/reactions}
 }
 \value{
-universal metabolite inforamtion
+universal metabolite information
 }
 \description{
 Request BIGG universal reaction information

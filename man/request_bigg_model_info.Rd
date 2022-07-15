@@ -10,7 +10,7 @@ request_bigg_model_info(url = "http://bigg.ucsd.edu/api/v2/models")
 \item{url}{url http://bigg.ucsd.edu/api/v2/models}
 }
 \value{
-model inforamtion
+model information
 }
 \description{
 Request BIGG model information

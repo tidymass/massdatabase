@@ -250,16 +250,17 @@ read_chebi_compound <-
 request_chebi_compound <-
   function(url = "https://www.ebi.ac.uk/chebi/searchId.do?chebiId=",
            compound_id = "CHEBI:18358") {
-
     result <-
-      tryCatch(rvest::read_html(x = paste0(url, compound_id)),
-               error = function(e) NULL)
+      tryCatch(
+        rvest::read_html(x = paste0(url, compound_id)),
+        error = function(e)
+          NULL
+      )
 
-    if(is.null(result)){
+    if (is.null(result)) {
       message("Check url: ", paste0(url, compound_id))
       return(NULL)
     }
-
 
     main <-
       tryCatch(
@@ -278,7 +279,6 @@ request_chebi_compound <-
     if (is.null(main)) {
       stop("Can't find ", compound_id, ", check it.")
     }
-
 
     colnames(main) <- as.character(main[1, ])
     main <- main[-1, , drop = FALSE]
@@ -325,18 +325,28 @@ request_chebi_compound <-
 
     others <-
       result %>%
-      rvest::html_elements(css = ".chebiTableContent") %>%
-      purrr::map(function(x) {
+      rvest::html_elements(css = ".chebiTableContent")
+
+    others <-
+      seq_along(others) %>%
+      purrr::map(function(i) {
+        # cat(i, " ")
+        x <- others[[i]]
         x <-
           tryCatch(
             rvest::html_table(x),
             error = function(e)
               NULL
           )
+
         if (!is.null(x)) {
-          x <-
-            x %>%
-            dplyr::filter(X1 != "")
+          if (nrow(x) > 0) {
+            x <-
+              x %>%
+              dplyr::filter(X1 != "")
+          }else{
+            return(NULL)
+          }
         }
         x
       })
