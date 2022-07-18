@@ -14,7 +14,7 @@
 
 # About
 
-`massdatabase` is a R package which is used to play with databases about mass spectrometry data.
+`massdatabase` is an R package that operates the online public databases and combines with other tools for streamlined compound annotation and pathway enrichment analysis. `massDatabase` is a flexible, simple, and powerful tool that can be installed on all platforms, allowing the users to leverage all the online public databases for biological function mining.
 
 <img src="man/figures/Figure_1.png" align="middle" alt="" width = "100%"/>
 
@@ -36,7 +36,7 @@ remotes::install_github("tidymass/massdatabase")
 
 # Usage
 
-Please see the `Help documents` page to get the instruction of `massdatabase`.
+Please see the `Help documents` page to get the instruction of `massDatabase`.
 
 ## Need help?
 
@@ -45,10 +45,10 @@ If you have any questions about `massdatabase`, please don’t hesitate to email
 <i class="fa fa-weixin"></i>
 [shenzutao1990](https://www.shenxt.info/files/wechat_QR.jpg)
 
-<i class="fa fa-envelope"></i> <shenxt@stanford.edu>
+<i class="fa fa-envelope"></i> <shenxt1990@outlook.com>
 
 <i class="fa fa-twitter"></i>
-[Twitter](https://twitter.com/JasperShen1990)
+[Twitter](https://twitter.com/xiaotaoshen1990)
 
 <i class="fa fa-map-marker-alt"></i> 
 [M339, Alway Buidling, Cooper Lane, Palo Alto, CA 94304](https://www.google.com/maps/place/Alway+Building/@37.4322345,-122.1770883,17z/data=!3m1!4b1!4m5!3m4!1s0x808fa4d335c3be37:0x9057931f3b312c29!8m2!3d37.4322345!4d-122.1748996)
@@ -57,10 +57,8 @@ If you have any questions about `massdatabase`, please don’t hesitate to email
 
 If you use `massdatabase` in your publications, please cite this paper:
 
-TidyMass: An Object-oriented Reproducible Analysis Framework for LC-MS Data.
+1. massDatabase: utilities for the operation of the public compound and pathway database. [Web Link](https://www.biorxiv.org/content/10.1101/2022.06.02.494457v1)
 
-Xiaotao Shen, Hong Yan, Chuchu Wang, Peng Gao, Caroline H. Johnson, Michael P. Snyder.
-
-[Web Link](https://www.biorxiv.org/content/10.1101/2022.03.15.484499v1).
+2. TidyMass: An Object-oriented Reproducible Analysis Framework for LC-MS Data. [Web Link](https://www.biorxiv.org/content/10.1101/2022.03.15.484499v1).
 
 Thanks very much!

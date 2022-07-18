@@ -22,3 +22,7 @@
 # Version 0.99.13
 
 * New function: request_bigg_reaction_info
+
+# Version 0.99.14
+
+* Add new functions

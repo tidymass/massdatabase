@@ -4,17 +4,10 @@
 \name{smpdb_primary_pathway_id}
 \alias{smpdb_primary_pathway_id}
 \title{smpdb_primary_pathway_id}
-\format{
-A vector.
-}
-\usage{
-smpdb_primary_pathway_id
-}
 \description{
 smpdb_primary_pathway_id
 }
-\author{
-Xiaotao Shen
-\email{shenxt1990@outlook.com}
+\examples{
+data(smpdb_primary_pathway_id)
 }
-\keyword{datasets}
+\keyword{data}

@@ -51,6 +51,9 @@ reference:
     - request_wikipedia_scientific_classification
     - request_kegg_pathway_info
     - request_kegg_pathway
+    - request_hmdb_reaction
+    - request_bigg_reaction_info
+    - request_foodb_compound_info_crawler
 
   - title: Download database
     desc: Download databases
@@ -106,13 +109,14 @@ reference:
     - convert_mona2metid
     - convert_nist2metid
     - convert_kegg2metpath
-    - convert_smpdf2metpath
+    - convert_smpdb2metpath
 
   - title: Data
     desc: Some data embed in massdatabase
     contents:
     - match_table
     - smpdb_primary_pathway_id
+    - hmdb_ms1
 
   - title: Other functions
     desc: Other usefull functions in massdatabase

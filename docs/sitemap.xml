@@ -136,6 +136,9 @@
     <loc>https://tidymass.github.io/massdatabase/reference/get_words_similarity.html</loc>
   </url>
   <url>
+    <loc>https://tidymass.github.io/massdatabase/reference/hmdb_ms1.html</loc>
+  </url>
+  <url>
     <loc>https://tidymass.github.io/massdatabase/reference/index.html</loc>
   </url>
   <url>
@@ -193,6 +196,9 @@
     <loc>https://tidymass.github.io/massdatabase/reference/request_bigg_model_info.html</loc>
   </url>
   <url>
+    <loc>https://tidymass.github.io/massdatabase/reference/request_bigg_reaction_info.html</loc>
+  </url>
+  <url>
     <loc>https://tidymass.github.io/massdatabase/reference/request_bigg_universal_metabolite.html</loc>
   </url>
   <url>
@@ -227,6 +233,9 @@
   </url>
   <url>
     <loc>https://tidymass.github.io/massdatabase/reference/request_hmdb_metabolite.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/massdatabase/reference/request_hmdb_reaction.html</loc>
   </url>
   <url>
     <loc>https://tidymass.github.io/massdatabase/reference/request_kegg_compound.html</loc>

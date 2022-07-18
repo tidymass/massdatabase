@@ -250,6 +250,7 @@ read_chebi_compound <-
 request_chebi_compound <-
   function(url = "https://www.ebi.ac.uk/chebi/searchId.do?chebiId=",
            compound_id = "CHEBI:18358") {
+
     result <-
       tryCatch(
         rvest::read_html(x = paste0(url, compound_id)),
@@ -277,10 +278,11 @@ request_chebi_compound <-
       )
 
     if (is.null(main)) {
-      stop("Can't find ", compound_id, ", check it.")
+      message("Can't find ", compound_id, ", check it.")
+      return(NULL)
     }
 
-    colnames(main) <- as.character(main[1, ])
+    colnames(main) <- as.character(main[1,])
     main <- main[-1, , drop = FALSE]
 
     base_info <-
@@ -319,7 +321,7 @@ request_chebi_compound <-
       matrix(base_info, nrow = 2) %>%
       tibble::as_tibble()
 
-    colnames(base_info) <- as.character(base_info[1, ])
+    colnames(base_info) <- as.character(base_info[1,])
 
     base_info <- base_info[-1, , drop = FALSE]
 
@@ -344,7 +346,7 @@ request_chebi_compound <-
             x <-
               x %>%
               dplyr::filter(X1 != "")
-          }else{
+          } else{
             return(NULL)
           }
         }
@@ -387,7 +389,7 @@ request_chebi_compound <-
         stringr::str_trim() %>%
         paste(collapse = "")
 
-      colnames(source) <- as.character(source[1, ])
+      colnames(source) <- as.character(source[1,])
       source <- source[-1, , drop = FALSE]
 
     }
@@ -425,7 +427,7 @@ request_chebi_compound <-
       tibble::as_tibble()
 
     colnames(roles_classification) <-
-      as.character(roles_classification[1, ])
+      as.character(roles_classification[1,])
 
     roles_classification <- roles_classification[-1, , drop = FALSE]
 
@@ -440,7 +442,7 @@ request_chebi_compound <-
       }) %>%
       dplyr::bind_rows()
 
-    colnames(iupac_name) <- as.character(iupac_name[1, ])
+    colnames(iupac_name) <- as.character(iupac_name[1,])
     iupac_name <- iupac_name[-1, , drop = FALSE]
 
     ###Synonyms
@@ -454,7 +456,7 @@ request_chebi_compound <-
       }) %>%
       dplyr::bind_rows()
 
-    colnames(synonyms) <- as.character(synonyms[1, ])
+    colnames(synonyms) <- as.character(synonyms[1,])
     synonyms <- synonyms[-1, , drop = FALSE]
 
     ###Manual Xrefs
@@ -475,7 +477,7 @@ request_chebi_compound <-
         manual_xrefs %>%
         dplyr::filter(!is.na(X2))
 
-      colnames(manual_xrefs) <- as.character(manual_xrefs[1, ])
+      colnames(manual_xrefs) <- as.character(manual_xrefs[1,])
       manual_xrefs <- manual_xrefs[-1, , drop = FALSE]
 
     }
@@ -499,7 +501,7 @@ request_chebi_compound <-
         dplyr::filter(!is.na(X2))
 
       colnames(registry_numbers) <-
-        as.character(registry_numbers[1, ])
+        as.character(registry_numbers[1,])
       registry_numbers <- registry_numbers[-1, , drop = FALSE]
     }
 

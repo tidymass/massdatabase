@@ -110,20 +110,30 @@ request_lipidbank_lipid_class <-
     url <- paste0(url, bre, ".html")
 
     result <-
-      rvest::read_html(url) %>%
-      rvest::html_table()
+      tryCatch(
+        rvest::read_html(url) %>%
+          rvest::html_table(),
+        error = function(e) {
+          NULL
+        }
+      )
+
+    if (is.null(result)) {
+      message("Check your internet.")
+      return(NULL)
+    }
 
     result <- result[[2]] %>%
       as.data.frame()
 
     colnames(result) <-
-      result[1,] %>%
+      result[1, ] %>%
       as.character()
 
     result <-
-      result[-1,]
+      result[-1, ]
 
-    invisible(result)
+    result
   }
 
 

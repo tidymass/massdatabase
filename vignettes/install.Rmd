@@ -1,5 +1,5 @@
 ---
-title: "Install `metdatabase`"
+title: "Install massdatabase"
 author:
 - name: Xiaotao Shen (https://www.shenxt.info/)
 date: "Created on 2022-05-11 and updated on `r Sys.Date()`"
@@ -27,22 +27,22 @@ knitr::opts_chunk$set(
 )
 ```
 
-# **Install `metdatabase` from GitLab**
+# **Install `massdatabase` from GitLab**
 
-You can just use the `remotes` to install `metdatabase`. 
+You can just use the `remotes` to install `massdatabase`. 
 
 ```{r,eval=FALSE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
-remotes::install_gitlab("jaspershen/metdatabase", dependencies = TRUE)
+remotes::install_gitlab("jaspershen/massdatabase", dependencies = TRUE)
 ```
 
 During the installation, it will ask if you want to update some packages for few times, just enter `enter` key to skip it.
 
-# **Install `metdatabase` from GitHub**
+# **Install `massdatabase` from GitHub**
 
-You can just use the `remotes` to install `metdatabase`. 
+You can just use the `remotes` to install `massdatabase`. 
 
 ```{r,eval=FALSE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
-remotes::install_github("tidymass/metdatabase", dependencies = TRUE)
+remotes::install_github("tidymass/massdatabase", dependencies = TRUE)
 ```
 
 During the installation, it will ask if you want to update some packages for few times, just enter `enter` key to skip it.
@@ -50,7 +50,7 @@ During the installation, it will ask if you want to update some packages for few
 If there is a error like below:
 
 ```
-Error: Failed to install 'metdatabase' from GitHub: HTTP error 403. API rate limit exceeded for 171.66.10.237. (But here's the good news: Authenticated requests get a higher rate limit. Check out the documentation for more details.)
+Error: Failed to install 'massdatabase' from GitHub: HTTP error 403. API rate limit exceeded for 171.66.10.237. (But here's the good news: Authenticated requests get a higher rate limit. Check out the documentation for more details.)
 ```
 
 Try to resolve it by:

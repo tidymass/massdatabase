@@ -48,7 +48,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">massdatabase</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.12</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.14</span>
       </span>
     </div>
 
@@ -136,8 +136,7 @@
   <div class="contents col-md-9">
 
 <div class="section level1">
-<div class="page-header"><h1 id="massdatabase-">massDatabase
-<img src="reference/figures/logo.png" align="right" alt="" width="120"><a class="anchor" aria-label="anchor" href="#massdatabase-"></a>
+<div class="page-header"><h1 id="massdatabase-">massDatabase <img src="reference/figures/logo.png" align="right" alt="" width="120"><a class="anchor" aria-label="anchor" href="#massdatabase-"></a>
 </h1></div>
 
 <p><code>massdatabase</code> is a part of <a href="https://tidymass.github.io/tidymass/" class="external-link">tidymass</a></p>
@@ -146,8 +145,7 @@
 <div class="section level1">
 <h1 id="about">About<a class="anchor" aria-label="anchor" href="#about"></a>
 </h1>
-<p><code>massdatabase</code> is a R package which is used to play with
-databases about mass spectrometry data.</p>
+<p><code>massdatabase</code> is an R package that operates the online public databases and combines with other tools for streamlined compound annotation and pathway enrichment analysis. <code>massDatabase</code> is a flexible, simple, and powerful tool that can be installed on all platforms, allowing the users to leverage all the online public databases for biological function mining.</p>
 <p><img src="reference/figures/Figure_1.png" align="middle" alt="" width="100%"></p>
 </div>
 <div class="section level1">
@@ -155,42 +153,36 @@ databases about mass spectrometry data.</p>
 </h1>
 <p>You can install <code>massdatabase</code> from <a href="https://gitlab.com/jaspershen/massdatabase" class="external-link">GitLab</a></p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://remotes.r-lib.org" class="external-link">remotes</a></span><span class="op">)</span><span class="op">)</span><span class="op">{</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
-<span class="op">}</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_gitlab.html" class="external-link">install_gitlab</a></span><span class="op">(</span><span class="st">"jaspershen/massdatabase"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://remotes.r-lib.org" class="external-link">remotes</a></span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_gitlab.html" class="external-link">install_gitlab</a></span><span class="op">(</span><span class="st">"jaspershen/massdatabase"</span><span class="op">)</span></span></code></pre></div>
 <p>or <a href="https://github.com/tidymass/massdatabase" class="external-link">Github</a></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"tidymass/massdatabase"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"tidymass/massdatabase"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level1">
 <h1 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
 </h1>
-<p>Please see the <code>Help documents</code> page to get the
-instruction of <code>massdatabase</code>.</p>
+<p>Please see the <code>Help documents</code> page to get the instruction of <code>massDatabase</code>.</p>
 <div class="section level2">
 <h2 id="need-help">Need help?<a class="anchor" aria-label="anchor" href="#need-help"></a>
 </h2>
-<p>If you have any questions about <code>massdatabase</code>, please
-don’t hesitate to email me (<a href="mailto:shenxt@stanford.edu" class="email">shenxt@stanford.edu</a>).</p>
+<p>If you have any questions about <code>massdatabase</code>, please don’t hesitate to email me (<a href="mailto:shenxt@stanford.edu" class="email">shenxt@stanford.edu</a>).</p>
 <p><i class="fa fa-weixin"></i> <a href="https://www.shenxt.info/files/wechat_QR.jpg" class="external-link">shenzutao1990</a></p>
-<p><i class="fa fa-envelope"></i> <a href="mailto:shenxt@stanford.edu" class="email">shenxt@stanford.edu</a></p>
-<p><i class="fa fa-twitter"></i> <a href="https://twitter.com/JasperShen1990" class="external-link">Twitter</a></p>
-<p><i class="fa fa-map-marker-alt"></i> <a href="https://www.google.com/maps/place/Alway+Building/@37.4322345,-122.1770883,17z/data=!3m1!4b1!4m5!3m4!1s0x808fa4d335c3be37:0x9057931f3b312c29!8m2!3d37.4322345!4d-122.1748996" class="external-link">M339,
-Alway Buidling, Cooper Lane, Palo Alto, CA 94304</a></p>
+<p><i class="fa fa-envelope"></i> <a href="mailto:shenxt1990@outlook.com" class="email">shenxt1990@outlook.com</a></p>
+<p><i class="fa fa-twitter"></i> <a href="https://twitter.com/xiaotaoshen1990" class="external-link">Twitter</a></p>
+<p><i class="fa fa-map-marker-alt"></i> <a href="https://www.google.com/maps/place/Alway+Building/@37.4322345,-122.1770883,17z/data=!3m1!4b1!4m5!3m4!1s0x808fa4d335c3be37:0x9057931f3b312c29!8m2!3d37.4322345!4d-122.1748996" class="external-link">M339, Alway Buidling, Cooper Lane, Palo Alto, CA 94304</a></p>
 </div>
 </div>
 <div class="section level1">
 <h1 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
 </h1>
-<p>If you use <code>massdatabase</code> in your publications, please
-cite this paper:</p>
-<p>TidyMass: An Object-oriented Reproducible Analysis Framework for
-LC-MS Data.</p>
-<p>Xiaotao Shen, Hong Yan, Chuchu Wang, Peng Gao, Caroline H. Johnson,
-Michael P. Snyder.</p>
-<p><a href="https://www.biorxiv.org/content/10.1101/2022.03.15.484499v1" class="external-link">Web
-Link</a>.</p>
+<p>If you use <code>massdatabase</code> in your publications, please cite this paper:</p>
+<ol style="list-style-type: decimal">
+<li><p>massDatabase: utilities for the operation of the public compound and pathway database. <a href="https://www.biorxiv.org/content/10.1101/2022.06.02.494457v1" class="external-link">Web Link</a></p></li>
+<li><p>TidyMass: An Object-oriented Reproducible Analysis Framework for LC-MS Data. <a href="https://www.biorxiv.org/content/10.1101/2022.03.15.484499v1" class="external-link">Web Link</a>.</p></li>
+</ol>
 <p>Thanks very much!</p>
 </div>
 
@@ -230,15 +222,7 @@ Link</a>.</p>
 </ul>
 </div>
 
-<div class="dev-status">
-<h2 data-toc-skip>Dev status</h2>
-<ul class="list-unstyled">
-<li><a href="https://cran.r-project.org/package=massdatabase" class="external-link"><img src="https://www.r-pkg.org/badges/version/massdatabase?color=green"></a></li>
-<li><a href="https://github.com/tidymass/massdatabase" class="external-link"><img src="https://img.shields.io/github/languages/code-size/tidymass/massdatabase.svg"></a></li>
-<li><a href="https://cran.r-project.org/package=massdatabase" class="external-link"><img src="https://tinyverse.netlify.com/badge/massdatabase" alt="Dependencies"></a></li>
-<li><a href="https://www.tidyverse.org/lifecycle/#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg"></a></li>
-</ul>
-</div>
+
 
   </div>
 </div>
@@ -246,8 +230,7 @@ Link</a>.</p>
 
       <footer><div class="copyright">
   <p></p>
-<p>massdatabase Developed by Xiaotao Shen. <br> from
-<i class="fa fa-university"></i> Stanford University <br><i class="fa fa-clinic-medical"></i>School of Medicine <br><i class="fa fa-dna"></i> Genetics Department</p>
+<p>massdatabase Developed by Xiaotao Shen. <br> from <i class="fa fa-university"></i> Stanford University <br><i class="fa fa-clinic-medical"></i>School of Medicine <br><i class="fa fa-dna"></i> Genetics Department</p>
 </div>
 
 <div class="pkgdown">

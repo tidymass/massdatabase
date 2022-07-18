@@ -15,7 +15,11 @@ request_bigg_version <-
   function(url = "http://bigg.ucsd.edu/api/v2/database_version") {
     options(warn = -1)
     x <-
-      curl::curl(url = url)
+      tryCatch(
+        curl::curl(url = url),
+        error = function(e)
+          NULL
+      )
     open(x)
     out <- readLines(x)
     close(x)

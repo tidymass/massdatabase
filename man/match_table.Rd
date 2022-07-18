@@ -3,18 +3,11 @@
 \docType{data}
 \name{match_table}
 \alias{match_table}
-\title{match table}
-\format{
-A data frame.
-}
-\usage{
+\title{match_table}
+\description{
 match_table
 }
-\description{
-match table
+\examples{
+data(match_table)
 }
-\author{
-Xiaotao Shen
-\email{shenxt1990@outlook.com}
-}
-\keyword{datasets}
+\keyword{data}

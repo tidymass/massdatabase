@@ -23,7 +23,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">massdatabase</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.12</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.14</span>
       </span>
     </div>
 
@@ -106,31 +106,38 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">download_lipidbank_lipid_class</span><span class="op">(</span>
-  url <span class="op">=</span> <span class="st">"https://lipidbank.jp/download/"</span>,
-  lipid_class <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"All data"</span>, <span class="st">"Acylglycerol"</span>, <span class="st">"Bile Acid"</span>, <span class="st">"Fatty acid"</span>,
-    <span class="st">"Long chain alcohol"</span>, <span class="st">"Long chain aldehyde"</span>, <span class="st">"Long chain base and Ceramide"</span>,
-    <span class="st">"Eicosanoid"</span>, <span class="st">"Ether type lipid"</span>, <span class="st">"Carotenoid"</span>, <span class="st">"Coenzyme Q"</span>, <span class="st">"Vitamin A"</span>,
-    <span class="st">"Vitamin D"</span>, <span class="st">"Vitamin E"</span>, <span class="st">"Vitamin F"</span>, <span class="st">"Vitamin K"</span>, <span class="st">"Glycosphingolipid"</span>,
-    <span class="st">"Glycoglycerolipid and others"</span>, <span class="st">"Isoprenoid"</span>, <span class="st">"Lipid peroxide"</span>, <span class="st">"Lipoamino acid"</span>,
-    <span class="st">"Lipopolysaccharide"</span>, <span class="st">"Lipoprotein"</span>, <span class="st">"Mycolic acid"</span>, <span class="st">"Glycerophospholipid"</span>,
-    <span class="st">"Sphingophospholipid"</span>, <span class="st">"Steroid"</span>, <span class="st">"Wax"</span><span class="op">)</span>,
-  path <span class="op">=</span> <span class="st">"."</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">download_lipidbank_lipid_class</span><span class="op">(</span></span>
+<span>  url <span class="op">=</span> <span class="st">"https://lipidbank.jp/download/"</span>,</span>
+<span>  lipid_class <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"All data"</span>, <span class="st">"Acylglycerol"</span>, <span class="st">"Bile Acid"</span>, <span class="st">"Fatty acid"</span>,</span>
+<span>    <span class="st">"Long chain alcohol"</span>, <span class="st">"Long chain aldehyde"</span>, <span class="st">"Long chain base and Ceramide"</span>,</span>
+<span>    <span class="st">"Eicosanoid"</span>, <span class="st">"Ether type lipid"</span>, <span class="st">"Carotenoid"</span>, <span class="st">"Coenzyme Q"</span>, <span class="st">"Vitamin A"</span>,</span>
+<span>    <span class="st">"Vitamin D"</span>, <span class="st">"Vitamin E"</span>, <span class="st">"Vitamin F"</span>, <span class="st">"Vitamin K"</span>, <span class="st">"Glycosphingolipid"</span>,</span>
+<span>    <span class="st">"Glycoglycerolipid and others"</span>, <span class="st">"Isoprenoid"</span>, <span class="st">"Lipid peroxide"</span>, <span class="st">"Lipoamino acid"</span>,</span>
+<span>    <span class="st">"Lipopolysaccharide"</span>, <span class="st">"Lipoprotein"</span>, <span class="st">"Mycolic acid"</span>, <span class="st">"Glycerophospholipid"</span>,</span>
+<span>    <span class="st">"Sphingophospholipid"</span>, <span class="st">"Steroid"</span>, <span class="st">"Wax"</span><span class="op">)</span>,</span>
+<span>  path <span class="op">=</span> <span class="st">"."</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>url</dt>
 <dd><p>Default is "https://lipidbank.jp/download/".</p></dd>
+
+
 <dt>lipid_class</dt>
 <dd><p>See here: https://lipidbank.jp/index.html.</p></dd>
+
+
 <dt>path</dt>
 <dd><p>Default is .</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Downloaded files.</p>
+    
+
+<p>Downloaded files.</p>
     </div>
     <div id="author">
     <h2>Author</h2>
@@ -146,8 +153,7 @@
 
 
       <footer><div class="copyright">
-  <p></p><p>massdatabase Developed by Xiaotao Shen. <br> from
-<i class="fa fa-university"></i> Stanford University <br><i class="fa fa-clinic-medical"></i>School of Medicine <br><i class="fa fa-dna"></i> Genetics Department</p>
+  <p></p><p>massdatabase Developed by Xiaotao Shen. <br> from <i class="fa fa-university"></i> Stanford University <br><i class="fa fa-clinic-medical"></i>School of Medicine <br><i class="fa fa-dna"></i> Genetics Department</p>
 </div>
 
 <div class="pkgdown">

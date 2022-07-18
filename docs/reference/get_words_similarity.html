@@ -23,7 +23,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">massdatabase</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.12</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.14</span>
       </span>
     </div>
 
@@ -106,25 +106,32 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">get_words_similarity</span><span class="op">(</span>
-  word1 <span class="op">=</span> <span class="st">"(2S)-2-Amino-3-(1-methyl-1H-imidazol-4-yl)propanoic acid"</span>,
-  word2 <span class="op">=</span> <span class="st">"(2S)-2-Amino-3-(1-methyl-1H-imidazol-4-yl)propanoate"</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_words_similarity</span><span class="op">(</span></span>
+<span>  word1 <span class="op">=</span> <span class="st">"(2S)-2-Amino-3-(1-methyl-1H-imidazol-4-yl)propanoic acid"</span>,</span>
+<span>  word2 <span class="op">=</span> <span class="st">"(2S)-2-Amino-3-(1-methyl-1H-imidazol-4-yl)propanoate"</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>word1</dt>
 <dd><p>word1.</p></dd>
+
+
 <dt>word2</dt>
 <dd><p>word2.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Other arguments for stringdist::stringsim()</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A simility score.</p>
+    
+
+<p>A simility score.</p>
     </div>
     <div id="author">
     <h2>Author</h2>
@@ -134,8 +141,8 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">get_words_similarity</span><span class="op">(</span>word1 <span class="op">=</span> <span class="st">"(2S)-2-Amino-3-(1-methyl-1H-imidazol-4-yl)propanoic acid"</span>,</span>
-<span class="r-in">word2 <span class="op">=</span> <span class="st">"(2S)-2-Amino-3-(1-methyl-1H-imidazol-4-yl)propanoate"</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">get_words_similarity</span><span class="op">(</span>word1 <span class="op">=</span> <span class="st">"(2S)-2-Amino-3-(1-methyl-1H-imidazol-4-yl)propanoic acid"</span>,</span></span>
+<span class="r-in"><span>word2 <span class="op">=</span> <span class="st">"(2S)-2-Amino-3-(1-methyl-1H-imidazol-4-yl)propanoate"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.8809524</span>
 </code></pre></div>
     </div>
@@ -147,8 +154,7 @@
 
 
       <footer><div class="copyright">
-  <p></p><p>massdatabase Developed by Xiaotao Shen. <br> from
-<i class="fa fa-university"></i> Stanford University <br><i class="fa fa-clinic-medical"></i>School of Medicine <br><i class="fa fa-dna"></i> Genetics Department</p>
+  <p></p><p>massdatabase Developed by Xiaotao Shen. <br> from <i class="fa fa-university"></i> Stanford University <br><i class="fa fa-clinic-medical"></i>School of Medicine <br><i class="fa fa-dna"></i> Genetics Department</p>
 </div>
 
 <div class="pkgdown">

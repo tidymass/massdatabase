@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Install `metdatabase` • massdatabase</title>
+<title>Install massdatabase • massdatabase</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -19,7 +19,7 @@
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><!-- docsearch --><script src="../docsearch.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.3/docsearch.min.css" integrity="sha256-QOSRU/ra9ActyXkIBbiIB144aDBdtvXBcNc3OTNuX/Q=" crossorigin="anonymous">
 <link href="../docsearch.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script><meta property="og:title" content="Install `metdatabase`">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script><meta property="og:title" content="Install massdatabase">
 <meta property="og:description" content="massdatabase">
 <meta property="og:image" content="https://tidymass.github.io/massdatabase/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -48,7 +48,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">massdatabase</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.12</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.14</span>
       </span>
     </div>
 
@@ -135,13 +135,12 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Install <code>metdatabase</code>
-</h1>
+      <h1 data-toc-skip>Install massdatabase</h1>
                         <h4 data-toc-skip class="author">Xiaotao Shen
 (<a href="https://www.shenxt.info/" class="external-link uri">https://www.shenxt.info/</a>)</h4>
                         
             <h4 data-toc-skip class="date">Created on 2022-05-11 and
-updated on 2022-06-01</h4>
+updated on 2022-07-17</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/tidymass/massdatabase/blob/HEAD/vignettes/install.Rmd" class="external-link"><code>vignettes/install.Rmd</code></a></small>
       <div class="hidden name"><code>install.Rmd</code></div>
@@ -150,46 +149,46 @@ updated on 2022-06-01</h4>
 
     
     
-<div class="section level1">
-<h1 id="install-metdatabase-from-gitlab">
-<strong>Install <code>metdatabase</code> from GitLab</strong><a class="anchor" aria-label="anchor" href="#install-metdatabase-from-gitlab"></a>
-</h1>
+<div class="section level2">
+<h2 id="install-massdatabase-from-gitlab">
+<strong>Install <code>massdatabase</code> from GitLab</strong><a class="anchor" aria-label="anchor" href="#install-massdatabase-from-gitlab"></a>
+</h2>
 <p>You can just use the <code>remotes</code> to install
-<code>metdatabase</code>.</p>
+<code>massdatabase</code>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_gitlab.html" class="external-link">install_gitlab</a></span><span class="op">(</span><span class="st">"jaspershen/metdatabase"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_gitlab.html" class="external-link">install_gitlab</a></span><span class="op">(</span><span class="st">"jaspershen/massdatabase"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>During the installation, it will ask if you want to update some
 packages for few times, just enter <code>enter</code> key to skip
 it.</p>
 </div>
-<div class="section level1">
-<h1 id="install-metdatabase-from-github">
-<strong>Install <code>metdatabase</code> from GitHub</strong><a class="anchor" aria-label="anchor" href="#install-metdatabase-from-github"></a>
-</h1>
+<div class="section level2">
+<h2 id="install-massdatabase-from-github">
+<strong>Install <code>massdatabase</code> from GitHub</strong><a class="anchor" aria-label="anchor" href="#install-massdatabase-from-github"></a>
+</h2>
 <p>You can just use the <code>remotes</code> to install
-<code>metdatabase</code>.</p>
+<code>massdatabase</code>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"tidymass/metdatabase"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"tidymass/massdatabase"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>During the installation, it will ask if you want to update some
 packages for few times, just enter <code>enter</code> key to skip
 it.</p>
 <p>If there is a error like below:</p>
-<pre><code>Error: Failed to install 'metdatabase' from GitHub: HTTP error 403. API rate limit exceeded for 171.66.10.237. (But here's the good news: Authenticated requests get a higher rate limit. Check out the documentation for more details.)</code></pre>
+<pre><code>Error: Failed to install 'massdatabase' from GitHub: HTTP error 403. API rate limit exceeded for 171.66.10.237. (But here's the good news: Authenticated requests get a higher rate limit. Check out the documentation for more details.)</code></pre>
 <p>Try to resolve it by:</p>
 <ol style="list-style-type: decimal">
 <li>In you R console, type this code:</li>
 </ol>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/github-token.html" class="external-link">create_github_token</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/github-token.html" class="external-link">create_github_token</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>It will open a page in browser, and create a “New personal access
 token” and copy it.</p>
 <ol start="2" style="list-style-type: decimal">
 <li>Then type this code:</li>
 </ol>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/edit.html" class="external-link">edit_r_environ</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/edit.html" class="external-link">edit_r_environ</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>and then add one line like below:</p>
-<pre><code><span class="va">GITHUB_PAT</span><span class="op">=</span><span class="va">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</span></code></pre>
+<pre><code><span><span class="va">GITHUB_PAT</span><span class="op">=</span><span class="va">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</span></span></code></pre>
 <blockquote>
 <p>The <code>GITHUB_PAT</code> should be yours that is created in step
 1.</p>
@@ -198,35 +197,35 @@ token” and copy it.</p>
 <p><a href="shenxt1990@outlook.com">Let me know if you have any
 questions</a>.</p>
 </div>
-<div class="section level1">
-<h1 id="session-information">
+<div class="section level2">
+<h2 id="session-information">
 <strong>Session information</strong><a class="anchor" aria-label="anchor" href="#session-information"></a>
-</h1>
+</h2>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; R version 4.1.2 (2021-11-01)</span>
-<span class="co">#&gt; Platform: x86_64-apple-darwin17.0 (64-bit)</span>
-<span class="co">#&gt; Running under: macOS Big Sur 10.16</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Matrix products: default</span>
-<span class="co">#&gt; BLAS:   /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRblas.0.dylib</span>
-<span class="co">#&gt; LAPACK: /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRlapack.dylib</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; locale:</span>
-<span class="co">#&gt; [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; attached base packages:</span>
-<span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; loaded via a namespace (and not attached):</span>
-<span class="co">#&gt;  [1] rprojroot_2.0.2   digest_0.6.27     crayon_1.4.1      R6_2.5.0         </span>
-<span class="co">#&gt;  [5] jsonlite_1.7.2    magrittr_2.0.1    evaluate_0.14     stringi_1.7.3    </span>
-<span class="co">#&gt;  [9] rlang_0.4.11      cachem_1.0.5      fs_1.5.0          jquerylib_0.1.4  </span>
-<span class="co">#&gt; [13] bslib_0.3.1       ragg_1.1.3        rmarkdown_2.14    pkgdown_2.0.1    </span>
-<span class="co">#&gt; [17] textshaping_0.3.6 desc_1.3.0        tools_4.1.2       stringr_1.4.0    </span>
-<span class="co">#&gt; [21] purrr_0.3.4       yaml_2.2.1        xfun_0.31         fastmap_1.1.0    </span>
-<span class="co">#&gt; [25] compiler_4.1.2    systemfonts_1.0.2 memoise_2.0.0     htmltools_0.5.2  </span>
-<span class="co">#&gt; [29] knitr_1.33        sass_0.4.0</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; R version 4.2.1 (2022-06-23)</span></span>
+<span><span class="co">#&gt; Platform: x86_64-apple-darwin17.0 (64-bit)</span></span>
+<span><span class="co">#&gt; Running under: macOS Big Sur ... 10.16</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Matrix products: default</span></span>
+<span><span class="co">#&gt; BLAS:   /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRblas.0.dylib</span></span>
+<span><span class="co">#&gt; LAPACK: /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRlapack.dylib</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; locale:</span></span>
+<span><span class="co">#&gt; [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; attached base packages:</span></span>
+<span><span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
+<span><span class="co">#&gt;  [1] rprojroot_2.0.3   digest_0.6.29     R6_2.5.1          jsonlite_1.8.0   </span></span>
+<span><span class="co">#&gt;  [5] magrittr_2.0.3    evaluate_0.15     stringi_1.7.6     rlang_1.0.3      </span></span>
+<span><span class="co">#&gt;  [9] cachem_1.0.6      cli_3.3.0         rstudioapi_0.13   fs_1.5.2         </span></span>
+<span><span class="co">#&gt; [13] jquerylib_0.1.4   bslib_0.3.1       ragg_1.2.2        rmarkdown_2.14   </span></span>
+<span><span class="co">#&gt; [17] pkgdown_2.0.5     textshaping_0.3.6 desc_1.4.1        tools_4.2.1      </span></span>
+<span><span class="co">#&gt; [21] stringr_1.4.0     purrr_0.3.4       yaml_2.3.5        xfun_0.31        </span></span>
+<span><span class="co">#&gt; [25] fastmap_1.1.0     compiler_4.2.1    systemfonts_1.0.4 memoise_2.0.1    </span></span>
+<span><span class="co">#&gt; [29] htmltools_0.5.2   knitr_1.39        sass_0.4.1</span></span></code></pre></div>
 </div>
   </div>
 
@@ -242,8 +241,7 @@ questions</a>.</p>
 
       <footer><div class="copyright">
   <p></p>
-<p>massdatabase Developed by Xiaotao Shen. <br> from
-<i class="fa fa-university"></i> Stanford University <br><i class="fa fa-clinic-medical"></i>School of Medicine <br><i class="fa fa-dna"></i> Genetics Department</p>
+<p>massdatabase Developed by Xiaotao Shen. <br> from <i class="fa fa-university"></i> Stanford University <br><i class="fa fa-clinic-medical"></i>School of Medicine <br><i class="fa fa-dna"></i> Genetics Department</p>
 </div>
 
 <div class="pkgdown">

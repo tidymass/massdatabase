@@ -115,6 +115,118 @@ request_hmdb_metabolite <-
   }
 
 
+
+
+#' @title Request one specific reaction information in HMDB
+#' @description Request one specific reaction information in HMDB
+#' @author Xiaotao Shen
+#' \email{shenxt1990@@outlook.com}
+#' @param url Default is "https://hmdb.ca/reactions".
+#' @param reaction_id reaction id. For example, 241
+#' @return A data frame .
+#' @importFrom XML xmlTreeParse xmlToList
+#' @importFrom magrittr %>%
+#' @importClassesFrom metid databaseClass
+#' @export
+#' @examples
+#' request_hmdb_reaction(reaction_id = "1")
+
+request_hmdb_reaction <-
+  function(url = "https://hmdb.ca/reactions",
+           reaction_id = "241") {
+    final_url <-
+      paste0(url, "/", reaction_id)
+
+    result <-
+      tryCatch(
+        rvest::read_html(x = final_url),
+        error = function(e)
+          NULL
+      )
+
+    if (is.null(result)) {
+      message("Check url: ", final_url)
+      return(NULL)
+    }
+
+    equation <-
+      tryCatch(
+        result %>%
+          rvest::html_elements(".panel-heading") %>%
+          rvest::html_text(),
+        error = function(e)
+          NULL
+      )
+
+    main <-
+      tryCatch(
+        result %>%
+          rvest::html_elements(".panel-body") %>%
+          rvest::html_text2(),
+        error = function(e)
+          NULL
+      )
+
+    if (!is.null(main)) {
+      main <-
+        main %>%
+        stringr::str_replace_all(pattern = "\\\t", "") %>%
+        stringr::str_split("\\\n") %>%
+        `[[`(1)
+      main <-
+        main[!stringr::str_detect(main, "\\=")]
+
+      enzymes_idx <- which(main == "Enzymes")
+      External_Links_idx <- which(main == "External Links")
+      Status_idx <- which(main == "Status")
+      Comments_idx <- which(main == "Comments")
+
+      if (length(enzymes_idx) > 0) {
+        Enzymes <- main[enzymes_idx + 1]
+      } else{
+        Enzymes <- NA
+      }
+
+      if (length(External_Links_idx) > 0) {
+        External_Links <- main[External_Links_idx + 1]
+      } else{
+        External_Links <- NA
+      }
+
+      if (length(Status_idx) > 0) {
+        Status <- main[Status_idx + 1]
+      } else{
+        Status <- NA
+      }
+
+      if (length(Comments_idx) > 0) {
+        Comments <- main[Comments_idx + 1]
+      } else{
+        Comments <- NA
+      }
+
+      info <-
+        data.frame(Enzymes,
+                   External_Links,
+                   Status,
+                   Comments)
+    } else{
+      info <-
+        data.frame(
+          Enzymes = NA,
+          External_Links = NA,
+          Status = NA,
+          Comments = NA
+        )
+    }
+
+    info <-
+      cbind(equation, info)
+
+    info
+  }
+
+
 #' @title Search metabolite in HMDB
 #' @description Search metabolite in HMDB
 #' @author Xiaotao Shen
