@@ -21,7 +21,7 @@ request_bigg_version <-
           NULL
       )
     open(x)
-    out <- readLines(x)
+    out <- readLines(x, warn = FALSE)
     close(x)
     # cat(out, sep = "\n")
     out <-
@@ -76,7 +76,7 @@ request_bigg_model_info <-
     x <-
       curl::curl(url = url)
     open(x)
-    out <- readLines(x)
+    out <- readLines(x, warn = FALSE)
     close(x)
     # cat(out, sep = "\n")
     out <-
@@ -148,7 +148,7 @@ request_bigg_universal_metabolite_info <-
     x <-
       curl::curl(url = url)
     open(x)
-    out <- readLines(x)
+    out <- readLines(x, warn = FALSE)
     close(x)
 
     out <-
@@ -217,7 +217,7 @@ request_bigg_universal_metabolite <-
     x <-
       curl::curl(url = url)
     open(x)
-    out <- readLines(x)
+    out <- readLines(x, warn = FALSE)
     close(x)
 
     out <-
@@ -691,7 +691,7 @@ request_bigg_universal_reaction_info <-
     x <-
       curl::curl(url = url)
     open(x)
-    out <- readLines(x)
+    out <- readLines(x, warn = FALSE)
     close(x)
 
     out <-
@@ -765,7 +765,7 @@ request_bigg_reaction_info <-
     x <-
       curl::curl(url = url)
     open(x)
-    out <- readLines(x)
+    out <- readLines(x, warn = FALSE)
     close(x)
 
     out <-
@@ -834,7 +834,7 @@ request_bigg_universal_reaction <-
     x <-
       curl::curl(url = url)
     open(x)
-    out <- readLines(x)
+    out <- readLines(x, warn = FALSE)
     close(x)
 
     out <-

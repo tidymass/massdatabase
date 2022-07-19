@@ -62,7 +62,7 @@ request_foodb_compound <-
            return_form = c("list" , "data.frame")) {
     return_form <- match.arg(return_form)
     result <-
-      readLines(paste0(url, "/", compound_id, ".xml"))
+      readLines(paste0(url, "/", compound_id, ".xml"), warn = FALSE)
     result <-
       XML::xmlTreeParse(file = result, asText = TRUE)
     result <-
@@ -228,7 +228,7 @@ request_foodb_compound_ms2 <-
     url <- paste0("https://foodb.ca/compounds/", compound_id)
 
     result <-
-      readLines(paste0(url, ".xml"))
+      readLines(paste0(url, ".xml"), warn = FALSE)
 
     result <-
       XML::xmlTreeParse(file = result, asText = TRUE)

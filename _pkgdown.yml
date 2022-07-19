@@ -54,6 +54,7 @@ reference:
     - request_hmdb_reaction
     - request_bigg_reaction_info
     - request_foodb_compound_info_crawler
+    - request_pubchem_compound
 
   - title: Download database
     desc: Download databases
@@ -72,6 +73,7 @@ reference:
     - download_kegg_rclass
     - download_kegg_reaction
     - download_smpdb_pathway
+    - download_pubchem_compound
 
   - title: Read downloaded database
     desc: Read downloaded database

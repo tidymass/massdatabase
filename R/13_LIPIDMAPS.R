@@ -8,10 +8,6 @@
 
 download_lipidmaps_lipid <-
   function(path = ".") {
-    url <-
-      paste0('http://bigg.ucsd.edu/static/models/',
-             model_id,
-             '.json')
     download.file(url = "https://www.lipidmaps.org/files/?file=LMSD&ext=sdf.zip",
                   destfile = file.path(path, "LMSD.sdf.zip"))
   }

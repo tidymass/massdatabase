@@ -51,7 +51,6 @@ download_smpdb_pathway <-
   }
 
 
-
 #' @title Read the SMPDB pathway database from download_smpdb_pathway function
 #' @description Read the SMPDB pathway database from download_smpdb_pathway function
 #' @author Xiaotao Shen

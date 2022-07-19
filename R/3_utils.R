@@ -324,7 +324,7 @@ update_metid_database_info <-
 
     database@spectra.info <-
       database@spectra.info %>%
-        as.data.frame()
+      as.data.frame()
 
     ref_database@spectra.info <-
       ref_database@spectra.info %>%
@@ -333,7 +333,7 @@ update_metid_database_info <-
     idx <-
       by %>%
       purrr::map(function(x) {
-        match(database@spectra.info[, x,],
+        match(database@spectra.info[, x, ],
               ref_database@spectra.info[, x],
               incomparables = NA)
       }) %>%
@@ -415,7 +415,7 @@ merge_same_source <-
         idx <-
           which(duplicated_from == unique_from[i])
         x <-
-        source[, idx] %>%
+          source[, idx] %>%
           apply(1, function(y) {
             y <- as.character(y)
             y <- y[!is.na(y)]
@@ -456,7 +456,7 @@ update_metid_database_source_system <-
     prefer <- match.arg(prefer)
 
     source <-
-    source_system %>%
+      source_system %>%
       dplyr::select(tidyselect::starts_with("From_"))
 
     database@spectra.info <-
@@ -466,8 +466,8 @@ update_metid_database_source_system <-
     idx <-
       by %>%
       purrr::map(function(x) {
-        match(database@spectra.info[, x ,drop = TRUE],
-              source_system[, x,drop = TRUE],
+        match(database@spectra.info[, x , drop = TRUE],
+              source_system[, x, drop = TRUE],
               incomparables = NA)
       }) %>%
       dplyr::bind_cols()
@@ -481,21 +481,21 @@ update_metid_database_source_system <-
       database@spectra.info %>%
       dplyr::select(tidyselect::starts_with("From"))
 
-    if(ncol(database_source) == 0){
+    if (ncol(database_source) == 0) {
       database_source <- NULL
     }
 
-    if(prefer == "database"){
+    if (prefer == "database") {
       final_source <-
-        data.frame(database_source, source[idx,])
-    }else{
+        data.frame(database_source, source[idx, ])
+    } else{
       final_source <-
-        data.frame(source[idx,], database_source)
+        data.frame(source[idx, ], database_source)
     }
 
 
     final_source <-
-    merge_same_source(final_source)
+      merge_same_source(final_source)
 
     rownames(final_source) <- NULL
 
@@ -508,3 +508,93 @@ update_metid_database_source_system <-
 
     return(database)
   }
+
+
+
+
+
+
+
+
+#' @title Read GPML format data from wikipathway database
+#' @description Read GPML format data from wikipathway database
+#' @author Xiaotao Shen
+#' \email{shenxt1990@@outlook.com}
+#' @param file file name of GPML data
+#' @param only_remain_metabolites only remain metabolites inforamtion or not.
+#' @return A data.frame
+#' @importFrom magrittr %>%
+#' @importFrom dplyr case_when everything select filter
+#' @importFrom purrr map map2 walk
+#' @importFrom crayon green
+#' @importFrom XML xmlTreeParse xmlToList
+#' @export
+
+read_gpml <- function(file,
+                      only_remain_metabolites = TRUE) {
+
+  if (!grepl("\\.gpml$", file)[1]) {
+    message("Wikipathways Metabolite set information must be a .gpml file")
+    return(NULL)
+  }
+
+  filename <- utils::tail(unlist(strsplit(file, "/")), n = 1)
+
+  wikipId <-
+    utils::tail(unlist(strsplit(filename, "_")), n = 2)[[1]]
+
+  gpml <- XML::xmlTreeParse(file) %>%
+    XML::xmlToList()
+
+  nms <- names(gpml)
+
+  data_node <-
+    gpml[nms == "DataNode"] %>%
+    purrr::map(function(x) {
+      c(x$Xref, x$.attrs)[c("Database", "ID", "TextLabel", "Type")] %>%
+        stringr::str_replace_all("\\\n", "")
+    }) %>%
+    do.call(rbind, .) %>%
+    as.data.frame()
+
+  colnames(data_node) <-
+    c("Database", "ID", "TextLabel", "Type")
+
+  rownames(data_node) <- NULL
+
+  if(only_remain_metabolites){
+    data_node <-
+      data_node %>%
+      dplyr::filter(Type == "Metabolite")
+  }
+
+  if(nrow(data_node) == 0){
+    data_node <- NULL
+  }
+
+  interaction <-
+    gpml[nms == "Interaction"] %>%
+    purrr::map(function(x) {
+      c(x$Xref)
+    }) %>%
+    do.call(rbind, .) %>%
+    as.data.frame()
+
+  if(nrow(interaction) == 0){
+    interaction <- NULL
+  }else{
+    colnames(interaction) <-
+      c("Database", "ID")
+
+    rownames(interaction) <- NULL
+
+    interaction <-
+      interaction %>%
+      dplyr::filter(ID != "") %>%
+      dplyr::arrange(Database)
+  }
+
+  list(metabolite = data_node,
+       reaction = interaction)
+
+}

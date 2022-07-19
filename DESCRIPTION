@@ -1,7 +1,7 @@
 Package: massdatabase
 Type: Package
 Title: Play with databases about mass spectrometry
-Version: 0.99.14
+Version: 1.0.1
 Date: 2022-04-09
 Authors@R: c(
     person(given = "Xiaotao",
@@ -40,7 +40,9 @@ Imports:
     progress,
     ChemmineR,
     KEGGREST,
-    metpath
+    metpath,
+    R.utils,
+    rjson
 Suggests: 
     knitr,
     rmarkdown,

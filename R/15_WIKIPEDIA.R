@@ -43,22 +43,26 @@ request_wikipedia_scientific_classification <-
               NULL
           )
 
-        if(is.null(result)){
+        if (is.null(result)) {
           return(NA)
         }
 
-      }else{
+      } else{
         return(NA)
       }
     }
 
     result <-
-      tryCatch(result %>%
-                 rvest::html_element(".biota") %>%
-                 rvest::html_table() %>%
-                 as.data.frame(), error = function(e) NULL)
+      tryCatch(
+        result %>%
+          rvest::html_element(".biota") %>%
+          rvest::html_table() %>%
+          as.data.frame(),
+        error = function(e)
+          NULL
+      )
 
-    if(is.null(result)){
+    if (is.null(result)) {
       return(NA)
     }
 
@@ -100,8 +104,10 @@ request_wikipedia_scientific_classification <-
 request_wikipedia_compound <-
   function(compound_id = "Microcystin-LR") {
     url <-
-      paste0("https://en.wikipedia.org/wiki/",
-             stringr::str_replace_all(compound_id, " ", "_"))
+      paste0(
+        "https://en.wikipedia.org/wiki/",
+        stringr::str_replace_all(compound_id, " ", "_")
+      )
 
     result <-
       tryCatch(
@@ -115,13 +121,16 @@ request_wikipedia_compound <-
     }
 
     result <-
-      tryCatch(result %>%
-                 rvest::html_element(".ib-chembox") %>%
-                 rvest::html_table() %>%
-                 tibble::as_tibble(),
-               error = function(e) NULL)
+      tryCatch(
+        result %>%
+          rvest::html_element(".ib-chembox") %>%
+          rvest::html_table() %>%
+          tibble::as_tibble(),
+        error = function(e)
+          NULL
+      )
 
-    if(is.null(result)){
+    if (is.null(result)) {
       return(NA)
     }
 
@@ -136,7 +145,7 @@ request_wikipedia_compound <-
     idx <- which(result$name == "Names")
 
     result <-
-      result[idx:nrow(result),]
+      result[idx:nrow(result), ]
 
     # result$name[grep("IUPAC name", result$name)] <-
     #   result$name[grep("IUPAC name", result$name)] %>%
@@ -173,23 +182,23 @@ request_wikipedia_compound <-
     #   stringr::str_split(pattern = "\n") %>%
     #   `[[`(1) %>%
     #   `[`(2)
-#
-#     idx <-
-#       which(result$name == result$value)
-#
-#     idx <-
-#     data.frame(idx1 = idx,
-#                idx2 = c(idx-1, nrow(result))[-1])
-#
-#     seq_len(nrow(idx)) %>%
-#       purrr::map(function(i){
-#         result[idx$idx1[i] : idx$idx2[i], ]
-#       })
-#
-#
-#     result$name <-
-#       result$name %>%
-#       stringr::str_split("\n", "")
+    #
+    #     idx <-
+    #       which(result$name == result$value)
+    #
+    #     idx <-
+    #     data.frame(idx1 = idx,
+    #                idx2 = c(idx-1, nrow(result))[-1])
+    #
+    #     seq_len(nrow(idx)) %>%
+    #       purrr::map(function(i){
+    #         result[idx$idx1[i] : idx$idx2[i], ]
+    #       })
+    #
+    #
+    #     result$name <-
+    #       result$name %>%
+    #       stringr::str_split("\n", "")
     result
   }
 

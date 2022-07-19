@@ -21,7 +21,8 @@ request_hmdb_metabolite <-
            return_form = c("list" , "data.frame")) {
     return_form <- match.arg(return_form)
     result <-
-      readLines(paste0(url, "/", metabolite_id, ".xml"))
+      readLines(paste0(url, "/", metabolite_id, ".xml"),
+                warn = FALSE)
     result <-
       XML::xmlTreeParse(file = result, asText = TRUE)
     result <-
@@ -477,7 +478,7 @@ convert_hmdb2metid <-
 
       if (length(remove_idx) > 0) {
         spectra_info <-
-          spectra_info[-remove_idx,]
+          spectra_info[-remove_idx, ]
 
         spectra_data <-
           spectra_data[-remove_idx]
@@ -513,7 +514,7 @@ convert_hmdb2metid <-
         as.data.frame()
 
       spectra_info2 <-
-        spectra_info2[match(spectra_info$Lab.ID, spectra_info2$Lab.ID),]
+        spectra_info2[match(spectra_info$Lab.ID, spectra_info2$Lab.ID), ]
 
       spectra_data2 <-
         1:length(spectra_data) %>%
@@ -533,10 +534,10 @@ convert_hmdb2metid <-
       index_pos <- which(spectra_info2$Polarity == "Positive")
       index_neg <- which(spectra_info2$Polarity == "Negative")
 
-      spectra_info_pos <- spectra_info2[index_pos,]
+      spectra_info_pos <- spectra_info2[index_pos, ]
       spectra_data_pos <- spectra_data2[index_pos]
 
-      spectra_info_neg <- spectra_info2[index_neg,]
+      spectra_info_neg <- spectra_info2[index_neg, ]
       spectra_data_neg <- spectra_data2[index_neg]
 
       colnames(spectra_info2)

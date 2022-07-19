@@ -42,6 +42,7 @@ library(metpath)
 ```
 
 ```{r,eval=FALSE,warning=FALSE, R.options="", message=TRUE, cache=TRUE}
+download_bigg_universal_metabolite(path = ".", sleep = 1)
 data <- 
   read_bigg_universal_metabolite(path = ".")
 bigg_database <- 
@@ -55,6 +56,7 @@ Chemical Entities of Biological Interest ([ChEBI](https://www.ebi.ac.uk/chebi/))
 Read and convert ChEBI compound database
 
 ```{r,eval=FALSE,warning=FALSE, R.options="", message=TRUE, cache=TRUE}
+download_chebi_compound(path = ".")
 data <-
   read_chebi_compound(path = ".")
 chebi_database <-
@@ -68,6 +70,7 @@ chebi_database <-
 Read and convert the FooDB compound database
 
 ```{r,eval=FALSE,warning=FALSE, R.options="", message=TRUE, cache=TRUE}
+download_foodb_compound(compound_id = "all", path = ".")
 data <- 
   read_foodb_compound(path = ".")
 foodb_dataabse <- 
@@ -82,6 +85,7 @@ The [GNPS](https://gnps-external.ucsd.edu/gnpslibrary) GNPS is a web-based mass 
 Read and convert one GNPS compound database
 
 ```{r,eval=FALSE,warning=FALSE, R.options="", message=TRUE, cache=TRUE}
+download_gnps_spectral_library(gnps_library = "HMDB", path = ".")
 data <-
   read_msp_data_gnps(file = "ms2.msp")
 gnps_database <- 
@@ -95,6 +99,7 @@ gnps_database <-
 Read and convert KEGG compound database
 
 ```{r,eval=FALSE,warning=FALSE, R.options="", message=TRUE, cache=TRUE}
+download_kegg_compound(path = ".")
 data <- 
   read_kegg_compound(path = ".")
 kegg_database <-
@@ -104,6 +109,7 @@ kegg_database <-
 Read and convert KEGG pathway database
 
 ```{r,eval=FALSE,warning=FALSE, R.options="", message=TRUE, cache=TRUE}
+download_kegg_pathway(path = ".", organism = "hsa")
 data <- 
   read_kegg_pathway(path = ".")
 kegg_pathway_database <-
@@ -118,6 +124,7 @@ kegg_pathway_database <-
 Read and convert lipidmaps database
 
 ```{r,eval=FALSE,warning=FALSE, R.options="", message=TRUE, cache=TRUE}
+download_lipidmaps_lipid(path = ".")
 data <-
   read_sdf_data_lipidmaps(file = "data.sdf", path = ".")
 lipidmaps_database <-
@@ -131,6 +138,7 @@ lipidmaps_database <-
 Read and convert MassBnak compound database.
 
 ```{r,eval=FALSE,warning=FALSE, R.options="", message=TRUE, cache=TRUE}
+download_massbank_compound(source = "nist")
 data <- read_msp_data_massbank(file = "data.msp")
 massbank_database <- 
   convert_massbank2metid_nist(data = data, path = ".")
@@ -143,13 +151,12 @@ massbank_database <-
 Read and convert SMPDB pathway database.
 
 ```{r,eval=FALSE,warning=FALSE, R.options="", message=TRUE, cache=TRUE}
+download_smpdb_pathway(path = ".")
 data <- 
   read_smpdb_pathway(path = ".", only_primarity_pathway = TRUE)
 smpdb_pathway_database <-
   convert_smpdb2metpath(data = data, path = ".")
 ```
-
-
 
 # **Session information**
 
