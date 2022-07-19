@@ -48,7 +48,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">massdatabase</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.14</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1</span>
       </span>
     </div>
 
@@ -141,7 +141,7 @@ massdatabase</h1>
 (<a href="https://www.shenxt.info/" class="external-link uri">https://www.shenxt.info/</a>)</h4>
                         
             <h4 data-toc-skip class="date">Created on 2022-05-30 and
-updated on 2022-07-17</h4>
+updated on 2022-07-18</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/tidymass/massdatabase/blob/HEAD/vignettes/read_convert_functions.Rmd" class="external-link"><code>vignettes/read_convert_functions.Rmd</code></a></small>
       <div class="hidden name"><code>read_convert_functions.Rmd</code></div>
@@ -165,7 +165,8 @@ genome-scale metabolic network reconstructions.</p>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidymass/massdatabase" class="external-link">massdatabase</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidymass/metpath" class="external-link">metpath</a></span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> </span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/download_bigg_universal_metabolite.html">download_bigg_universal_metabolite</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">"."</span>, sleep <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> </span>
 <span>  <span class="fu"><a href="../reference/read_bigg_universal_metabolite.html">read_bigg_universal_metabolite</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span>
 <span><span class="va">bigg_database</span> <span class="op">&lt;-</span> </span>
 <span>  <span class="fu"><a href="../reference/convert_bigg_universal2metid.html">convert_bigg_universal2metid</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, path <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span></code></pre></div>
@@ -179,7 +180,8 @@ dictionary of molecular entities focused on ‘small’ chemical
 compounds.</p>
 <p>Read and convert ChEBI compound database</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/download_chebi_compound.html">download_chebi_compound</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu"><a href="../reference/read_chebi_compound.html">read_chebi_compound</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span>
 <span><span class="va">chebi_database</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu"><a href="../reference/convert_chebi2metid.html">convert_chebi2metid</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, path <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span></code></pre></div>
@@ -192,7 +194,8 @@ compounds.</p>
 comprehensive resource on food constituents, chemistry and biology.</p>
 <p>Read and convert the FooDB compound database</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> </span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/download_foodb_compound.html">download_foodb_compound</a></span><span class="op">(</span>compound_id <span class="op">=</span> <span class="st">"all"</span>, path <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> </span>
 <span>  <span class="fu"><a href="../reference/read_foodb_compound.html">read_foodb_compound</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span>
 <span><span class="va">foodb_dataabse</span> <span class="op">&lt;-</span> </span>
 <span>  <span class="fu"><a href="../reference/convert_foodb2metid.html">convert_foodb2metid</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, path <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span></code></pre></div>
@@ -210,7 +213,8 @@ life cycle of data; from initial data acquisition/analysis to post
 publication.</p>
 <p>Read and convert one GNPS compound database</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/download_gnps_spectral_library.html">download_gnps_spectral_library</a></span><span class="op">(</span>gnps_library <span class="op">=</span> <span class="st">"HMDB"</span>, path <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu"><a href="../reference/read_msp_data_gnps.html">read_msp_data_gnps</a></span><span class="op">(</span>file <span class="op">=</span> <span class="st">"ms2.msp"</span><span class="op">)</span></span>
 <span><span class="va">gnps_database</span> <span class="op">&lt;-</span> </span>
 <span>  <span class="fu"><a href="../reference/convert_gnps2metid.html">convert_gnps2metid</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, path <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span></code></pre></div>
@@ -227,13 +231,15 @@ generated by genome sequencing and other high-throughput experimental
 technologies.</p>
 <p>Read and convert KEGG compound database</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> </span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/download_kegg_compound.html">download_kegg_compound</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> </span>
 <span>  <span class="fu"><a href="../reference/read_kegg_compound.html">read_kegg_compound</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span>
 <span><span class="va">kegg_database</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu"><a href="../reference/convert_kegg2metid.html">convert_kegg2metid</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, path <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span></code></pre></div>
 <p>Read and convert KEGG pathway database</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> </span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/download_kegg_pathway.html">download_kegg_pathway</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">"."</span>, organism <span class="op">=</span> <span class="st">"hsa"</span><span class="op">)</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> </span>
 <span>  <span class="fu"><a href="../reference/read_kegg_pathway.html">read_kegg_pathway</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span>
 <span><span class="va">kegg_pathway_database</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu"><a href="../reference/convert_kegg2metpath.html">convert_kegg2metpath</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, path <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span></code></pre></div>
@@ -249,7 +255,8 @@ tutorials, meetings, publications, and other resources and serving the
 international lipid research community.</p>
 <p>Read and convert lipidmaps database</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/download_lipidmaps_lipid.html">download_lipidmaps_lipid</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu"><a href="../reference/read_sdf_data_lipidmaps.html">read_sdf_data_lipidmaps</a></span><span class="op">(</span>file <span class="op">=</span> <span class="st">"data.sdf"</span>, path <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span>
 <span><span class="va">lipidmaps_database</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu"><a href="../reference/convert_lipidmaps2metid.html">convert_lipidmaps2metid</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, path <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span></code></pre></div>
@@ -263,7 +270,8 @@ effort and you are invited to contribute. Please refer to our
 contributor documentation and get in touch via github or email.</p>
 <p>Read and convert MassBnak compound database.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_msp_data_massbank.html">read_msp_data_massbank</a></span><span class="op">(</span>file <span class="op">=</span> <span class="st">"data.msp"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/download_massbank_compound.html">download_massbank_compound</a></span><span class="op">(</span>source <span class="op">=</span> <span class="st">"nist"</span><span class="op">)</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_msp_data_massbank.html">read_msp_data_massbank</a></span><span class="op">(</span>file <span class="op">=</span> <span class="st">"data.msp"</span><span class="op">)</span></span>
 <span><span class="va">massbank_database</span> <span class="op">&lt;-</span> </span>
 <span>  <span class="fu"><a href="../reference/convert_massbank2metid_nist.html">convert_massbank2metid_nist</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, path <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -276,7 +284,8 @@ database containing more than 30000 small molecule pathways found in
 humans only.</p>
 <p>Read and convert SMPDB pathway database.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> </span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/download_smpdb_pathway.html">download_smpdb_pathway</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> </span>
 <span>  <span class="fu"><a href="../reference/read_smpdb_pathway.html">read_smpdb_pathway</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">"."</span>, only_primarity_pathway <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">smpdb_pathway_database</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu"><a href="../reference/convert_smpdb2metpath.html">convert_smpdb2metpath</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, path <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span></code></pre></div>

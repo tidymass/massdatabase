@@ -130,6 +130,9 @@
     <loc>https://tidymass.github.io/massdatabase/reference/download_massbank_compound.html</loc>
   </url>
   <url>
+    <loc>https://tidymass.github.io/massdatabase/reference/download_pubchem_compound.html</loc>
+  </url>
+  <url>
     <loc>https://tidymass.github.io/massdatabase/reference/download_smpdb_pathway.html</loc>
   </url>
   <url>
@@ -148,6 +151,9 @@
     <loc>https://tidymass.github.io/massdatabase/reference/match_table.html</loc>
   </url>
   <url>
+    <loc>https://tidymass.github.io/massdatabase/reference/parse_pubchem_compound.html</loc>
+  </url>
+  <url>
     <loc>https://tidymass.github.io/massdatabase/reference/read_bigg_universal_metabolite.html</loc>
   </url>
   <url>
@@ -155,6 +161,9 @@
   </url>
   <url>
     <loc>https://tidymass.github.io/massdatabase/reference/read_foodb_compound.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/massdatabase/reference/read_gpml.html</loc>
   </url>
   <url>
     <loc>https://tidymass.github.io/massdatabase/reference/read_kegg_compound.html</loc>
@@ -275,6 +284,9 @@
   </url>
   <url>
     <loc>https://tidymass.github.io/massdatabase/reference/request_lipidmaps_lipid.html</loc>
+  </url>
+  <url>
+    <loc>https://tidymass.github.io/massdatabase/reference/request_pubchem_compound.html</loc>
   </url>
   <url>
     <loc>https://tidymass.github.io/massdatabase/reference/request_wikipedia_compound.html</loc>

@@ -128,6 +128,8 @@ reference:
     - massdatabase_logo
     - search_hmdb_database
     - show_progresser
+    - parse_pubchem_compound
+    - read_gpml
 
 navbar:
   title: "sparklyr"

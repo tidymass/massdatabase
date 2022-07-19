@@ -30,7 +30,7 @@ Parse the json or xml compound data from PubChem
 #' @importFrom tidyr pivot_wider
 #' @importFrom purrr map
 #' @importFrom XML xmlParse
-#' @importFrom R.utils gunzip
+#' @importFrom R.utils gunzip isGzipped
 #' @importFrom utils untar
 #' @importFrom xml2 read_xml
 #' @export
