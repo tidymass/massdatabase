@@ -118,7 +118,6 @@ reference:
     contents:
     - match_table
     - smpdb_primary_pathway_id
-    - hmdb_ms1
 
   - title: Other functions
     desc: Other usefull functions in massdatabase

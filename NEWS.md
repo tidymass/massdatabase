@@ -26,3 +26,7 @@
 # Version 0.99.14
 
 * Add new functions
+
+# Version 1.0.2
+
+* Remove data

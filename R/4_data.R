@@ -1,14 +1,3 @@
-#' @title HMDB metabolite MS1 database
-#'
-#' @description HMDB metabolite MS1 database
-#'
-#' @name hmdb_ms1
-#' @aliases hmdb_ms1
-#' @docType data
-#' @keywords data
-#' @examples
-#' data(hmdb_ms1)
-NA
 
 #' @title match_table
 #'
