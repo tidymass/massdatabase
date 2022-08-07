@@ -35,7 +35,7 @@
 #' read_rhea_reaction <-
 #'   function(path = ".") {
 #'     path <- file.path(path, "data")
-#'     owl_data <-
+#'     owl <-
 #'       readLines(file.path(path, "rhea-biopax.owl"))
 #'   }
 #'
@@ -56,10 +56,6 @@
 #'     idx <-
 #'       grep('<bp:BiochemicalReaction rdf:about=\"http://rdf.rhea-db.org/',
 #'            owl)
-#'
-#'     # pre-calculate condtions (TRUE/FALSE) for fast 'for' loop operation
-#'     condition <- list()
-#'
 #'     pb <-
 #'       progress::progress_bar$new(total = length(entry))
 #'

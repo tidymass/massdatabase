@@ -1057,3 +1057,36 @@ request_bigg_universal_reaction <-
     }
     invisible(return_result)
   }
+
+
+
+
+
+
+
+
+
+
+#' @title Read the BIGG model from download_bigg_model function
+#' @description Read the BIGG model from download_bigg_model function
+#' @author Xiaotao Shen
+#' \email{shenxt1990@@outlook.com}
+#' @param path Default is .. Should be same with
+#' download_bigg_model function.
+#' @param model model
+#' @return A data frame
+#' @importFrom magrittr %>%
+#' @importFrom plyr dlply .
+#' @importFrom readr read_delim
+#' @importFrom dplyr mutate bind_rows select distinct rename full_join filter
+#' @importFrom tidyr pivot_wider
+#' @importFrom purrr map
+#' @importFrom rjson fromJSON
+#' @export
+read_bigg_model <-
+  function(path = ".",
+           model = "iND750") {
+    result <-
+      rjson::fromJSON(file = file.path(path, paste0(model, ".json")))
+    return(result)
+  }

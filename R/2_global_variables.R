@@ -181,6 +181,16 @@ globalVariables(
     "SMPDB ID",
     "equation",
     "Type",
-    "Database"
+    "Database",
+    "boundaryCondition",
+    "compartment",
+    "constant",
+    "getRuleLeaves",
+    "hasOnlySubstanceUnits",
+    "id",
+    "metaid",
+    "sboTerm",
+    "stoichiometry",
+    "xmlName"
   )
 )
