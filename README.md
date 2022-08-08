@@ -59,6 +59,6 @@ If you use `massdatabase` in your publications, please cite this paper:
 
 1. massDatabase: utilities for the operation of the public compound and pathway database. [Web Link](https://www.biorxiv.org/content/10.1101/2022.06.02.494457v1)
 
-2. TidyMass: An Object-oriented Reproducible Analysis Framework for LC-MS Data. [Web Link](https://www.biorxiv.org/content/10.1101/2022.03.15.484499v1).
+2. Shen, X., Yan, H., Wang, C. et al. TidyMass an object-oriented reproducible analysis framework for LC–MS data. Nat Commun 13, 4365 (2022). [Web Link](https://www.nature.com/articles/s41467-022-32155-w).
 
 Thanks very much!

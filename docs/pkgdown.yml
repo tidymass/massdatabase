@@ -1,4 +1,4 @@
-pandoc: 2.17.1.1
+pandoc: '2.18'
 pkgdown: 2.0.5
 pkgdown_sha: ~
 articles:
@@ -8,7 +8,7 @@ articles:
   kegg_pathway: kegg_pathway.html
   read_convert_functions: read_convert_functions.html
   request_functions: request_functions.html
-last_built: 2022-07-19T17:08Z
+last_built: 2022-08-08T03:49Z
 urls:
   reference: https://tidymass.github.io/massdatabase/reference
   article: https://tidymass.github.io/massdatabase/articles

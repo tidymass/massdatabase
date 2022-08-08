@@ -55,6 +55,7 @@ reference:
     - request_bigg_reaction_info
     - request_foodb_compound_info_crawler
     - request_pubchem_compound
+    - request_reactome_reaction
 
   - title: Download database
     desc: Download databases
@@ -93,6 +94,7 @@ reference:
     - read_xml_data
     - read_kegg_pathway
     - read_smpdb_pathway
+    - read_bigg_model
 
   - title: Convert database to specific format
     desc: Convert database to specific format
@@ -129,6 +131,8 @@ reference:
     - show_progresser
     - parse_pubchem_compound
     - read_gpml
+    - massdatabase_packages
+    - parse_reactome_reaction
 
 navbar:
   title: "sparklyr"
