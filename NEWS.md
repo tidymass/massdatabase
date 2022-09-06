@@ -34,3 +34,7 @@
 # Version 1.0.3
 
 * Fix bugs.
+
+# Version 1.0.4
+
+* Fix bugs.
