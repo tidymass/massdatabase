@@ -38,3 +38,7 @@
 # Version 1.0.4
 
 * Fix bugs.
+
+# Version 1.0.4 (2022-09-10)
+
+* Fix bugs.

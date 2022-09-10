@@ -12,6 +12,7 @@ download_gnps_spectral_library <-
   function(url = "https://gnps-external.ucsd.edu/gnpslibrary",
            gnps_library = "HMDB",
            path = ".") {
+    dir.create(path, showWarnings = FALSE)
     message("Downloading...\n")
     download.file(
       url = paste0(url, "/", gnps_library, ".msp"),
