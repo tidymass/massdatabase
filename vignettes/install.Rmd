@@ -32,7 +32,7 @@ knitr::opts_chunk$set(
 You can just use the `remotes` to install `massdatabase`. 
 
 ```{r,eval=FALSE,warning=FALSE, R.options="", message=FALSE, cache=TRUE}
-remotes::install_gitlab("jaspershen/massdatabase", dependencies = TRUE)
+remotes::install_gitlab("tidymass/massdatabase", dependencies = TRUE)
 ```
 
 During the installation, it will ask if you want to update some packages for few times, just enter `enter` key to skip it.
