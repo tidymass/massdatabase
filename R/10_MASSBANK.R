@@ -51,7 +51,6 @@ convert_massbank2metid <-
            source = c("riken", "nist"),
            path = ".",
            threads = 5) {
-    browser()
     dir.create(path, showWarnings = FALSE, recursive = TRUE)
     source <-
       match.arg(source)

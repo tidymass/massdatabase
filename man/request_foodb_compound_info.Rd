@@ -5,8 +5,8 @@
 \title{Request all the food information in FoodB}
 \usage{
 request_foodb_compound_info(
- 
-    url = c("https://raw.githubusercontent.com/jaspershen/databases/main/data/foodb_compound_info.rda",
+  url =
+    c("https://raw.githubusercontent.com/jaspershen/databases/main/data/foodb_compound_info.rda",
     "https://foodb.ca/downloads", "https://foodb.ca/compounds"),
   sleep = 1,
   pages = 1:2838
