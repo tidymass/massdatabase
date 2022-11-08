@@ -266,7 +266,10 @@ request_foodb_compound_ms2 <-
           return(NULL)
         }
         ms2 <-
-          read.table(link, header = FALSE)
+          tryCatch(read.table(link, header = FALSE), error = function(e){NULL})
+        if (is.null(ms2)) {
+          return(NULL)
+        }
         colnames(ms2) <-
           c("mz", "intensity")
 

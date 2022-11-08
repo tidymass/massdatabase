@@ -9,6 +9,9 @@
 #' @importFrom crayon green
 #' @importFrom utils download.file head read.table
 #' @importFrom ggplot2 aes ggplot
+#' @importFrom Rdisop getMass getMolecule
+#' @importFrom masstools name_duplicated convert_precursor_mz2accurate_mass
+#' @importFrom masstools show_progresser sum_formula
 #' @export
 #' @examples
 #' massdatabase_logo()

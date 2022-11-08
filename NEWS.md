@@ -46,3 +46,7 @@
 # Version 1.0.6 (2022-10-13)
 
 * Fix bugs.
+
+# Version 1.0.7 (2022-11-07)
+
+* New function convert2metid.
