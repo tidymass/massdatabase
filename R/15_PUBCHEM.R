@@ -185,8 +185,12 @@ download_pubchem_compound <-
 #' @export
 parse_pubchem_compound <-
   function(file_name) {
-    result <-
-      rjson::fromJSON(file = file_name)
+    if(requireNamespace("rjson", quietly = TRUE)){
+      result <-
+        rjson::fromJSON(file = file_name)
+    }else{
+      stop("Please install rjson package first.")
+    }
 
     RecordType <-
       result$Record$RecordType

@@ -38,10 +38,8 @@ Imports:
     xml2,
     tidyselect,
     progress,
-    ChemmineR,
     KEGGREST,
     metpath,
-    rjson,
     rstudioapi
 Suggests: 
     knitr,
@@ -49,7 +47,9 @@ Suggests:
     BiocStyle,
     RUnit,
     BiocGenerics,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    ChemmineR,
+    rjson
 VignetteBuilder: 
     knitr
 biocViews: Metabolomics, MassSpectrometry

@@ -1081,12 +1081,15 @@ request_bigg_universal_reaction <-
 #' @importFrom dplyr mutate bind_rows select distinct rename full_join filter
 #' @importFrom tidyr pivot_wider
 #' @importFrom purrr map
-#' @importFrom rjson fromJSON
 #' @export
 read_bigg_model <-
   function(path = ".",
            model = "iND750") {
-    result <-
-      rjson::fromJSON(file = file.path(path, paste0(model, ".json")))
+    if (requireNamespace("rjson", quietly = TRUE)) {
+      result <-
+        rjson::fromJSON(file = file.path(path, paste0(model, ".json")))
+    } else{
+      stop("Please install rjson package first.")
+    }
     return(result)
   }

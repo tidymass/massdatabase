@@ -26,14 +26,17 @@ download_lipidmaps_lipid <-
 #' @importFrom dplyr mutate bind_rows select distinct rename full_join filter
 #' @importFrom tidyr pivot_wider
 #' @importFrom purrr map
-#' @importFrom ChemmineR read.SDFset
 #' @export
 read_sdf_data_lipidmaps <-
   function(file,
            path = ".") {
     message("Reading data, it may take a while...")
-    lipidmaps <-
-      ChemmineR::read.SDFset(sdfstr = file, skipErrors = TRUE)
+    if (requireNamespace("ChemmineR", quietly = TRUE)) {
+      lipidmaps <-
+        ChemmineR::read.SDFset(sdfstr = file, skipErrors = TRUE)
+    } else{
+      stop('Please install ChemmineR package first.')
+    }
     message("Done.")
     message("Organizing...")
     pb <- progress::progress_bar$new(total = length(lipidmaps))
@@ -80,11 +83,14 @@ request_lipidmaps_lipid <-
   function(url = "https://www.lipidmaps.org/databases/lmsd",
            lipid_id = "LMFA01030001") {
     result <-
-      tryCatch(rvest::read_html(paste0(url, "/", lipid_id)), error = function(e){
-        NULL
-      })
+      tryCatch(
+        rvest::read_html(paste0(url, "/", lipid_id)),
+        error = function(e) {
+          NULL
+        }
+      )
 
-    if(is.null(result)){
+    if (is.null(result)) {
       message("Check this url: ", paste0(url, "/", lipid_id))
       return(NULL)
     }
