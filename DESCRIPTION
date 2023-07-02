@@ -1,8 +1,8 @@
 Package: massdatabase
 Type: Package
 Title: Play with databases about mass spectrometry
-Version: 1.0.7
-Date: 2022-11-07
+Version: 1.0.8
+Date: 2023-07-01
 Authors@R: c(
     person(given = "Xiaotao",
            family = "Shen",
@@ -40,7 +40,8 @@ Imports:
     progress,
     KEGGREST,
     metpath,
-    rstudioapi
+    rstudioapi,
+    httr
 Suggests: 
     knitr,
     rmarkdown,
@@ -55,7 +56,7 @@ VignetteBuilder:
 biocViews: Metabolomics, MassSpectrometry
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3
 Remotes: 
     gitlab::jaspershen/metid,
     gitlab::jaspershen/masstools,

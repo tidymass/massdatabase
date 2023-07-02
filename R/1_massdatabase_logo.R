@@ -12,6 +12,7 @@
 #' @importFrom Rdisop getMass getMolecule
 #' @importFrom masstools name_duplicated convert_precursor_mz2accurate_mass
 #' @importFrom masstools show_progresser sum_formula
+#' @importFrom httr GET content
 #' @export
 #' @examples
 #' massdatabase_logo()

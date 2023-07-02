@@ -6,13 +6,16 @@
 \usage{
 download_chebi_compound(
   url = "https://ftp.ebi.ac.uk/pub/databases/chebi/Flat_file_tab_delimited/",
-  path = "."
+  path = ".",
+  download.method = c("download.file", "httr")
 )
 }
 \arguments{
 \item{url}{Default is "https://ftp.ebi.ac.uk/pub/databases/chebi/Flat_file_tab_delimited/".}
 
 \item{path}{Default is ..}
+
+\item{download.method}{which package you want to use, download.file or httr}
 }
 \value{
 Downloaded files.

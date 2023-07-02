@@ -50,3 +50,7 @@
 # Version 1.0.7 (2022-11-07)
 
 * New function convert2metid.
+
+# Version 1.0.8 (2023-07-01)
+
+* Fix bugs in download_chebi_compound.

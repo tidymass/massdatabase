@@ -4,63 +4,252 @@
 #' \email{shenxt1990@@outlook.com}
 #' @param url Default is "https://ftp.ebi.ac.uk/pub/databases/chebi/Flat_file_tab_delimited/".
 #' @param path Default is ..
+#' @param download.method which package you want to use, download.file or httr
 #' @return Downloaded files.
 #' @importFrom magrittr %>%
 #' @export
 download_chebi_compound <-
   function(url = "https://ftp.ebi.ac.uk/pub/databases/chebi/Flat_file_tab_delimited/",
-           path = ".") {
+           path = ".",
+           download.method = c("download.file", "httr")) {
     path <- file.path(path, "data")
-    dir.create(path)
-    message("Download chebiId_inchi.tsv...\n")
-    download.file(
-      url = paste0(url, "chebiId_inchi.tsv"),
-      destfile = file.path(path, "chebiId_inchi.tsv")
-    )
-    message("Done.\n")
+    download.method <- match.arg(download.method)
+    dir.create(path, showWarnings = FALSE)
 
-    message("Download chemical_data.tsv...\n")
-    download.file(
-      url = paste0(url, "chemical_data.tsv"),
-      destfile = file.path(path, "chemical_data.tsv")
-    )
-    message("Done.\n")
+    if (download.method == "download.file") {
+      ####1. chebiId_inchi.tsv
+      message("Download chebiId_inchi.tsv...\n")
+      tryCatch({
+        download.file(
+          url = paste0(url, "chebiId_inchi.tsv"),
+          destfile = file.path(path, "chebiId_inchi.tsv")
+        )
+      },
+      error = function(e) {
+        # Code to handle the error
+        message("Download failed. Switching to alternative function...")
+        response <- httr::GET(paste0(url, "chebiId_inchi.tsv"))
+        writeBin(httr::content(response, "raw"),
+                 file.path(path, "chebiId_inchi.tsv"))
+      })
+      message("Done.\n")
 
-    message("Download comments.tsv...\n")
-    download.file(url = paste0(url, "comments.tsv"),
-                  destfile = file.path(path, "comments.tsv"))
-    message("Done.\n")
+      ####2. chemical_data.tsv
+      message("Download chemical_data.tsv...\n")
+      tryCatch({
+        download.file(
+          url = paste0(url, "chemical_data.tsv"),
+          destfile = file.path(path, "chemical_data.tsv")
+        )
+      },
+      error = function(e) {
+        # Code to handle the error
+        message("Download failed. Switching to alternative function...")
+        response <- httr::GET(paste0(url, "chemical_data.tsv"))
+        writeBin(httr::content(response, "raw"),
+                 file.path(path, "chemical_data.tsv"))
+      })
+      message("Done.\n")
 
-    message("Download compound_origins.tsv...\n")
-    download.file(
-      url = paste0(url, "compound_origins.tsv"),
-      destfile = file.path(path, "compound_origins.tsv")
-    )
-    message("Done.\n")
+      ####3. comments.tsv
+      message("Download comments.tsv...\n")
+      tryCatch({
+        download.file(
+          url = paste0(url, "comments.tsv"),
+          destfile = file.path(path, "comments.tsv")
+        )
+      },
+      error = function(e) {
+        # Code to handle the error
+        message("Download failed. Switching to alternative function...")
+        response <- httr::GET(paste0(url, "comments.tsv"))
+        writeBin(httr::content(response, "raw"),
+                 file.path(path, "comments.tsv"))
+      })
+      message("Done.\n")
 
-    message("Download compounds.tsv.gz...\n")
-    download.file(
-      url = paste0(url, "compounds.tsv.gz"),
-      destfile = file.path(path, "compounds.tsv.gz")
-    )
-    message("Done.\n")
+      ####4. compound_origins.tsv
+      message("Download compound_origins.tsv...\n")
+      tryCatch({
+        download.file(
+          url = paste0(url, "compound_origins.tsv"),
+          destfile = file.path(path, "compound_origins.tsv")
+        )
+      },
+      error = function(e) {
+        # Code to handle the error
+        message("Download failed. Switching to alternative function...")
+        response <- httr::GET(paste0(url, "compound_origins.tsv"))
+        writeBin(httr::content(response, "raw"),
+                 file.path(path, "compound_origins.tsv"))
+      })
+      message("Done.\n")
 
-    message("Download database_accession.tsv...\n")
-    download.file(
-      url = paste0(url, "database_accession.tsv"),
-      destfile = file.path(path, "database_accession.tsv")
-    )
-    message("Done.\n")
+      ####5. compounds.tsv.gz
+      message("Download compounds.tsv.gz...\n")
+      tryCatch({
+        download.file(
+          url = paste0(url, "compounds.tsv.gz"),
+          destfile = file.path(path, "compounds.tsv.gz")
+        )
+      },
+      error = function(e) {
+        # Code to handle the error
+        message("Download failed. Switching to alternative function...")
+        response <- httr::GET(paste0(url, "compounds.tsv.gz"))
+        writeBin(httr::content(response, "raw"),
+                 file.path(path, "compounds.tsv.gz"))
+      })
+      message("Done.\n")
 
-    message("Download names.tsv.gz...\n")
-    download.file(url = paste0(url, "names.tsv.gz"),
-                  destfile = file.path(path, "names.tsv.gz"))
-    message("Done.\n")
+      ####6. database_accession.tsv
+      message("Download database_accession.tsv...\n")
+      tryCatch({
+        download.file(
+          url = paste0(url, "database_accession.tsv"),
+          destfile = file.path(path, "database_accession.tsv")
+        )
+      },
+      error = function(e) {
+        # Code to handle the error
+        message("Download failed. Switching to alternative function...")
+        response <-
+          httr::GET(paste0(url, "database_accession.tsv"))
+        writeBin(httr::content(response, "raw"),
+                 file.path(path, "database_accession.tsv"))
+      })
+      message("Done.\n")
 
-    message("Download names.tsv.gz...\n")
-    download.file(url = paste0(url, "names.tsv.gz"),
-                  destfile = file.path(path, "names.tsv.gz"))
-    message("Done.\n")
+      ####7. names.tsv.gz
+      message("Download names.tsv.gz...\n")
+      tryCatch({
+        download.file(
+          url = paste0(url, "names.tsv.gz"),
+          destfile = file.path(path, "names.tsv.gz")
+        )
+      },
+      error = function(e) {
+        # Code to handle the error
+        message("Download failed. Switching to alternative function...")
+        response <- httr::GET(paste0(url, "names.tsv.gz"))
+        writeBin(httr::content(response, "raw"),
+                 file.path(path, "names.tsv.gz"))
+      })
+      message("Done.\n")
+    } else{
+      message("Download chebiId_inchi.tsv...\n")
+      tryCatch({
+        response <- httr::GET(paste0(url, "chebiId_inchi.tsv"))
+        writeBin(httr::content(response, "raw"),
+                 file.path(path, "chebiId_inchi.tsv"))
+      },
+      error = function(e) {
+        message("Download failed. Switching to alternative function...")
+        # Code to handle the error
+        download.file(
+          url = paste0(url, "chebiId_inchi.tsv"),
+          destfile = file.path(path, "chebiId_inchi.tsv")
+        )
+      })
+      message("Done.\n")
+
+      message("Download chemical_data.tsv...\n")
+      tryCatch({
+        response <- httr::GET(paste0(url, "chemical_data.tsv"))
+        writeBin(httr::content(response, "raw"),
+                 file.path(path, "chemical_data.tsv"))
+      },
+      error = function(e) {
+        message("Download failed. Switching to alternative function...")
+        # Code to handle the error
+        download.file(
+          url = paste0(url, "chemical_data.tsv"),
+          destfile = file.path(path, "chemical_data.tsv")
+        )
+      })
+      message("Done.\n")
+
+      message("Download comments.tsv...\n")
+      tryCatch({
+        response <- httr::GET(paste0(url, "comments.tsv"))
+        writeBin(httr::content(response, "raw"),
+                 file.path(path, "comments.tsv"))
+      },
+      error = function(e) {
+        message("Download failed. Switching to alternative function...")
+        # Code to handle the error
+        download.file(
+          url = paste0(url, "comments.tsv"),
+          destfile = file.path(path, "comments.tsv")
+        )
+      })
+      message("Done.\n")
+
+      message("Download compound_origins.tsv...\n")
+      tryCatch({
+        response <- httr::GET(paste0(url, "compound_origins.tsv"))
+        writeBin(httr::content(response, "raw"),
+                 file.path(path, "compound_origins.tsv"))
+      },
+      error = function(e) {
+        message("Download failed. Switching to alternative function...")
+        # Code to handle the error
+        download.file(
+          url = paste0(url, "compound_origins.tsv"),
+          destfile = file.path(path, "compound_origins.tsv")
+        )
+      })
+      message("Done.\n")
+
+      message("Download compounds.tsv.gz...\n")
+      tryCatch({
+        response <- httr::GET(paste0(url, "compounds.tsv.gz"))
+        writeBin(httr::content(response, "raw"),
+                 file.path(path, "compounds.tsv.gz"))
+      },
+      error = function(e) {
+        message("Download failed. Switching to alternative function...")
+        # Code to handle the error
+        download.file(
+          url = paste0(url, "compounds.tsv.gz"),
+          destfile = file.path(path, "compounds.tsv.gz")
+        )
+      })
+      message("Done.\n")
+
+      message("Download database_accession.tsv...\n")
+      tryCatch({
+        response <-
+          httr::GET(paste0(url, "database_accession.tsv"))
+        writeBin(httr::content(response, "raw"),
+                 file.path(path, "database_accession.tsv"))
+      },
+      error = function(e) {
+        # Code to handle the error
+        message("Download failed. Switching to alternative function...")
+        download.file(
+          url = paste0(url, "database_accession.tsv"),
+          destfile = file.path(path, "database_accession.tsv")
+        )
+      })
+      message("Done.\n")
+
+      message("Download names.tsv.gz...\n")
+      tryCatch({
+        response <- httr::GET(paste0(url, "names.tsv.gz"))
+        writeBin(httr::content(response, "raw"),
+                 file.path(path, "names.tsv.gz"))
+      },
+      error = function(e) {
+        # Code to handle the error
+        message("Download failed. Switching to alternative function...")
+        download.file(
+          url = paste0(url, "names.tsv.gz"),
+          destfile = file.path(path, "names.tsv.gz")
+        )
+      })
+      message("Done.\n")
+    }
   }
 
 
@@ -82,20 +271,25 @@ read_chebi_compound <-
   function(path = ".") {
     path <- file.path(path, "data")
 
+    message('Reading data...')
     chebiid_inchi <-
-      readr::read_delim(file.path(path, "chebiId_inchi.tsv")) %>%
+      readr::read_delim(file.path(path, "chebiId_inchi.tsv"),
+                        show_col_types = FALSE) %>%
       dplyr::mutate(CHEBI_ID = paste0("CHEBI:", CHEBI_ID))
 
     chemical_data <-
-      readr::read_delim(file.path(path, "chemical_data.tsv")) %>%
+      readr::read_delim(file.path(path, "chemical_data.tsv"),
+                        show_col_types = FALSE) %>%
       dplyr::mutate(COMPOUND_ID = paste0("CHEBI:", COMPOUND_ID))
 
     comments <-
-      readr::read_delim(file.path(path, "comments.tsv")) %>%
+      readr::read_delim(file.path(path, "comments.tsv"),
+                        show_col_types = FALSE) %>%
       dplyr::mutate(COMPOUND_ID = paste0("CHEBI:", COMPOUND_ID))
 
     compound_origins <-
-      readr::read_delim(file.path(path, "compound_origins.tsv")) %>%
+      readr::read_delim(file.path(path, "compound_origins.tsv"),
+                        show_col_types = FALSE) %>%
       dplyr::mutate(COMPOUND_ID = paste0("CHEBI:", COMPOUND_ID))
 
     compound_origins <-
@@ -113,10 +307,12 @@ read_chebi_compound <-
       as.data.frame()
 
     compounds <-
-      readr::read_delim(gzfile(file.path(path, "compounds.tsv.gz")))
+      readr::read_delim(gzfile(file.path(path, "compounds.tsv.gz")),
+                        show_col_types = FALSE)
 
     database_accession <-
-      readr::read_delim(file.path(path, "database_accession.tsv")) %>%
+      readr::read_delim(file.path(path, "database_accession.tsv"),
+                        show_col_types = FALSE) %>%
       dplyr::mutate(COMPOUND_ID = paste0("CHEBI:", COMPOUND_ID))
 
     database_accession <-
@@ -160,7 +356,8 @@ read_chebi_compound <-
       )
 
     names <-
-      readr::read_delim(gzfile(file.path(path, "names.tsv.gz"))) %>%
+      readr::read_delim(gzfile(file.path(path, "names.tsv.gz")),
+                        show_col_types = FALSE) %>%
       dplyr::mutate(COMPOUND_ID = paste0("CHEBI:", COMPOUND_ID))
 
     names <-
@@ -250,7 +447,6 @@ read_chebi_compound <-
 request_chebi_compound <-
   function(url = "https://www.ebi.ac.uk/chebi/searchId.do?chebiId=",
            compound_id = "CHEBI:18358") {
-
     result <-
       tryCatch(
         rvest::read_html(x = paste0(url, compound_id)),
