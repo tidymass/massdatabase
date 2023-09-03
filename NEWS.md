@@ -58,3 +58,7 @@
 # Version 1.0.9 (2023-09-02)
 
 * Added path argument for download_bigg_model function.
+
+# Version 1.0.10 (2023-09-02)
+
+* Fixed bugs in read_sdf_data_lipidmaps function.

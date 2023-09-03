@@ -33,7 +33,8 @@ read_sdf_data_lipidmaps <-
     message("Reading data, it may take a while...")
     if (requireNamespace("ChemmineR", quietly = TRUE)) {
       lipidmaps <-
-        ChemmineR::read.SDFset(sdfstr = file, skipErrors = TRUE)
+        ChemmineR::read.SDFset(sdfstr = file.path(path, file),
+                               skipErrors = TRUE)
     } else{
       stop('Please install ChemmineR package first.')
     }
