@@ -3,7 +3,7 @@
 #' @author Xiaotao Shen
 #' \email{shenxt1990@@outlook.com}
 #' @param url Default is "https://ftp.ebi.ac.uk/pub/databases/chebi/Flat_file_tab_delimited/".
-#' @param path Default is ..
+#' @param path Default is .
 #' @param download.method which package you want to use, download.file or httr
 #' @return Downloaded files.
 #' @importFrom magrittr %>%

@@ -54,3 +54,7 @@
 # Version 1.0.8 (2023-07-01)
 
 * Fix bugs in download_chebi_compound.
+
+# Version 1.0.9 (2023-09-02)
+
+* Added path argument for download_bigg_model function.

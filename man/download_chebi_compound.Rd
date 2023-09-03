@@ -13,7 +13,7 @@ download_chebi_compound(
 \arguments{
 \item{url}{Default is "https://ftp.ebi.ac.uk/pub/databases/chebi/Flat_file_tab_delimited/".}
 
-\item{path}{Default is ..}
+\item{path}{Default is .}
 
 \item{download.method}{which package you want to use, download.file or httr}
 }

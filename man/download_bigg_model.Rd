@@ -4,10 +4,12 @@
 \alias{download_bigg_model}
 \title{Download BIGG model data}
 \usage{
-download_bigg_model(model_id = "iND750")
+download_bigg_model(model_id = "iND750", path = ".")
 }
 \arguments{
 \item{model_id}{model_id, for example, iND750}
+
+\item{path}{Default is .}
 }
 \value{
 version.

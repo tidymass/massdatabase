@@ -45,16 +45,28 @@ request_bigg_version <-
 #' @author Xiaotao Shen
 #' \email{shenxt1990@@outlook.com}
 #' @param model_id model_id, for example, iND750
+#' @param path Default is .
 #' @return version.
 #' @export
 
 download_bigg_model <-
-  function(model_id = "iND750") {
+  function(model_id = "iND750",
+           path = ".") {
+    dir.create(path, showWarnings = FALSE, recursive = TRUE)
     url <-
       paste0('http://bigg.ucsd.edu/static/models/',
              model_id,
              '.json')
     system(command = paste('curl -O', url))
+    file.copy(
+      from = file.path(".", paste0(model_id, '.json')),
+      to = file.path(path, paste0(model_id, '.json')),
+      overwrite = TRUE,
+      recursive = TRUE
+    )
+    unlink(x = file.path(".", paste0(model_id, '.json')),
+           recursive = TRUE,
+           force = TRUE)
   }
 
 
