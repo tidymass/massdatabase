@@ -14,8 +14,8 @@
 
 convert2metid <-
   function (data, 
-            file_names, 
-            row_names, 
+            final_names, 
+            raw_names, 
             check_names, 
             path = ".", 
             threads = 6, 
@@ -26,14 +26,19 @@ convert2metid <-
   all_names <- data %>% purrr::map(function(x) {
     x$info$key
   }) %>% unlist() %>% unique() %>% sort()
-  progresser <- show_progresser(index = seq_along(data), progresser = c(1, seq(10, 100, 10)))
+
+  progresser <- show_progresser(index = seq_along(data), 
+                                progresser = c(1, seq(10, 100, 10)))
+
   ms1_info <- seq_along(data) %>% purrr::map(function(i) {
     if (i %in% progresser$idx) {
       message(progresser$progresser[which(i == progresser$idx)], 
               " ", appendLF = FALSE)
     }
+
     x <- data[[i]]
     x <- x$info %>% dplyr::arrange(key)
+
     if (sum(duplicated(x$key)) == 0) {
       x <- t(x) %>% as.data.frame()
       colnames(x) <- as.character(x[1, ])
@@ -48,6 +53,7 @@ convert2metid <-
       }
       return(x)
     }
+
     x <- x %>% plyr::dlply(.variables = "key") %>% lapply(function(y) {
       if (nrow(y) == 1) {
         return(y)
@@ -55,10 +61,12 @@ convert2metid <-
       y$value <- paste(y$value, collapse = "{}")
       return(y[1, , drop = FALSE])
     }) %>% dplyr::bind_rows() %>% as.data.frame() %>% dplyr::arrange(key)
+
     x <- t(x) %>% as.data.frame()
     colnames(x) <- as.character(x[1, ])
     x <- x[-1, , drop = FALSE]
     new_name <- setdiff(all_names, colnames(x))
+
     if (length(new_name) > 0) {
       new_x <- matrix(NA, nrow = 1, ncol = length(new_name)) %>% 
         as.data.frame()
@@ -68,10 +76,12 @@ convert2metid <-
     }
     return(x)
   })
+
   ms1_info <- ms1_info %>% dplyr::bind_rows() %>% as.data.frame()
   rownames(ms1_info) <- NULL
   message("Done.")
   message("Extracting MS2 inforamtion...")
+
   spectra_data <- seq_along(data) %>% purrr::map(function(i) {
     if (i %in% progresser$idx) {
       message(progresser$progresser[which(i == progresser$idx)], 
@@ -95,7 +105,6 @@ convert2metid <-
   }
   
   ms1_info$Lab.ID <- masstools::name_duplicated(ms1_info$Compound.name)
-  message("debugging is ongoing !!!")
   
   ms1_info <- ms1_info %>% 
                dplyr::mutate(mz.pos = NA, mz.neg = NA, Submitter = Submitter) %>% 
@@ -129,7 +138,6 @@ convert2metid <-
   if(any(colnames(ms1_info) != "Adduct")){
     ms1_info <- ms1_info %>% dplyr::mutate(Adduct = NA)
   }
-  
   
   message("data transfer is ongoing !!!")
   
@@ -185,9 +193,7 @@ convert2metid <-
       }
       y
     }) %>% dplyr::bind_rows() %>% as.data.frame()
-  
-  message("move to breakpoint !!!")
-  
+    
   ms1_info2 <- ms1_info2[match(ms1_info$Lab.ID, ms1_info2$Lab.ID), ]
   
   progresser <- show_progresser(index = seq_along(spectra_data), 
