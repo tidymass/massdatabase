@@ -1,17 +1,30 @@
-#' @title Request all the compound information in FooDB based on web crawler
-#' @description Request all the compound information in FooDB based on web crawler
-#' @author Xiaotao Shen
-#' \email{shenxt1990@@outlook.com}
-#' @param url Default is "https://foodb.ca/compounds".
-#' @param sleep Default is 1 second.
-#' @param pages default is from 1:2838
-#' @return A data frame.
-#' @importFrom rvest read_html html_table
-#' @importFrom magrittr %>%
-#' @export
+#' Scrape Compound Information from FooDB
+#'
+#' This function scrapes compound information from the FooDB website. It visits multiple pages of the compounds section, extracts the data from the HTML tables on each page, and combines the results into a single data frame.
+#'
+#' @param url A character string specifying the base URL of the FooDB compounds page. Default is `"https://foodb.ca/compounds"`.
+#' @param sleep A numeric value indicating the number of seconds to pause between requests to avoid overwhelming the server. Default is `1` second.
+#' @param pages A numeric vector indicating which pages to scrape. Default is `1:2838`, which covers all pages on the FooDB compounds section.
+#'
+#' @return A data frame containing the combined table data from all the specified pages. Each row corresponds to one compound entry from the scraped pages.
+#'
+#' @details
+#' The function uses the `purrr::map` function to iterate over the pages and scrape data from each page. The data on each page is extracted using `rvest::html_table` and combined into a single data frame.
+#'
 #' @examples
-#' x = request_foodb_compound_info_crawler(pages = 1)
-#' head(x)
+#' \dontrun{
+#' # Scrape the first 3 pages with a 2-second delay between requests:
+#' data <- request_foodb_compound_info_crawler(
+#'   pages = 1:3,
+#'   sleep = 2
+#' )
+#' head(data)
+#' }
+#'
+#' @importFrom purrr map
+#' @importFrom rvest read_html html_table
+#' @importFrom dplyr %>%
+#' @export
 
 request_foodb_compound_info_crawler <-
   function(url = "https://foodb.ca/compounds",

@@ -62,3 +62,8 @@
 # Version 1.0.10 (2023-09-02)
 
 * Fixed bugs in read_sdf_data_lipidmaps function.
+
+
+# Version 1.0.11 (2023-10-14)
+
+* Fixed bugs in download_bigg_model function.

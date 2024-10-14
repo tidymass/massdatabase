@@ -50,23 +50,22 @@ request_bigg_version <-
 #' @export
 
 download_bigg_model <-
-  function(model_id = "iND750",
-           path = ".") {
+  function(model_id = "iND750", path = ".") {
     dir.create(path, showWarnings = FALSE, recursive = TRUE)
     url <-
-      paste0('http://bigg.ucsd.edu/static/models/',
-             model_id,
-             '.json')
+      paste0('http://bigg.ucsd.edu/static/models/', model_id, '.json')
     system(command = paste('curl -O', url))
-    file.copy(
-      from = file.path(".", paste0(model_id, '.json')),
-      to = file.path(path, paste0(model_id, '.json')),
-      overwrite = TRUE,
-      recursive = TRUE
-    )
-    unlink(x = file.path(".", paste0(model_id, '.json')),
-           recursive = TRUE,
-           force = TRUE)
+    if (!paste0(model_id, '.json') %in% dir(path)) {
+      file.copy(
+        from = file.path(".", paste0(model_id, '.json')),
+        to = file.path(path, paste0(model_id, '.json')),
+        overwrite = TRUE,
+        recursive = TRUE
+      )
+      unlink(x = file.path(".", paste0(model_id, '.json')),
+             recursive = TRUE,
+             force = TRUE)
+    }
   }
 
 
@@ -269,8 +268,7 @@ request_bigg_universal_metabolite <-
           `[[`(1) %>%
           `[`(1)
 
-        data.frame(database = database,
-                   id = id)
+        data.frame(database = database, id = id)
       }) %>%
       do.call(rbind, .) %>%
       as.data.frame()
@@ -397,8 +395,7 @@ request_bigg_universal_metabolite <-
         new_database_link <-
           data.frame(database = missing_id, id = NA)
         database_link <-
-          rbind(database_link,
-                new_database_link) %>%
+          rbind(database_link, new_database_link) %>%
           dplyr::filter(database != "")
       }
 
@@ -411,8 +408,7 @@ request_bigg_universal_metabolite <-
       colnames(id) <- database_link$database
 
       return_result <-
-        cbind(return_result,
-              id)
+        cbind(return_result, id)
     }
     invisible(return_result)
   }
@@ -428,8 +424,7 @@ request_bigg_universal_metabolite <-
 #' @export
 
 download_bigg_universal_metabolite <-
-  function(path = ".",
-           sleep = 1) {
+  function(path = ".", sleep = 1) {
     dir.create(path, recursive = TRUE, showWarnings = FALSE)
     metabolite_info <-
       request_bigg_universal_metabolite_info()
@@ -660,8 +655,7 @@ convert_bigg_universal2metid <-
 
     temp_file <- tempfile()
     dir.create(temp_file, showWarnings = FALSE)
-    readr::write_csv(x = data,
-                     file = file.path(temp_file, "data.csv"))
+    readr::write_csv(x = data, file = file.path(temp_file, "data.csv"))
 
 
     bigg_ms1 =
@@ -961,8 +955,7 @@ request_bigg_universal_reaction <-
           `[[`(1) %>%
           `[`(1)
 
-        data.frame(database = database,
-                   id = id)
+        data.frame(database = database, id = id)
       }) %>%
       do.call(rbind, .) %>%
       as.data.frame()
@@ -1051,8 +1044,7 @@ request_bigg_universal_reaction <-
         new_database_link <-
           data.frame(database = missing_id, id = NA)
         database_link <-
-          rbind(database_link,
-                new_database_link)
+          rbind(database_link, new_database_link)
       }
 
       database_link <-
@@ -1064,8 +1056,7 @@ request_bigg_universal_reaction <-
       colnames(id) <- database_link$database
 
       return_result <-
-        cbind(return_result,
-              id)
+        cbind(return_result, id)
     }
     invisible(return_result)
   }
@@ -1095,8 +1086,7 @@ request_bigg_universal_reaction <-
 #' @importFrom purrr map
 #' @export
 read_bigg_model <-
-  function(path = ".",
-           model = "iND750") {
+  function(path = ".", model = "iND750") {
     if (requireNamespace("rjson", quietly = TRUE)) {
       result <-
         rjson::fromJSON(file = file.path(path, paste0(model, ".json")))

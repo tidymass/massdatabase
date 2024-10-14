@@ -1,8 +1,8 @@
 Package: massdatabase
 Type: Package
 Title: Play with databases about mass spectrometry
-Version: 1.0.10
-Date: 2023-09-02
+Version: 1.0.11
+Date: 2024-10-14
 Authors@R: c(
     person(given = "Xiaotao",
            family = "Shen",
@@ -56,7 +56,7 @@ VignetteBuilder:
 biocViews: Metabolomics, MassSpectrometry
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2
 Remotes: 
     gitlab::jaspershen/metid,
     gitlab::jaspershen/masstools,

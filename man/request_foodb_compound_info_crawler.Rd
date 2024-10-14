@@ -2,7 +2,7 @@
 % Please edit documentation in R/14_FOODB.R
 \name{request_foodb_compound_info_crawler}
 \alias{request_foodb_compound_info_crawler}
-\title{Request all the compound information in FooDB based on web crawler}
+\title{Scrape Compound Information from FooDB}
 \usage{
 request_foodb_compound_info_crawler(
   url = "https://foodb.ca/compounds",
@@ -11,23 +11,29 @@ request_foodb_compound_info_crawler(
 )
 }
 \arguments{
-\item{url}{Default is "https://foodb.ca/compounds".}
+\item{url}{A character string specifying the base URL of the FooDB compounds page. Default is `"https://foodb.ca/compounds"`.}
 
-\item{sleep}{Default is 1 second.}
+\item{sleep}{A numeric value indicating the number of seconds to pause between requests to avoid overwhelming the server. Default is `1` second.}
 
-\item{pages}{default is from 1:2838}
+\item{pages}{A numeric vector indicating which pages to scrape. Default is `1:2838`, which covers all pages on the FooDB compounds section.}
 }
 \value{
-A data frame.
+A data frame containing the combined table data from all the specified pages. Each row corresponds to one compound entry from the scraped pages.
 }
 \description{
-Request all the compound information in FooDB based on web crawler
+This function scrapes compound information from the FooDB website. It visits multiple pages of the compounds section, extracts the data from the HTML tables on each page, and combines the results into a single data frame.
+}
+\details{
+The function uses the `purrr::map` function to iterate over the pages and scrape data from each page. The data on each page is extracted using `rvest::html_table` and combined into a single data frame.
 }
 \examples{
-x = request_foodb_compound_info_crawler(pages = 1)
-head(x)
+\dontrun{
+# Scrape the first 3 pages with a 2-second delay between requests:
+data <- request_foodb_compound_info_crawler(
+  pages = 1:3,
+  sleep = 2
+)
+head(data)
 }
-\author{
-Xiaotao Shen
-\email{shenxt1990@outlook.com}
+
 }
