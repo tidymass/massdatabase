@@ -1,15 +1,32 @@
-#' @title Request BIGG version
-#' @description Request BIGG version
-#' @author Xiaotao Shen
-#' \email{shenxt1990@@outlook.com}
-#' @param url Default is "https://foodb.ca/compounds".
-#' @return version.
+#' Request BiGG Database Version
+#'
+#' This function retrieves the current version of the BiGG database from the BiGG API.
+#'
+#' @param url A string specifying the URL of the BiGG database version endpoint.
+#' Defaults to `"http://bigg.ucsd.edu/api/v2/database_version"`.
+#'
+#' @details
+#' The function makes an HTTP request to the BiGG database version endpoint using `curl`.
+#' It parses the response to extract the version information, returning it as a data frame
+#' with two columns: `name` and `value`. If the request fails, the function returns `NULL`.
+#'
+#' @return A data frame containing the version information of the BiGG database with two columns:
+#' - `name`: The type of version information (e.g., "bigg_models_version").
+#' - `value`: The corresponding value of the version information.
+#'
+#' @examples
+#' \dontrun{
+#' # Retrieve the current version of the BiGG database
+#' version_info <- request_bigg_version()
+#'
+#' # Use a custom API URL
+#' version_info <- request_bigg_version(url = "http://bigg.ucsd.edu/api/v2/custom_endpoint")
+#' }
+#'
 #' @importFrom curl curl
 #' @importFrom stringr str_replace_all str_split str_trim
-#' @importFrom magrittr %>%
 #' @export
-#' @examples
-#' request_bigg_version()
+
 
 request_bigg_version <-
   function(url = "http://bigg.ucsd.edu/api/v2/database_version") {
@@ -414,55 +431,122 @@ request_bigg_universal_metabolite <-
   }
 
 
-#' @title Download BIGG universal metabolites
-#' @description Download BIGG universal metabolites
-#' @author Xiaotao Shen
-#' \email{shenxt1990@@outlook.com}
-#' @param path Default is .
-#' @param sleep Default is 1 second.
-#' @return bigg_universal_metabolite database.
+#' Download BiGG Universal Metabolite Data
+#'
+#' This function downloads the BiGG universal metabolite database, saving it to a specified directory.
+#' It provides the option to store intermediate files and control the download rate by introducing a delay.
+#'
+#' @param path A string specifying the directory to save the downloaded data. Defaults to the current directory (`"."`).
+#' @param sleep A numeric value indicating the number of seconds to pause between downloads. Defaults to 1 second.
+#' @param delete_intermediate A logical value indicating whether to delete intermediate files after the download completes. Defaults to `TRUE`.
+#'
+#' @details
+#' The function first retrieves a list of all available metabolites from the BiGG database using
+#' `request_bigg_universal_metabolite_info()`. It saves this information in an intermediate directory.
+#' For each metabolite, the function checks if the data already exists locally; if not, it downloads the data using
+#' `request_bigg_universal_metabolite()`.
+#'
+#' A progress bar is shown during the download process. The final data is saved as `bigg_universal_metabolit_database`
+#' in the specified path. If `delete_intermediate = TRUE`, intermediate files are deleted after the download completes.
+#'
+#' @return None. The function saves the downloaded data to the specified directory.
+#'
+#' @examples
+#' \dontrun{
+#' # Download BiGG universal metabolite data to the current directory
+#' download_bigg_universal_metabolite()
+#'
+#' # Download data to a custom path with 2 seconds of sleep between downloads
+#' download_bigg_universal_metabolite(path = "data", sleep = 2)
+#'
+#' # Keep intermediate files
+#' download_bigg_universal_metabolite(delete_intermediate = FALSE)
+#' }
+#'
+#' @importFrom progress progress_bar
 #' @export
 
 download_bigg_universal_metabolite <-
-  function(path = ".", sleep = 1) {
+  function(path = ".",
+           sleep = 1,
+           delete_intermediate = TRUE) {
     dir.create(path, recursive = TRUE, showWarnings = FALSE)
+    dir.create(file.path(path, "intermediate"),
+               recursive = TRUE,
+               showWarnings = FALSE)
     metabolite_info <-
       request_bigg_universal_metabolite_info()
 
+    message(nrow(metabolite_info), " metabolites in total")
+
+    save(metabolite_info,
+         file = file.path(path, "intermediate/metabolite_info"))
+
     pb <- progress::progress_bar$new(total = nrow(metabolite_info))
 
+    ###download metabolite
+
     bigg_universal_metabolit_database <-
-      seq_along(metabolite_info$bigg_id) %>%
-      purrr::map(function(i) {
-        pb$tick()
+      vector(mode = "list", length = nrow(metabolite_info))
+    names(bigg_universal_metabolit_database) <- metabolite_info$bigg_id
+
+    for (i in seq_len(nrow(metabolite_info))) {
+      pb$tick()
+      id <- metabolite_info$bigg_id[i]
+
+      if (file.exists(file.path(path, "intermediate", paste0(id)))) {
+        load(file = file.path(path, "intermediate", paste0(id)))
+        bigg_universal_metabolit_database[[i]] <- metabolite
+      } else{
         Sys.sleep(time = sleep)
-        request_bigg_universal_metabolite(metabolite_id = metabolite_info$bigg_id[i],
-                                          return_form = "data.frame")
-      })
+        metabolite <-
+          request_bigg_universal_metabolite(metabolite_id = metabolite_info$bigg_id[i],
+                                            return_form = "data.frame")
+        save(metabolite, file = file.path(path, "intermediate", id))
+        bigg_universal_metabolit_database[[i]] <- metabolite
+      }
+    }
+
     save(
       bigg_universal_metabolit_database,
       file = file.path(path, "bigg_universal_metabolit_database")
     )
+
+    if (delete_intermediate) {
+      unlink(file.path(path, "intermediate"), recursive = TRUE)
+    }
+
   }
 
 
 
-#' @title Read the BIGG universal metabolite database from
-#' download_bigg_universal_metabolite function
-#' @description Read the BIGG universal metabolite database from
-#' download_bigg_universal_metabolite function
-#' @author Xiaotao Shen
-#' \email{shenxt1990@@outlook.com}
-#' @param path Default is .. Should be same with
-#' download_bigg_universal_metabolite function.
-#' @return A data frame
-#' @importFrom magrittr %>%
-#' @importFrom plyr dlply .
-#' @importFrom readr read_delim
-#' @importFrom dplyr mutate bind_rows select distinct rename full_join filter
-#' @importFrom tidyr pivot_wider
-#' @importFrom purrr map
+#' Read BiGG Universal Metabolite Data
+#'
+#' This function reads the saved BiGG universal metabolite database from the specified directory
+#' and returns it as a combined data frame.
+#'
+#' @param path A string specifying the directory where the BiGG database is located. Defaults to the current directory (`"."`).
+#'
+#' @details
+#' The function loads the previously saved `bigg_universal_metabolit_database` file from the provided directory.
+#' It uses a progress bar to indicate the loading progress and combines individual metabolite data into a
+#' single data frame using `dplyr::bind_rows()`. The final data frame is returned to the user.
+#'
+#' @return A data frame containing all the metabolites from the BiGG universal database.
+#'
+#' @examples
+#' \dontrun{
+#' # Read the BiGG database from the current directory
+#' metabolites <- read_bigg_universal_metabolite()
+#'
+#' # Read the BiGG database from a custom directory
+#' metabolites <- read_bigg_universal_metabolite(path = "data")
+#' }
+#'
+#' @importFrom progress progress_bar
+#' @importFrom dplyr bind_rows
 #' @export
+
 read_bigg_universal_metabolite <-
   function(path = ".") {
     load(file.path(path, "bigg_universal_metabolit_database"))
@@ -480,22 +564,43 @@ read_bigg_universal_metabolite <-
 
 
 
-#' @title Convert BIGG universal metabolites (data.frame,
-#' from read_bigg_universal_metabolite)
-#' to metID format database
-#' @description Convert BIGG universal metabolites (data.frame,
-#' from read_bigg_universal_metabolite)
-#' to metID format database
-#' @author Xiaotao Shen
-#' \email{shenxt1990@@outlook.com}
-#' @param data data.frame, from read_bigg_universal_metabolite function
-#' @param path Default is .
-#' @param threads threads
-#' @return metid database class
-#' @importFrom magrittr %>%
-#' @importFrom plyr . dlply
-#' @importFrom metid construct_database
+#' Convert BiGG Universal Metabolite Data to MetID Format
+#'
+#' This function converts the BiGG universal metabolite database into a format compatible with the `metid` package.
+#' It processes the metabolite formulas, calculates mass-to-charge ratios (m/z), and maps various IDs for downstream use.
+#'
+#' @param data A data frame containing BiGG metabolite information, including formulas and IDs.
+#' @param path A string specifying the directory where the output data will be saved. Defaults to the current directory (`"."`).
+#' @param threads An integer specifying the number of threads to use for parallel processing. Defaults to 5.
+#'
+#' @details
+#' The function processes the provided metabolite data by:
+#' - Handling missing formulas and modifying them based on charge.
+#' - Calculating the mass-to-charge ratio (m/z) for each metabolite using `Rdisop`.
+#' - Renaming and reformatting columns for compatibility with the `metid` package.
+#' - Writing the processed data to a temporary CSV file and creating a `metid`-compatible database.
+#'
+#' The final processed database is saved as `bigg_ms1` in the specified path, and intermediate files are cleaned up.
+#'
+#' @return An invisible object containing the converted database.
+#'
+#' @examples
+#' \dontrun{
+#' # Convert BiGG metabolite data to MetID format and save to the current directory
+#' convert_bigg_universal2metid(data = bigg_data)
+#'
+#' # Save the converted data to a custom directory using multiple threads
+#' convert_bigg_universal2metid(data = bigg_data, path = "metid_data", threads = 10)
+#' }
+#'
+#' @importFrom dplyr filter rename mutate select bind_rows
+#' @importFrom purrr map
+#' @importFrom stringr str_split str_replace str_replace_all
+#' @importFrom Rdisop getMass getMolecule
+#' @importFrom progress progress_bar
+#' @importFrom readr write_csv
 #' @export
+
 
 convert_bigg_universal2metid <-
   function(data,

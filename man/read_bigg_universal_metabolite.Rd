@@ -2,23 +2,32 @@
 % Please edit documentation in R/5_BIGG.R
 \name{read_bigg_universal_metabolite}
 \alias{read_bigg_universal_metabolite}
-\title{Read the BIGG universal metabolite database from
-download_bigg_universal_metabolite function}
+\title{Read BiGG Universal Metabolite Data}
 \usage{
 read_bigg_universal_metabolite(path = ".")
 }
 \arguments{
-\item{path}{Default is .. Should be same with
-download_bigg_universal_metabolite function.}
+\item{path}{A string specifying the directory where the BiGG database is located. Defaults to the current directory (`"."`).}
 }
 \value{
-A data frame
+A data frame containing all the metabolites from the BiGG universal database.
 }
 \description{
-Read the BIGG universal metabolite database from
-download_bigg_universal_metabolite function
+This function reads the saved BiGG universal metabolite database from the specified directory
+and returns it as a combined data frame.
 }
-\author{
-Xiaotao Shen
-\email{shenxt1990@outlook.com}
+\details{
+The function loads the previously saved `bigg_universal_metabolit_database` file from the provided directory.
+It uses a progress bar to indicate the loading progress and combines individual metabolite data into a
+single data frame using `dplyr::bind_rows()`. The final data frame is returned to the user.
+}
+\examples{
+\dontrun{
+# Read the BiGG database from the current directory
+metabolites <- read_bigg_universal_metabolite()
+
+# Read the BiGG database from a custom directory
+metabolites <- read_bigg_universal_metabolite(path = "data")
+}
+
 }

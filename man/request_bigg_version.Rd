@@ -2,23 +2,34 @@
 % Please edit documentation in R/5_BIGG.R
 \name{request_bigg_version}
 \alias{request_bigg_version}
-\title{Request BIGG version}
+\title{Request BiGG Database Version}
 \usage{
 request_bigg_version(url = "http://bigg.ucsd.edu/api/v2/database_version")
 }
 \arguments{
-\item{url}{Default is "https://foodb.ca/compounds".}
+\item{url}{A string specifying the URL of the BiGG database version endpoint.
+Defaults to `"http://bigg.ucsd.edu/api/v2/database_version"`.}
 }
 \value{
-version.
+A data frame containing the version information of the BiGG database with two columns:
+- `name`: The type of version information (e.g., "bigg_models_version").
+- `value`: The corresponding value of the version information.
 }
 \description{
-Request BIGG version
+This function retrieves the current version of the BiGG database from the BiGG API.
+}
+\details{
+The function makes an HTTP request to the BiGG database version endpoint using `curl`.
+It parses the response to extract the version information, returning it as a data frame
+with two columns: `name` and `value`. If the request fails, the function returns `NULL`.
 }
 \examples{
-request_bigg_version()
+\dontrun{
+# Retrieve the current version of the BiGG database
+version_info <- request_bigg_version()
+
+# Use a custom API URL
+version_info <- request_bigg_version(url = "http://bigg.ucsd.edu/api/v2/custom_endpoint")
 }
-\author{
-Xiaotao Shen
-\email{shenxt1990@outlook.com}
+
 }

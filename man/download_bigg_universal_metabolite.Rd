@@ -2,22 +2,47 @@
 % Please edit documentation in R/5_BIGG.R
 \name{download_bigg_universal_metabolite}
 \alias{download_bigg_universal_metabolite}
-\title{Download BIGG universal metabolites}
+\title{Download BiGG Universal Metabolite Data}
 \usage{
-download_bigg_universal_metabolite(path = ".", sleep = 1)
+download_bigg_universal_metabolite(
+  path = ".",
+  sleep = 1,
+  delete_intermediate = TRUE
+)
 }
 \arguments{
-\item{path}{Default is .}
+\item{path}{A string specifying the directory to save the downloaded data. Defaults to the current directory (`"."`).}
 
-\item{sleep}{Default is 1 second.}
+\item{sleep}{A numeric value indicating the number of seconds to pause between downloads. Defaults to 1 second.}
+
+\item{delete_intermediate}{A logical value indicating whether to delete intermediate files after the download completes. Defaults to `TRUE`.}
 }
 \value{
-bigg_universal_metabolite database.
+None. The function saves the downloaded data to the specified directory.
 }
 \description{
-Download BIGG universal metabolites
+This function downloads the BiGG universal metabolite database, saving it to a specified directory.
+It provides the option to store intermediate files and control the download rate by introducing a delay.
 }
-\author{
-Xiaotao Shen
-\email{shenxt1990@outlook.com}
+\details{
+The function first retrieves a list of all available metabolites from the BiGG database using
+`request_bigg_universal_metabolite_info()`. It saves this information in an intermediate directory.
+For each metabolite, the function checks if the data already exists locally; if not, it downloads the data using
+`request_bigg_universal_metabolite()`.
+
+A progress bar is shown during the download process. The final data is saved as `bigg_universal_metabolit_database`
+in the specified path. If `delete_intermediate = TRUE`, intermediate files are deleted after the download completes.
+}
+\examples{
+\dontrun{
+# Download BiGG universal metabolite data to the current directory
+download_bigg_universal_metabolite()
+
+# Download data to a custom path with 2 seconds of sleep between downloads
+download_bigg_universal_metabolite(path = "data", sleep = 2)
+
+# Keep intermediate files
+download_bigg_universal_metabolite(delete_intermediate = FALSE)
+}
+
 }

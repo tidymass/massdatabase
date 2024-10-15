@@ -2,28 +2,40 @@
 % Please edit documentation in R/5_BIGG.R
 \name{convert_bigg_universal2metid}
 \alias{convert_bigg_universal2metid}
-\title{Convert BIGG universal metabolites (data.frame,
-from read_bigg_universal_metabolite)
-to metID format database}
+\title{Convert BiGG Universal Metabolite Data to MetID Format}
 \usage{
 convert_bigg_universal2metid(data, path = ".", threads = 5)
 }
 \arguments{
-\item{data}{data.frame, from read_bigg_universal_metabolite function}
+\item{data}{A data frame containing BiGG metabolite information, including formulas and IDs.}
 
-\item{path}{Default is .}
+\item{path}{A string specifying the directory where the output data will be saved. Defaults to the current directory (`"."`).}
 
-\item{threads}{threads}
+\item{threads}{An integer specifying the number of threads to use for parallel processing. Defaults to 5.}
 }
 \value{
-metid database class
+An invisible object containing the converted database.
 }
 \description{
-Convert BIGG universal metabolites (data.frame,
-from read_bigg_universal_metabolite)
-to metID format database
+This function converts the BiGG universal metabolite database into a format compatible with the `metid` package.
+It processes the metabolite formulas, calculates mass-to-charge ratios (m/z), and maps various IDs for downstream use.
 }
-\author{
-Xiaotao Shen
-\email{shenxt1990@outlook.com}
+\details{
+The function processes the provided metabolite data by:
+- Handling missing formulas and modifying them based on charge.
+- Calculating the mass-to-charge ratio (m/z) for each metabolite using `Rdisop`.
+- Renaming and reformatting columns for compatibility with the `metid` package.
+- Writing the processed data to a temporary CSV file and creating a `metid`-compatible database.
+
+The final processed database is saved as `bigg_ms1` in the specified path, and intermediate files are cleaned up.
+}
+\examples{
+\dontrun{
+# Convert BiGG metabolite data to MetID format and save to the current directory
+convert_bigg_universal2metid(data = bigg_data)
+
+# Save the converted data to a custom directory using multiple threads
+convert_bigg_universal2metid(data = bigg_data, path = "metid_data", threads = 10)
+}
+
 }
