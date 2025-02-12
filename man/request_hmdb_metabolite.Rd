@@ -24,10 +24,12 @@ A data frame or list.
 Request one specific the metabolite information in HMDB
 }
 \examples{
+\dontrun{
 x = request_hmdb_metabolite(metabolite_id = "HMDB0000001", return_form = "list")
 x[1:2]
 y = request_hmdb_metabolite(metabolite_id = "HMDB0000001", return_form = "data.frame")
 head(y)
+}
 }
 \author{
 Xiaotao Shen
