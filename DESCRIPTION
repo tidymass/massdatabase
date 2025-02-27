@@ -18,11 +18,13 @@ Depends:
     R (>= 4.1)
 Imports:
     crayon,
+    cli,
     plyr,
     readr,
     tidyr,
     ggplot2,
     dplyr,
+    jsonlite,
     utils,
     rvest,
     XML,

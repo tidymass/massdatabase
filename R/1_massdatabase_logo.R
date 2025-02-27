@@ -13,6 +13,8 @@
 #' @importFrom masstools name_duplicated convert_precursor_mz2accurate_mass
 #' @importFrom masstools show_progresser sum_formula
 #' @importFrom httr GET content
+#' @importFrom jsonlite fromJSON
+#' @importFrom cli rule symbol
 #' @export
 #' @examples
 #' massdatabase_logo()

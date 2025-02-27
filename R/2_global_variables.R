@@ -191,6 +191,7 @@ globalVariables(
     "metaid",
     "sboTerm",
     "stoichiometry",
-    "xmlName"
+    "xmlName",
+    "species"
   )
 )
