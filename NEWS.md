@@ -67,3 +67,11 @@
 # Version 1.0.11 (2023-10-14)
 
 * Fixed bugs in download_bigg_model function.
+
+# Version 1.0.13 (2025-02-27)
+
+* Add new functions
+
+# Version 1.0.14 (2025-03-11)
+
+* Add new functions

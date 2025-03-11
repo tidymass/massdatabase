@@ -201,19 +201,29 @@ convert_kegg2metpath <-
            threads = 5) {
     dir.create(path, showWarnings = FALSE, recursive = TRUE)
 
+    describtion <-
+      lapply(data, function(x)
+      paste0(x$describtion, collapse = "{}")) %>% unlist()
+
+    describtion[describtion == ""] <- NA
+
+    pathway_class <-
+      lapply(data, function(x)
+        paste0(x$pathway_class, collapse = "{}")) %>% unlist()
+
+    pathway_class[pathway_class == ""] <- NA
+
     pathway <-
       new(
         Class = "pathway_database",
         database_info = list(source = "KEGG",
                              version = as.character(Sys.Date())),
         pathway_id = lapply(data, function(x)
-          x$pathway_id),
+          x$pathway_id) %>% unlist(),
         pathway_name = lapply(data, function(x)
-          x$pathway_name),
-        describtion = lapply(data, function(x)
-          x$describtion),
-        pathway_class = lapply(data, function(x)
-          x$pathway_class),
+          x$pathway_name) %>% unlist(),
+        describtion = describtion,
+        pathway_class = pathway_class,
         gene_list = lapply(data, function(x)
           x$gene_list),
         compound_list = lapply(data, function(x)
