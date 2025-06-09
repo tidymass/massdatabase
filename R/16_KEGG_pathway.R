@@ -203,13 +203,13 @@ convert_kegg2metpath <-
 
     describtion <-
       lapply(data, function(x)
-      paste0(x$describtion, collapse = "{}")) %>% unlist()
+      paste0(x$describtion, collapse = "{}"))
 
     describtion[describtion == ""] <- NA
 
     pathway_class <-
       lapply(data, function(x)
-        paste0(x$pathway_class, collapse = "{}")) %>% unlist()
+        paste0(x$pathway_class, collapse = "{}"))
 
     pathway_class[pathway_class == ""] <- NA
 
